@@ -1,5 +1,0 @@
-New log file opened at Sat Feb 11 11:49:17 GMT+01:00 2017 by 15968@MSI
-Sending msg to client play-fork-run-16915678-0e35-4951-8e35-4ead3c1fcc0f: DetachedLogEvent(LogMessage(debug,sbt server socket logs are in: C:\Users\rafae\Documents\keep-clone\.sbtserver\connections\master.log))
-Sending msg to client play-fork-run-16915678-0e35-4951-8e35-4ead3c1fcc0f: DetachedLogEvent(LogMessage(debug,sbt general server logs are in: C:\Users\rafae\Documents\keep-clone\.sbtserver\master.log))
-Sending msg to client play-fork-run-16915678-0e35-4951-8e35-4ead3c1fcc0f: DetachedLogEvent(LogMessage(debug,sbt client logs are in: C:\Users\rafae\Documents\keep-clone\.sbtserver\connections\play-fork-run-16915678-0e35-4951-8e35-4ead3c1fcc0f.log))
-Reading next message from client.
