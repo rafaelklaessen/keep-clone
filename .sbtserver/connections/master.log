@@ -53,3 +53,6 @@ New client attempting to connect on port: 52020-52012
 This client on port 52020 has uuid 5b48d871-5d85-4713-83ca-791eca585402 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
 Connected Clients: activator-6f5cb496-3d6f-42e4-b110-2b4672058073, play-fork-run-5b48d871-5d85-4713-83ca-791eca585402
 Taking next connection to: 52012
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 52012
