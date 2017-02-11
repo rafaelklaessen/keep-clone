@@ -7,4 +7,4 @@ target
 /.settings
 /RUNNING_PID
 .sbtserver/*
-project/.sbtserver/*
+project/.sbtserver
