@@ -12,6 +12,8 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 import play.api.libs.json._
+import play.api.data._
+import play.api.data.Forms._
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -26,10 +28,12 @@ class UserController @Inject() extends Controller {
   }
 
   def register = Action {
-    // Fetch the service account key JSON file contents
+    Ok(views.html.register())
+  }
+
+  def registerUser() = Action { implicit request => 
     val serviceAccount = new FileInputStream("../keep-clone-840b5-firebase-adminsdk-ztnub-40397c0ba3.json")
 
-    // Initialize the app with a service account, granting admin privileges
     val options = new FirebaseOptions.Builder()
       .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
       .setDatabaseUrl("https://keep-clone-840b5.firebaseio.com/")
@@ -41,19 +45,39 @@ class UserController @Inject() extends Controller {
       FirebaseApp.initializeApp(options)
     }
 
-    // As an admin, the app has access to read and write all data, regardless of Security Rules
-    val ref = FirebaseDatabase.getInstance().getReference("restricted_access/secret_document")
-    
-    ref.addListenerForSingleValueEvent(new ValueEventListener() {
-      override def onDataChange(dataSnapshot: DataSnapshot) {
-        val document = dataSnapshot.getValue()
-        println(document)
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+
+    val usersRef = ref.child("users")
+
+    case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
+
+    val userForm = Form(
+      mapping(
+        "username" -> nonEmptyText,
+        "email" -> nonEmptyText,
+        "firstName" -> nonEmptyText,
+        "lastName" -> nonEmptyText,
+        "password" -> nonEmptyText
+      )(UserData.apply)(UserData.unapply)
+    )
+
+    val userData = userForm.bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest("Form not filled correctly")
+      },
+      userData => {
+        val currentUser = usersRef.child(userData.username)
+
+        currentUser.child("email").setValue(userData.firstName)
+        currentUser.child("firstName").setValue(userData.firstName)
+        currentUser.child("lastName").setValue(userData.lastName)
+        currentUser.child("password").setValue(userData.firstName)
+      
+        Redirect("/")
       }
+    )
 
-      def onCancelled(error: DatabaseError) { }
-    })
-
-    Ok(views.html.register())
+    userData
   }
 
   def logout = Action {
