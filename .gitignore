@@ -1,5 +1,6 @@
 logs
 target
+.sbtserver/
 /.idea
 /.idea_modules
 /.classpath
