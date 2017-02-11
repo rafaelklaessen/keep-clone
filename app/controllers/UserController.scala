@@ -13,7 +13,8 @@ import play.api.libs.json._
 class UserController @Inject() extends Controller {
 
   def login = Action {
-    Ok(views.html.login())
+    Ok(views.html.login()).withSession(
+      "user_email" -> "test@example.com")
   }
 
   def register = Action {
@@ -25,7 +26,7 @@ class UserController @Inject() extends Controller {
     {
       "json": true
     }
-    """))
+    """)).withNewSession
   }
 
 }
