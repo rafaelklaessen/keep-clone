@@ -1,5 +1,16 @@
-@(message: String)
+@main("Welcome to keep-clone") {
+  <header id="site-header" class="site-header no-shadow">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/login" class="login-btn btn">Login</a>
+      <a href="/register" class="register-btn btn">Register</a>
+    </section>
+  </header>
 
-@main("Welcome to Play") {
-  @play20.welcome(message, style = "Scala")
+  <section id="home" class="home fullsize-section">
+    <section class="hero-content">
+      <h1 class="page-title">Welcome to Keep Clone</h1>
+      <p class="section-text">An effort to make a clone of <a href="https://keep.google.com" target="_blank">Google Keep</a> in play-scala with Firebase.
+    </section>
+  </section>
 }

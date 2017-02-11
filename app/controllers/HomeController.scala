@@ -21,7 +21,7 @@ class HomeController @Inject() extends Controller {
     request.session.get("user_email").map { userEmail =>
       Ok(views.html.notes(userEmail))
     }.getOrElse {
-      Ok(views.html.index("Your new application is ready."))
+      Ok(views.html.index())
     }
   }
 

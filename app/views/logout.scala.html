@@ -1,0 +1,35 @@
+@main("Successfully logged out") {
+  <header id="site-header" class="site-header no-shadow">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/login" class="login-btn btn">Login</a>
+      <a href="/register" class="register-btn btn">Register</a>
+    </section>
+  </header>
+
+  <section id="logout" class="logout fullsize-section">
+    <section class="hero-content">
+      <h1 class="page-title">Successfully logged out</h1>
+      <p class="section-text">You'll be redirected to the homepage <span id="countdown" class="countdown">5</span></p>
+    </section>
+  </section>
+
+  <script>
+    var secondsPassed = 0;
+
+    setInterval(countdown, 1000);
+
+    function countdown() {
+      if (secondsPassed < 5) {
+        secondsPassed++;
+      } else {
+        location.assign('/');
+        return;
+      }
+
+      var currentCountdown = Number($('#countdown').text());
+
+      $('#countdown').text(currentCountdown - 1);
+    }
+  </script>
+}

@@ -1,3 +1,237 @@
-* {
-  color: green !important;
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+
+$mainColor: #1A237E;
+$mainTransition: all .2s ease-in-out;
+
+// Mixin for transition
+@mixin transition($transition) {
+  transition: $transition;
+  -moz-transition: $transition;
+  -webkit-transition: $transition;
+  -ms-transition: $transition;
+}
+
+// Shortcut for flexbox
+@mixin flex() {
+  display: flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex
+}
+
+// No appearance shortcut
+@mixin noappearance() {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.page-title,
+.title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 48px;
+  font-weight: 300;
+}
+
+.title {
+  font-size: 36px;
+}
+
+.section-text {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+a {
+  color: #2196F3;
+  @include transition($mainTransition);
+
+  &:hover {
+    color: #0D47A1;
+  }
+}
+
+button,
+.btn {
+  padding: 6px 12px;
+  text-align: center;
+  color: $mainColor;
+  background-color: #FFFFFF;
+  font: inherit;
+  border: 0;
+  cursor: pointer;
+  outline-width: 0;
+  box-sizing: border-box;
+  @include noappearance();
+  @include transition($mainTransition);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, .7);
+  }
+}
+
+label,
+.label {
+  margin-bottom: 4px;
+  display: block;
+}
+
+input,
+.input {
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, .24);
+  font: inherit;
+  border: 0;
+  outline-width: 0;
+  box-sizing: border-box;
+  @include noappearance();
+  @include transition($mainTransition);
+
+  &:focus {
+    background-color: rgba(255, 255, 255, .3);
+  }
+}
+
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  height: 64px;
+  line-height: 64px;
+  color: #FFFFFF;
+  background-color: $mainColor;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+  box-sizing: border-box;
+  z-index: 100;
+
+  &.no-shadow {
+    box-shadow: none;
+  }
+
+  &.white {
+    color: $mainColor;
+    background-color: #FFFFFF;
+
+    .btn-container {
+      .login-btn:hover {
+        color: rgba($mainColor, .7);
+      }
+      
+      .register-btn {
+        color: #FFFFFF;
+        background-color: $mainColor;
+
+        &:hover {
+          color: $mainColor;
+          background-color: #FFFFFF;
+        }
+      }
+    }
+  }
+
+  .site-title {
+    float: left;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  .btn-container {
+    float: right;
+
+    .btn {
+      padding: {
+        top: 0;
+        bottom: 0;
+        left: 24px;
+        right: 24px;
+      }
+      color: inherit;
+      background: none;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .login-btn:hover {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .login-btn:last-child {
+      margin-right: -24px;
+    }
+
+    .register-btn {
+      margin-right: -24px;
+      color: $mainColor;
+      background-color: #FFFFFF;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, .7);
+      }
+    }
+  }
+}
+
+.fullsize-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  color: #FFFFFF;
+  background-color: $mainColor;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+
+  a {
+    color: #FFFFFF;
+
+    &:hover {
+      color: rgba(255, 255, 255, .7);
+    }
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
+
+#login,
+#register {
+  padding: 96px 48px 0;
+
+  .page-title {
+    text-align: right;
+  }
+
+  .login-form {
+    float: right;
+    width: 350px;
+
+    .input {
+      width: 100%;
+    }
+
+    .submit-btn {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+  }
 }

@@ -22,11 +22,7 @@ class UserController @Inject() extends Controller {
   }
 
   def logout = Action {
-    Ok(Json.parse("""
-    {
-      "json": true
-    }
-    """)).withNewSession
+    Ok(views.html.logout()).withNewSession
   }
 
 }

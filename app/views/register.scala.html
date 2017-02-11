@@ -1,3 +1,26 @@
 @main("Register") {
-  <h1>Register</h1>
+  <header id="site-header" class="site-header white">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/login" class="login-btn btn">Login</a>
+    </section>
+  </header>
+
+  <section id="register" class="register fullsize-section">
+    <h1 class="page-title">Register</h1>
+    <form id="login-form" class="login-form" method="post">
+      <label for="first-name-input" class="label">First name</label>
+      <input id="first-name-input" class="email-input input" name="firstName" type="text">
+      <label for="last-name-input" class="label">Last name</label>
+      <input id="last-name-input" class="email-input input" name="lastName" type="text">
+      <label for="email-input" class="label">Email adress</label>
+      <input id="email-input" class="email-input input" name="email" type="text">
+      <label for="password-input" class="label">Password</label>
+      <input id="password-input" class="password-input input" name="password" type="password"> 
+      
+      <button class="submit-btn btn" type="submit">Register</button>
+    
+      <p class="section-text">Already have an account? <a href="/login">Login</a></p>
+    </form>
+  </section>
 }
