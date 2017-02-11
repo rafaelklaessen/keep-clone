@@ -3482,3 +3482,830 @@ Copy resource mappings:
 Total time: 5 s, completed 11 févr. 2017 11:11:26
 > server-post-command-cleanup
 > server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@26e5b378, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 16f87b24, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 1.479318124 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 2 s, completed 11 févr. 2017 11:14:10
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@cfb8056, check cycles: false
+
+Canceling execution...
+Task java.util.concurrent.ExecutorCompletionService$QueueingFuture@1067ea4c rejected from java.util.concurrent.ThreadPoolExecutor@a032609[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 12]
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ExecutorCompletionService$QueueingFuture@1067ea4c rejected from java.util.concurrent.ThreadPoolExecutor@a032609[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 12]
+Use 'last' for the full log.
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 1
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@16d4056, check cycles: false
+Total time: 0 s, completed 11 févr. 2017 11:14:10
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@2e267ef9, check cycles: false
+Total time: 0 s, completed 11 févr. 2017 11:14:10
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@f105c81, check cycles: false
+Total time: 0 s, completed 11 févr. 2017 11:14:14
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@3f0195fa, check cycles: false
+Total time: 0 s, completed 11 févr. 2017 11:14:16
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1ad66647, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:14:38
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@131f8ece, check cycles: false
+
+Initial source changes: 
+	removed:Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 2c442f3f, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: three errors found
+three errors found
+Compilation failed (CompilerInterface)
+Read from stdout: (compile:compileIncremental) Compilation failed
+(compile:compileIncremental) Compilation failed
+Total time: 2 s, completed 11 févr. 2017 11:16:14
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@7d6121f4, check cycles: false
+
+Initial source changes: 
+	removed:Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 6a610af0, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: three errors found
+three errors found
+Compilation failed (CompilerInterface)
+Read from stdout: (compile:compileIncremental) Compilation failed
+(compile:compileIncremental) Compilation failed
+Total time: 1 s, completed 11 févr. 2017 11:16:15
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@2b4a6447, check cycles: false
+
+Initial source changes: 
+	removed:Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 3d8b0ffc, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+Read from stdout: GET     /message                    controllers.AsyncController.message
+GET     /message                    controllers.AsyncController.message
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+Read from stdout: GET     /message                    controllers.AsyncController.message
+GET     /message                    controllers.AsyncController.message
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+Read from stdout: GET     /message                    controllers.AsyncController.message
+GET     /message                    controllers.AsyncController.message
+Read from stdout: 6 errors found
+6 errors found
+Compilation failed (CompilerInterface)
+Read from stdout: (compile:compileIncremental) Compilation failed
+(compile:compileIncremental) Compilation failed
+Total time: 1 s, completed 11 févr. 2017 11:16:19
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@58dd5a2a, check cycles: false
+
+Initial source changes: 
+	removed:Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 6419afef, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+Read from stdout: GET     /message                    controllers.AsyncController.message
+GET     /message                    controllers.AsyncController.message
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+Read from stdout: GET     /message                    controllers.AsyncController.message
+GET     /message                    controllers.AsyncController.message
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:8: type CountController is not a member of package controllers
+Read from stdout: GET     /count                      controllers.CountController.count
+GET     /count                      controllers.CountController.count
+Read from stdout: C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+C:\Users\rafae\Documents\keep-clone\conf\routes:10: type AsyncController is not a member of package controllers
+Read from stdout: GET     /message                    controllers.AsyncController.message
+GET     /message                    controllers.AsyncController.message
+Read from stdout: 6 errors found
+6 errors found
+Compilation failed (CompilerInterface)
+Read from stdout: (compile:compileIncremental) Compilation failed
+(compile:compileIncremental) Compilation failed
+Total time: 1 s, completed 11 févr. 2017 11:16:20
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1b46115d, check cycles: false
+
+Initial source changes: 
+	removed:Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\RoutesPrefix.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\RoutesPrefix.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala, C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java, C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala, C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\RoutesPrefix.scala)
+
+Recompiling all 13 sources: invalidated sources (7) exceeded 50.0% of all sources
+Read from stdout: Compiling 12 Scala sources and 1 Java source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 12 Scala sources and 1 Java source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 6f161b62, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 3.438998123 s
+Java compilation took 1.350133334 s
+Java analysis took 0.043172346 s
+Java compile + analysis took 1.403952988 s
+Invalidating C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java...
+Invalidating (transitively) by inheritance from C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java...
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java)
+Invalidated by transitive inheritance dependency: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java)
+The C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java source file has the following regular definitions changed:
+	AsyncController, CountController.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java
+None of the modified names appears in C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala. This dependency is not being considered for invalidation.
+Invalidating C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala...
+Invalidating (transitively) by inheritance from C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala...
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala)
+Invalidated by transitive inheritance dependency: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala)
+The C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala source file has the following regular definitions changed:
+	notify, count, _defaultPrefix, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, ReverseCountController, ReverseAsyncController, notifyAll, isInstanceOf, <init>, ==, clone, message, toString, !=, getClass, ne, eq, ##, finalize, hashCode.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java
+Invalidating C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala...
+Invalidating (transitively) by inheritance from C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala...
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala)
+Invalidated by transitive inheritance dependency: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala)
+The C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\ReverseRoutes.scala source file has the following regular definitions changed:
+	notify, count, _defaultPrefix, wait, $asInstanceOf, equals, asInstanceOf, synchronized, $isInstanceOf, ReverseCountController, ReverseAsyncController, notifyAll, isInstanceOf, <init>, ==, clone, message, toString, !=, getClass, ne, eq, ##, finalize, hashCode.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\controllers\routes.java
+The following modified names cause invalidation of C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala: Set(<init>)
+Invalidating C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala...
+Invalidating (transitively) by inheritance from C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala...
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala)
+Invalidated by transitive inheritance dependency: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala)
+The C:\Users\rafae\Documents\keep-clone\app\controllers\AsyncController.scala source file has the following implicit definitions changed:
+	request2session, request2flash, request2lang.
+All member reference dependencies will be considered within this context.
+Invalidating C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala...
+Invalidating (transitively) by inheritance from C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala...
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala)
+Invalidated by transitive inheritance dependency: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala)
+The C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala source file has the following regular definitions changed:
+	controllers_CountController_count1_invoker, controllers_Assets_versioned1_invoker, controllers_Assets_versioned3_route, controllers_CountController_count1_route, <init>, controllers_Assets_versioned3_invoker, controllers_AsyncController_message2_route, controllers_AsyncController_message2_invoker, controllers_Assets_versioned1_route.
+All member reference dependencies will be considered within this context.
+Invalidating C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala...
+Invalidating (transitively) by inheritance from C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala...
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+Invalidated by transitive inheritance dependency: Set(C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala)
+The C:\Users\rafae\Documents\keep-clone\app\controllers\CountController.scala source file has the following implicit definitions changed:
+	request2session, request2flash, request2lang.
+All member reference dependencies will be considered within this context.
+New invalidations:
+	Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala)
+Initial set of included nodes: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala)
+Including C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala by C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala
+Including C:\Users\rafae\Documents\keep-clone\app\controllers\HomeController.scala by C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala
+Including C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala by C:\Users\rafae\Documents\keep-clone\app\controllers\HomeController.scala
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\routes\main\router\Routes.scala)
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 6 s, completed 11 févr. 2017 11:16:37
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@5aaed159, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 739a3c2e, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 0.750640198 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:18:20
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1a7adf05, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 1d57b8fc, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 0.745902223 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:18:31
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@6bfa4038, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 1bd17eb4, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 0.70915279 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:18:40
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@4627aa18, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 3ad98fa8, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 0.583505383 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:18:47
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@41cff9be, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\main.template.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 2a52afee, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 0.682668247 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:24:04
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@7159d69d, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:24:05
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@2362f781, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\rafae\Documents\keep-clone\target\scala-2.11\twirl\main\views\html\index.template.scala)
+
+Read from stdout: Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Compiling 1 Scala source to C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes...
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Getting compiler-interface from component compiler for Scala 2.11.7
+Other repositories:
+Default repositories:
+Running cached compiler 712e7c0f, interfacing (CompilerInterface) with Scala compiler version 2.11.7
+Calling Scala compiler with arguments  (CompilerInterface):
+	-deprecation
+	-unchecked
+	-encoding
+	utf8
+	-bootclasspath
+	C:\Program Files\Java\jre1.8.0_112\lib\resources.jar;C:\Program Files\Java\jre1.8.0_112\lib\rt.jar;C:\Program Files\Java\jre1.8.0_112\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_112\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_112\lib\jce.jar;C:\Program Files\Java\jre1.8.0_112\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_112\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_112\classes;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-library\2.11.7\jars\scala-library.jar
+	-classpath
+	C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes;C:\activator-dist-1.3.12\repository\com.typesafe.play\twirl-api_2.11\1.1.1\jars\twirl-api_2.11.jar;C:\activator-dist-1.3.12\repository\org.apache.commons\commons-lang3\3.4\jars\commons-lang3.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-server_2.11\jars\play-server_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\activator-dist-1.3.12\repository\com.typesafe\config\1.3.0\bundles\config.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.9.6.jar;C:\activator-dist-1.3.12\repository\org.joda\joda-convert\1.8.1\jars\joda-convert.jar;C:\activator-dist-1.3.12\repository\org.scala-lang\scala-reflect\2.11.7\jars\scala-reflect.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\bundles\jackson-datatype-jdk8-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\bundles\jackson-datatype-jsr310-2.7.8.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-utils\jars\play-netty-utils-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.slf4j\slf4j-api\1.7.21\jars\slf4j-api.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jul-to-slf4j\1.7.21\jars\jul-to-slf4j.jar;C:\activator-dist-1.3.12\repository\org.slf4j\jcl-over-slf4j\1.7.21\jars\jcl-over-slf4j.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-streams_2.11\jars\play-streams_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\org.reactivestreams\reactive-streams\1.0.0\jars\reactive-streams.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-stream_2.11\jars\akka-stream_2.11-2.4.12.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\org.scala-lang.modules\scala-java8-compat_2.11\0.7.0\bundles\scala-java8-compat_2.11.jar;C:\activator-dist-1.3.12\repository\com.typesafe\ssl-config-core_2.11\0.2.1\bundles\ssl-config-core_2.11.jar;C:\Users\rafae\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.4.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.4.12.jar;C:\activator-dist-1.3.12\repository\commons-codec\commons-codec\1.10\jars\commons-codec.jar;C:\Users\rafae\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\rafae\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\rafae\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\activator-dist-1.3.12\repository\com.google.inject\guice\4.0\jars\guice.jar;C:\activator-dist-1.3.12\repository\javax.inject\javax.inject\1\jars\javax.inject.jar;C:\activator-dist-1.3.12\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar;C:\activator-dist-1.3.12\repository\com.google.inject.extensions\guice-assistedinject\4.0\jars\guice-assistedinject.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-netty-server_2.11\jars\play-netty-server_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams-http\1.0.8\jars\netty-reactive-streams-http.jar;C:\activator-dist-1.3.12\repository\com.typesafe.netty\netty-reactive-streams\1.0.8\jars\netty-reactive-streams.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-handler\4.0.41.Final\jars\netty-handler.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-buffer\4.0.41.Final\jars\netty-buffer.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-common\4.0.41.Final\jars\netty-common.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport\4.0.41.Final\jars\netty-transport.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec\4.0.41.Final\jars\netty-codec.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-codec-http\4.0.41.Final\jars\netty-codec-http.jar;C:\activator-dist-1.3.12\repository\io.netty\netty-transport-native-epoll\4.0.41.Final\jars\netty-transport-native-epoll-linux-x86_64.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-logback_2.11\jars\play-logback_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-classic\1.1.7\jars\logback-classic.jar;C:\activator-dist-1.3.12\repository\ch.qos.logback\logback-core\1.1.7\jars\logback-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.5.10.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-jdbc-api_2.11\jars\play-jdbc-api_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar;C:\activator-dist-1.3.12\repository\com.zaxxer\HikariCP\2.5.1\bundles\HikariCP.jar;C:\activator-dist-1.3.12\repository\com.googlecode.usc\jdbcdslog\1.0.6.2\jars\jdbcdslog.jar;C:\activator-dist-1.3.12\repository\com.h2database\h2\1.4.192\jars\h2.jar;C:\activator-dist-1.3.12\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\net.sf.ehcache\ehcache-core\2.6.11\jars\ehcache-core.jar;C:\Users\rafae\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.5.10.jar;C:\activator-dist-1.3.12\repository\com.google.guava\guava\19.0\bundles\guava.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\async-http-client\2.0.11\jars\async-http-client.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver-dns\2.0.11\jars\netty-resolver-dns.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-resolver\2.0.11\jars\netty-resolver.jar;C:\activator-dist-1.3.12\repository\org.asynchttpclient\netty-codec-dns\2.0.11\jars\netty-codec-dns.jar;C:\activator-dist-1.3.12\repository\org.javassist\javassist\3.20.0-GA\bundles\javassist.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\rafae\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpcore\4.0.1\jars\httpcore.jar;C:\activator-dist-1.3.12\repository\org.apache.httpcomponents\httpclient\4.0.1\jars\httpclient.jar;C:\Users\rafae\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar
+Scala compilation took 0.476378469 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:25:01
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/rafae/Documents/keep-clone/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@65028314, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\rafae\Documents\keep-clone\conf\application.conf,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\application.conf)
+	(C:\Users\rafae\Documents\keep-clone\conf\logback.xml,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\logback.xml)
+	(C:\Users\rafae\Documents\keep-clone\conf\routes,C:\Users\rafae\Documents\keep-clone\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 11 févr. 2017 11:25:02
+> server-post-command-cleanup
+> server-handle-next-server-request
