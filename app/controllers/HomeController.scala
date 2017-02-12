@@ -18,8 +18,8 @@ class HomeController @Inject() extends Controller {
    * a path of `/`.
    */
   def index = Action { request =>
-    request.session.get("user_email").map { userEmail =>
-      Ok(views.html.notes(userEmail))
+    request.session.get("username").map { username =>
+      Ok(views.html.notes(username))
     }.getOrElse {
       Ok(views.html.index())
     }

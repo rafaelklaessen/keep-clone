@@ -40,6 +40,11 @@ object Users {
     lastName = scala.io.Source.fromURL(lastName).mkString
     password = scala.io.Source.fromURL(password).mkString
 
+    email = email.slice(1, email.size - 1)
+    firstName = firstName.slice(1, firstName.size - 1)
+    lastName = lastName.slice(1, lastName.size - 1)
+    password = password.slice(1, password.size - 1)
+
     val userData = Map(
       "email" -> email,
       "firstName" -> firstName,
@@ -48,6 +53,12 @@ object Users {
     )
 
     userData
+  }
+
+  def userExists(username: String) = {
+    val user = getUser(username)
+
+    user("email") != "ul" && user("firstName") != "ul" && user("lastName") != "ul" && user("password") != "ul"
   }
 
   def registerUser(username: String, email: String, firstName: String, lastName: String, password: String) = {

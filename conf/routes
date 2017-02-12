@@ -7,6 +7,7 @@ GET     /                           controllers.HomeController.index
 
 # Login page
 GET     /login                      controllers.UserController.login
+POST    /login                      controllers.UserController.loginUser()
 # Register page
 GET     /register                   controllers.UserController.register
 POST    /register                   controllers.UserController.registerUser()

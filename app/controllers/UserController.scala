@@ -15,6 +15,8 @@ import play.api.libs.json._
 import play.api.data._
 import play.api.data.Forms._
 
+import org.mindrot.jbcrypt._
+
 import models.Users
 
 /**
@@ -25,8 +27,42 @@ import models.Users
 class UserController @Inject() extends Controller {
 
   def login = Action {
-    Ok(views.html.login()).withSession(
-      "user_email" -> "test@example.com")
+    Ok(views.html.login())
+  }
+
+  def loginUser = Action { implicit request =>
+    case class LoginData(username: String, password: String)
+
+    val loginForm = Form(
+      mapping(
+        "username" -> nonEmptyText,
+        "password" -> nonEmptyText
+      )(LoginData.apply)(LoginData.unapply)
+    )
+
+    val loginData = loginForm.bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest("Please enter all form fields")
+      },
+      loginData => {
+        if (Users.userExists(loginData.username)) {
+          val user = Users.getUser(loginData.username)
+
+          println(BCrypt.checkpw(loginData.password, user("password")))
+
+          if (BCrypt.checkpw(loginData.password, user("password"))) {
+            Redirect("/").withSession(
+              "username" -> loginData.username)
+          } else {
+            Ok("Wrong password")
+          }
+        } else {
+          Ok("User not found")
+        }
+      }
+    )
+
+    loginData
   }
 
   def register = Action {
@@ -34,24 +70,9 @@ class UserController @Inject() extends Controller {
   }
 
   def registerUser() = Action { implicit request => 
-    val serviceAccount = new FileInputStream("../keep-clone-840b5-firebase-adminsdk-ztnub-40397c0ba3.json")
+    println(Users.getUser("nope"))
 
-    val options = new FirebaseOptions.Builder()
-      .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
-      .setDatabaseUrl("https://keep-clone-840b5.firebaseio.com/")
-      .build()
-    
-    val apps = FirebaseApp.getApps()
-
-    if (apps.isEmpty()) {
-      FirebaseApp.initializeApp(options)
-    }
-
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-
-    val usersRef = ref.child("users")
-
-    println(Users.getUser("AUTHTEST"))
+    println(Users.userExists("AUTHTEST"))
 
     case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
 
@@ -70,9 +91,14 @@ class UserController @Inject() extends Controller {
         BadRequest("Form not filled correctly")
       },
       userData => {
-        Users.registerUser(userData.username, userData.email, userData.firstName, userData.lastName, userData.password)
+        if (!Users.userExists(userData.username)) {
+          Users.registerUser(userData.username, userData.email, userData.firstName, userData.lastName, userData.password)
 
-        Redirect("/")
+          Redirect("/").withSession(
+            "username" -> userData.username)
+        } else {
+          Ok("User already exists!")
+        }
       }
     )
 
