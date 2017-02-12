@@ -15,6 +15,8 @@ import play.api.libs.json._
 import play.api.data._
 import play.api.data.Forms._
 
+import models.Users
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
@@ -49,6 +51,8 @@ class UserController @Inject() extends Controller {
 
     val usersRef = ref.child("users")
 
+    println(Users.getUser("AUTHTEST"))
+
     case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
 
     val userForm = Form(
@@ -66,13 +70,8 @@ class UserController @Inject() extends Controller {
         BadRequest("Form not filled correctly")
       },
       userData => {
-        val currentUser = usersRef.child(userData.username)
+        Users.registerUser(userData.username, userData.email, userData.firstName, userData.lastName, userData.password)
 
-        currentUser.child("email").setValue(userData.firstName)
-        currentUser.child("firstName").setValue(userData.firstName)
-        currentUser.child("lastName").setValue(userData.lastName)
-        currentUser.child("password").setValue(userData.firstName)
-      
         Redirect("/")
       }
     )

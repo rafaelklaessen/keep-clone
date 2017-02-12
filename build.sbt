@@ -10,7 +10,8 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
+  "org.mindrot" % "jbcrypt" % "0.3m"
 )
 
 // https://mvnrepository.com/artifact/com.google.firebase/firebase-admin
@@ -20,5 +21,7 @@ libraryDependencies += "com.google.firebase" % "firebase-admin" % "4.1.1"
 libraryDependencies += "com.firebase" % "firebase-client" % "2.2.4"
 
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
+
+fork in run := true
 
 fork in run := true
