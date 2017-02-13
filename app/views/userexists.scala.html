@@ -12,6 +12,9 @@
 
   <section id="register" class="register fullsize-section">
     <h1 class="page-title">Register</h1>
+    <p class=" error section-text">
+      A user with that username already exists
+    </p>
     @form(action = routes.UserController.registerUser()) {
       @inputText(userForm("username"), '_label -> "Username")
       @inputText(userForm("email"), '_label -> "Email")

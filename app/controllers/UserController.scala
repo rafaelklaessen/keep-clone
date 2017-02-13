@@ -15,9 +15,15 @@ import play.api.libs.json._
 import play.api.data._
 import play.api.data.Forms._
 
+import play.api.Play.current
+import play.api.i18n.Messages.Implicits._
+
 import org.mindrot.jbcrypt._
 
 import models.Users
+
+case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
+case class LoginData(username: String, password: String)
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -26,23 +32,21 @@ import models.Users
 @Singleton
 class UserController @Inject() extends Controller {
 
-  def login = Action {
-    Ok(views.html.login())
+  val loginForm = Form(
+    mapping(
+      "username" -> nonEmptyText,
+      "password" -> nonEmptyText
+    )(LoginData.apply)(LoginData.unapply)
+  )
+
+  def login = Action { implicit request =>
+    Ok(views.html.login(loginForm))
   }
 
   def loginUser = Action { implicit request =>
-    case class LoginData(username: String, password: String)
-
-    val loginForm = Form(
-      mapping(
-        "username" -> nonEmptyText,
-        "password" -> nonEmptyText
-      )(LoginData.apply)(LoginData.unapply)
-    )
-
     val loginData = loginForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest("Please enter all form fields")
+        BadRequest(views.html.login(formWithErrors))
       },
       loginData => {
         if (Users.userExists(loginData.username)) {
@@ -54,10 +58,10 @@ class UserController @Inject() extends Controller {
             Redirect("/").withSession(
               "username" -> loginData.username)
           } else {
-            Ok("Wrong password")
+            Ok(views.html.wrongpassword(loginForm))
           }
         } else {
-          Ok("User not found")
+          Ok(views.html.usernotfound(loginForm))
         }
       }
     )
@@ -65,8 +69,18 @@ class UserController @Inject() extends Controller {
     loginData
   }
 
-  def register = Action {
-    Ok(views.html.register())
+  val userForm = Form(
+    mapping(
+      "username" -> nonEmptyText,
+      "email" -> nonEmptyText,
+      "firstName" -> nonEmptyText,
+      "lastName" -> nonEmptyText,
+      "password" -> nonEmptyText
+    )(UserData.apply)(UserData.unapply)
+  )
+
+  def register = Action { implicit request =>
+    Ok(views.html.register(userForm))
   }
 
   def registerUser() = Action { implicit request => 
@@ -74,21 +88,9 @@ class UserController @Inject() extends Controller {
 
     println(Users.userExists("AUTHTEST"))
 
-    case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
-
-    val userForm = Form(
-      mapping(
-        "username" -> nonEmptyText,
-        "email" -> nonEmptyText,
-        "firstName" -> nonEmptyText,
-        "lastName" -> nonEmptyText,
-        "password" -> nonEmptyText
-      )(UserData.apply)(UserData.unapply)
-    )
-
     val userData = userForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest("Form not filled correctly")
+        BadRequest(views.html.register(formWithErrors))
       },
       userData => {
         if (!Users.userExists(userData.username)) {
@@ -97,7 +99,7 @@ class UserController @Inject() extends Controller {
           Redirect("/").withSession(
             "username" -> userData.username)
         } else {
-          Ok("User already exists!")
+          Ok(views.html.userexists(userForm))
         }
       }
     )

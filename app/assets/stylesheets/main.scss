@@ -47,6 +47,10 @@ body {
 .section-text {
   margin-top: 0;
   margin-bottom: 12px;
+
+  &.error {
+    color: #EF5350;
+  }
 }
 
 a {
@@ -216,16 +220,31 @@ input,
 #register {
   padding: 96px 48px 0;
 
-  .page-title {
+  .page-title,
+  .section-text {
     text-align: right;
   }
 
-  .login-form {
+  form {
     float: right;
     width: 350px;
 
-    .input {
+    dl, dd {
+      margin: 0;
+    }
+
+    input {
       width: 100%;
+    }
+
+    .info {
+      display: none;
+    }
+
+    dd.error {
+      margin-top: -8px;
+      padding-bottom: 12px;
+      color: #EF5350;
     }
 
     .submit-btn {
