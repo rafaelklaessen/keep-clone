@@ -47,6 +47,10 @@ body {
 .section-text {
   margin-top: 0;
   margin-bottom: 12px;
+
+  &.error {
+    color: #EF5350;
+  }
 }
 
 a {
@@ -216,7 +220,8 @@ input,
 #register {
   padding: 96px 48px 0;
 
-  .page-title {
+  .page-title,
+  .section-text {
     text-align: right;
   }
 

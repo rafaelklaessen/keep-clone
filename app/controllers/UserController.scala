@@ -100,7 +100,7 @@ class UserController @Inject() extends Controller {
           Redirect("/").withSession(
             "username" -> userData.username)
         } else {
-          Ok("User already exists!")
+          Ok(views.html.userexists(userForm))
         }
       }
     )

@@ -1,0 +1,27 @@
+@(userForm: Form[UserData])(implicit messages: Messages)
+
+@import helper._
+
+@main("Register") {
+  <header id="site-header" class="site-header white">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/login" class="login-btn btn">Login</a>
+    </section>
+  </header>
+
+  <section id="register" class="register fullsize-section">
+    <h1 class="page-title">Register</h1>
+    <p class=" error section-text">
+      A user with that username already exists
+    </p>
+    @form(action = routes.UserController.registerUser()) {
+      @inputText(userForm("username"), '_label -> "Username")
+      @inputText(userForm("email"), '_label -> "Email")
+      @inputText(userForm("firstName"), '_label -> "First name")
+      @inputText(userForm("lastName"), '_label -> "Last name")
+      @inputPassword(userForm("password"), '_label -> "Password")
+      <button class="submit-btn btn" type="submit">Register</button>
+    }
+  </section>
+}
