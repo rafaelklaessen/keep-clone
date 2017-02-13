@@ -23,6 +23,7 @@ import org.mindrot.jbcrypt._
 import models.Users
 
 case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
+case class LoginData(username: String, password: String)
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -31,23 +32,21 @@ case class UserData(username: String, email: String, firstName: String, lastName
 @Singleton
 class UserController @Inject() extends Controller {
 
-  def login = Action {
-    Ok(views.html.login())
+  val loginForm = Form(
+    mapping(
+      "username" -> nonEmptyText,
+      "password" -> nonEmptyText
+    )(LoginData.apply)(LoginData.unapply)
+  )
+
+  def login = Action { implicit request =>
+    Ok(views.html.login(loginForm))
   }
 
   def loginUser = Action { implicit request =>
-    case class LoginData(username: String, password: String)
-
-    val loginForm = Form(
-      mapping(
-        "username" -> nonEmptyText,
-        "password" -> nonEmptyText
-      )(LoginData.apply)(LoginData.unapply)
-    )
-
     val loginData = loginForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest("Please enter all form fields")
+        BadRequest(views.html.login(formWithErrors))
       },
       loginData => {
         if (Users.userExists(loginData.username)) {
@@ -59,10 +58,10 @@ class UserController @Inject() extends Controller {
             Redirect("/").withSession(
               "username" -> loginData.username)
           } else {
-            Ok("Wrong password")
+            Ok(views.html.wrongpassword(loginForm))
           }
         } else {
-          Ok("User not found")
+          Ok(views.html.usernotfound(loginForm))
         }
       }
     )

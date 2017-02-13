@@ -12,6 +12,9 @@
 
   <section id="login" class="login fullsize-section">
     <h1 class="page-title">Login</h1>
+    <p class=" error section-text">
+      A user with that username could not be found
+    </p>
     @form(action = routes.UserController.loginUser()) {
       @inputText(loginForm("username"), '_label -> "Username")
       @inputPassword(loginForm("password"), '_label -> "Password")
