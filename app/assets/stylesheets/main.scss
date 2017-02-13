@@ -220,12 +220,26 @@ input,
     text-align: right;
   }
 
-  .login-form {
+  form {
     float: right;
     width: 350px;
 
-    .input {
+    dl, dd {
+      margin: 0;
+    }
+
+    input {
       width: 100%;
+    }
+
+    .info {
+      display: none;
+    }
+
+    dd.error {
+      margin-top: -8px;
+      padding-bottom: 12px;
+      color: #EF5350;
     }
 
     .submit-btn {

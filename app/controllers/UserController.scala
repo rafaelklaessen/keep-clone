@@ -15,9 +15,14 @@ import play.api.libs.json._
 import play.api.data._
 import play.api.data.Forms._
 
+import play.api.Play.current
+import play.api.i18n.Messages.Implicits._
+
 import org.mindrot.jbcrypt._
 
 import models.Users
+
+case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -65,8 +70,18 @@ class UserController @Inject() extends Controller {
     loginData
   }
 
-  def register = Action {
-    Ok(views.html.register())
+  val userForm = Form(
+    mapping(
+      "username" -> nonEmptyText,
+      "email" -> nonEmptyText,
+      "firstName" -> nonEmptyText,
+      "lastName" -> nonEmptyText,
+      "password" -> nonEmptyText
+    )(UserData.apply)(UserData.unapply)
+  )
+
+  def register = Action { implicit request =>
+    Ok(views.html.register(userForm))
   }
 
   def registerUser() = Action { implicit request => 
@@ -74,21 +89,9 @@ class UserController @Inject() extends Controller {
 
     println(Users.userExists("AUTHTEST"))
 
-    case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
-
-    val userForm = Form(
-      mapping(
-        "username" -> nonEmptyText,
-        "email" -> nonEmptyText,
-        "firstName" -> nonEmptyText,
-        "lastName" -> nonEmptyText,
-        "password" -> nonEmptyText
-      )(UserData.apply)(UserData.unapply)
-    )
-
     val userData = userForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest("Form not filled correctly")
+        BadRequest(views.html.register(formWithErrors))
       },
       userData => {
         if (!Users.userExists(userData.username)) {
