@@ -20,6 +20,8 @@ import play.api.i18n.Messages.Implicits._
 
 import org.mindrot.jbcrypt._
 
+import play.api.data.validation._
+
 import models.Users
 
 case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
@@ -31,10 +33,22 @@ case class LoginData(username: String, password: String)
 @Singleton
 class UserController @Inject() extends Controller {
 
+  def usernameConstraint(username: String): ValidationResult = {
+    if (username.length == 0) {
+      Invalid("Required")
+    } else if (username.contains(".")) {
+      Invalid("Username may not contain dots")
+    } else {
+      Valid
+    }
+  }
+
+  val validUsername = Constraint("username")(usernameConstraint)
+
   // Form for the login page
   val loginForm = Form(
     mapping(
-      "username" -> nonEmptyText,
+      "username" -> text.verifying(validUsername),
       "password" -> nonEmptyText
     )(LoginData.apply)(LoginData.unapply)
   )
@@ -74,14 +88,38 @@ class UserController @Inject() extends Controller {
     loginData
   }
 
+  def nameConstraint(name: String): ValidationResult = {
+    if (name.length == 0) {
+      Invalid("This field is required")
+    } else if (name.length > 2 && name.length < 100) {
+      Valid
+    } else {
+      Invalid("Name to short")
+    }
+  }
+
+  val validName = Constraint("name")(nameConstraint)
+
+  def passwordConstraint(name: String): ValidationResult = {
+    if (name.length == 0) {
+      Invalid("This field is required")
+    } else if (name.length > 2 && name.length < 100) {
+      Valid
+    } else {
+      Invalid("Password too weak")
+    }
+  }
+
+  val validPassword = Constraint("password")(passwordConstraint)
+
   // Form for the register page
   val userForm = Form(
     mapping(
-      "username" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "firstName" -> nonEmptyText,
-      "lastName" -> nonEmptyText,
-      "password" -> nonEmptyText
+      "username" -> text.verifying(validUsername),
+      "email" -> email,
+      "firstName" -> text.verifying(validName),
+      "lastName" -> text.verifying(validName),
+      "password" -> text.verifying(validPassword)
     )(UserData.apply)(UserData.unapply)
   )
 
