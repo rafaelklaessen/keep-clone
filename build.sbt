@@ -23,3 +23,5 @@ libraryDependencies += "com.firebase" % "firebase-client" % "2.2.4"
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
 
 fork in run := true
+
+fork in run := true

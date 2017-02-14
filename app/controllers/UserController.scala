@@ -26,12 +26,12 @@ case class UserData(username: String, email: String, firstName: String, lastName
 case class LoginData(username: String, password: String)
 
 /**
- * This controller creates an `Action` to handle HTTP requests to the
- * application's home page.
+ * This controller handles user registration and logging in
  */
 @Singleton
 class UserController @Inject() extends Controller {
 
+  // Form for the login page
   val loginForm = Form(
     mapping(
       "username" -> nonEmptyText,
@@ -39,10 +39,16 @@ class UserController @Inject() extends Controller {
     )(LoginData.apply)(LoginData.unapply)
   )
 
+  // Render login page with login form on /login
   def login = Action { implicit request =>
     Ok(views.html.login(loginForm))
   }
 
+  /**
+   * This action handles post requests to /login. It logs users in when 
+   * all form fields are filled, the user exists and the password is correct.
+   * Otherwise, it will show an error/errors.
+   */
   def loginUser = Action { implicit request =>
     val loginData = loginForm.bindFromRequest.fold(
       formWithErrors => {
@@ -52,9 +58,8 @@ class UserController @Inject() extends Controller {
         if (Users.userExists(loginData.username)) {
           val user = Users.getUser(loginData.username)
 
-          println(BCrypt.checkpw(loginData.password, user("password")))
-
           if (BCrypt.checkpw(loginData.password, user("password"))) {
+            // Log user in and redirect to homepage
             Redirect("/").withSession(
               "username" -> loginData.username)
           } else {
@@ -69,6 +74,7 @@ class UserController @Inject() extends Controller {
     loginData
   }
 
+  // Form for the register page
   val userForm = Form(
     mapping(
       "username" -> nonEmptyText,
@@ -79,15 +85,17 @@ class UserController @Inject() extends Controller {
     )(UserData.apply)(UserData.unapply)
   )
 
+  // Render register page with register form on /register
   def register = Action { implicit request =>
     Ok(views.html.register(userForm))
   }
 
+  /**
+   * This action handles post requests to /register. It registers users when
+   * all form fields are filled and the username is not yet taken. 
+   * After a user successfully registers, he/she is redirected to the homepage.
+   */
   def registerUser() = Action { implicit request => 
-    println(Users.getUser("nope"))
-
-    println(Users.userExists("AUTHTEST"))
-
     val userData = userForm.bindFromRequest.fold(
       formWithErrors => {
         BadRequest(views.html.register(formWithErrors))
@@ -96,6 +104,8 @@ class UserController @Inject() extends Controller {
         if (!Users.userExists(userData.username)) {
           Users.registerUser(userData.username, userData.email, userData.firstName, userData.lastName, userData.password)
 
+          // After the user is registered, login as well and redirect to 
+          // homepage.
           Redirect("/").withSession(
             "username" -> userData.username)
         } else {
@@ -107,6 +117,8 @@ class UserController @Inject() extends Controller {
     userData
   }
 
+  // When a user goes to /logout, the user session is ended and a successfully
+  // logged out page will show.
   def logout = Action {
     Ok(views.html.logout()).withNewSession
   }
