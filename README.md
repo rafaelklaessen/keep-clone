@@ -14,11 +14,11 @@ The project's main focus is to learn Scala/Play and Firebase.
 
 ## Setup
 
-Requirements to run the project locally:
+#### Requirements to run the project locally:
 - Activator 1.3.12 including Play 2.5.12 (requires JDK 1.8)
 - NodeJS with Babel if you want to compile the ES6
 
-Setup instructions
+#### Setup instructions
 - Clone the repo
 - Cd into the repo folder and run `activator ui`
 - In Activator, go to the run tab and run the project after it's compiled
