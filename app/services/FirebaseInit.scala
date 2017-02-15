@@ -14,7 +14,7 @@ class FirebaseInit @Inject() () {
   val apps = FirebaseApp.getApps()
 
   if (apps.isEmpty()) {
-    val serviceAccount = new FileInputStream("../keep-clone-840b5-firebase-adminsdk-ztnub-40397c0ba3.json")
+    val serviceAccount = new FileInputStream("firebase-auth.json")
 
     val options = new FirebaseOptions.Builder()
       .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))

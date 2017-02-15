@@ -32,10 +32,10 @@ object Users {
     var password = baseUrl + "password.json?auth=" + credential
 
     // Perform request to URLs and get data
-    email = scala.io.Source.fromURL(email).mkString
-    firstName = scala.io.Source.fromURL(firstName).mkString
-    lastName = scala.io.Source.fromURL(lastName).mkString
-    password = scala.io.Source.fromURL(password).mkString
+    email = Source.fromURL(email).mkString
+    firstName = Source.fromURL(firstName).mkString
+    lastName = Source.fromURL(lastName).mkString
+    password = Source.fromURL(password).mkString
 
     // All data is quoted in "", so remove those quotes (as we don't want hem)
     email = email.slice(1, email.size - 1)
