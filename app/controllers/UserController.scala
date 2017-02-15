@@ -35,7 +35,7 @@ class UserController @Inject() extends Controller {
 
   def usernameConstraint(username: String): ValidationResult = {
     if (username.length == 0) {
-      Invalid("Required")
+      Invalid("This field is required")
     } else if (username.contains(".")) {
       Invalid("Username may not contain dots")
     } else {

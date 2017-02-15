@@ -1,6 +1,12 @@
 @(userEmail: String)
 
 @main("Notes") {
+  <header id="site-header" class="site-header">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/logout" class="logout-btn btn">Logout</a>
+    </section>
+  </header> 
   <h1>Notes</h1>
   @userEmail
 }

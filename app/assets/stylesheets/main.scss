@@ -116,7 +116,7 @@ input,
   line-height: 64px;
   color: #FFFFFF;
   background-color: $mainColor;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   box-sizing: border-box;
   z-index: 100;
 
@@ -129,7 +129,7 @@ input,
     background-color: #FFFFFF;
 
     .btn-container {
-      .login-btn:hover {
+      .btn:hover {
         color: rgba($mainColor, .7);
       }
       
@@ -166,24 +166,29 @@ input,
       background: none;
       text-decoration: none;
       display: inline-block;
-    }
 
-    .login-btn:hover {
-      color: rgba(255, 255, 255, .7);
+      &:hover {
+        color: rgba(255, 255, 255, .7);
+      }  
     }
 
     .login-btn:last-child {
       margin-right: -24px;
     }
 
-    .register-btn {
+    .register-btn, {
       margin-right: -24px;
       color: $mainColor;
       background-color: #FFFFFF;
       
       &:hover {
+        color: $mainColor;
         background-color: rgba(255, 255, 255, .7);
       }
+    }
+
+    .logout-btn {
+      margin-right: -24px;
     }
   }
 }
