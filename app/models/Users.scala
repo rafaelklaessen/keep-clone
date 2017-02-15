@@ -19,16 +19,6 @@ import scala.io.Source
  * and checking if a user exists.
  */
 object Users {
-  def initializeFireBaseApp() = {
-    val serviceAccount = new FileInputStream("../keep-clone-840b5-firebase-adminsdk-ztnub-40397c0ba3.json")
-
-    val options = new FirebaseOptions.Builder()
-      .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
-      .setDatabaseUrl("https://keep-clone-840b5.firebaseio.com/")
-      .build()
-    
-    FirebaseApp.initializeApp(options)
-  }
 
   // This method gets the user via a request to Firebase's REST 
   def getUser(username: String):Map[String, String] = {
@@ -78,12 +68,6 @@ object Users {
 
   // Registers user by putting the user's data in Firebase
   def registerUser(username: String, email: String, firstName: String, lastName: String, password: String) = {
-    val apps = FirebaseApp.getApps()
-
-    if (apps.isEmpty()) {
-      Users.initializeFireBaseApp()
-    }
-
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val usersRef = ref.child("users")
     val currentUser = usersRef.child(username)
