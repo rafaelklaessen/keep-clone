@@ -55,7 +55,11 @@ class UserController @Inject() extends Controller {
 
   // Render login page with login form on /login
   def login = Action { implicit request =>
-    Ok(views.html.login(loginForm))
+    request.session.get("username").map { username =>
+      Redirect("/")
+    }.getOrElse {
+      Ok(views.html.login(loginForm))
+    }
   }
 
   /**
@@ -125,7 +129,11 @@ class UserController @Inject() extends Controller {
 
   // Render register page with register form on /register
   def register = Action { implicit request =>
-    Ok(views.html.register(userForm))
+    request.session.get("username").map { username =>
+      Redirect("/")
+    }.getOrElse {
+      Ok(views.html.register(userForm))
+    }
   }
 
   /**
