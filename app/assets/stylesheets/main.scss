@@ -384,3 +384,23 @@ textarea {
     }
   }
 }
+
+#notes {
+  padding-top: 48px;
+
+  .grid-sizer {
+    width: 25%;
+  }
+
+  .note {
+    margin: {
+      left: 12px;
+      right: 12px;
+      bottom: 24px;
+    }
+    width: calc(25% - 24px);
+    background-color: #FFFFFF;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+  }
+}

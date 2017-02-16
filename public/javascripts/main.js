@@ -133,3 +133,12 @@ var NoteWriter = function () {
 
   return NoteWriter;
 }();
+
+// Setup masonry
+
+
+$('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+});
