@@ -394,13 +394,46 @@ textarea {
 
   .note {
     margin: {
+      top: 24px;
       left: 12px;
       right: 12px;
-      bottom: 24px;
     }
+    padding: 12px 18px;
     width: calc(25% - 24px);
     background-color: #FFFFFF;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     box-sizing: border-box;
+
+    .note-title {
+      margin: 0;
+      margin-bottom: 6px;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    .note-content {
+      margin: 0;
+      font-size: 24px;
+      font-family: 'Roboto Slab', sans-serif;
+      font-weight: 300;
+    }
+
+    .delete-btn {
+      position: absolute;
+      right: 18px;
+      bottom: 12px;
+      padding: 0;
+      line-height: 1;
+      font-size: 18px;
+      display: none;
+
+      &:hover {
+        color: rgba(0, 0, 0, .54);
+        background: none;
+      }
+    }
+
+    &:hover .delete-btn {
+      display: block;
+    }
   }
 }
