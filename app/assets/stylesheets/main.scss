@@ -135,7 +135,9 @@ textarea {
   resize: none;
 }
 
-.input {
+.input,
+#login input,
+#register input {
   margin-bottom: 12px;
   padding: 6px 12px;
   color: #FFFFFF;
