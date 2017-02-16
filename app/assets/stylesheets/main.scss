@@ -33,6 +33,22 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+::-webkit-input-placeholder {
+   color: rgba(0, 0, 0, .54);
+}
+
+:-moz-placeholder { 
+   color: rgba(0, 0, 0, .54);
+}
+
+::-moz-placeholder {
+   color: rgba(0, 0, 0, .54);
+}
+
+:-ms-input-placeholder {  
+   color: rgba(0, 0, 0, .54);
+}
+
 .page-title,
 .title {
   margin-top: 0;
@@ -306,23 +322,41 @@ textarea {
 
   .note-title {
     margin: 0;
-    margin-bottom: 12px;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 1.1em;
+
+    .note-title-input {
+      width: 100%;
+      background: none;
+    }
   }
 
   .note-content {
+    height: 0;
     font-family: 'Roboto Slab', sans-serif;
+    opacity: 0;
+    display: none;
+    transition: height .2s ease-in-out, opacity .4s ease-in-out;
+    -moz-transition: height .2s ease-in-out, opacity .4s ease-in-out;
+    -webkit-transition: height .2s ease-in-out, opacity .4s ease-in-out;
+    -ms-transition: height .2s ease-in-out, opacity .4s ease-in-out;
 
     .note-content-input {
       width: 100%;
       height: auto;
+      background: none;
     }
   }
 
   .toolbar {
     width: 100%;
-    display: inline-block;
+    height: 0;
+    opacity: 0;
+    display: none;
+    transition: height .3s ease-in-out, opacity .6s ease-in-out;
+    -moz-transition: height .3s ease-in-out, opacity .6s ease-in-out;
+    -webkit-transition: height .3s ease-in-out, opacity .6s ease-in-out;
+    -ms-transition: height .3s ease-in-out, opacity .6s ease-in-out;
 
     .color-balls  {
       margin-left: -3px;
