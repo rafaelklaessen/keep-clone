@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Roboto+Slab:300,400,700|Roboto:100,300,400,500,700');
 
 $mainColor: #1A237E;
 $mainTransition: all .2s ease-in-out;
@@ -29,6 +29,7 @@ $mainTransition: all .2s ease-in-out;
 
 body {
   margin: 0;
+  background-color: #ECEFF1;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -62,22 +63,41 @@ a {
   }
 }
 
-button,
+button {
+  font: inherit;
+  border: 0;
+  outline-width: 0;
+  cursor: pointer;
+  @include noappearance();
+}
+
 .btn {
   padding: 6px 12px;
   text-align: center;
   color: $mainColor;
   background-color: #FFFFFF;
-  font: inherit;
-  border: 0;
-  cursor: pointer;
-  outline-width: 0;
   box-sizing: border-box;
-  @include noappearance();
   @include transition($mainTransition);
 
   &:hover {
     background-color: rgba(255, 255, 255, .7);
+  }
+
+  &.md-btn {
+    padding: 0 12px;
+    line-height: 36px;
+    vertical-align: middle;
+    color: inherit;
+    background: none;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .08);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, .16)
+    }
   }
 }
 
@@ -88,16 +108,23 @@ label,
 }
 
 input,
+textarea {
+  font: inherit;
+  border: 0;
+  outline-width: 0;
+  @include noappearance();
+}
+
+textarea {
+  resize: none;
+}
+
 .input {
   margin-bottom: 12px;
   padding: 6px 12px;
   color: #FFFFFF;
   background-color: rgba(255, 255, 255, .24);
-  font: inherit;
-  border: 0;
-  outline-width: 0;
   box-sizing: border-box;
-  @include noappearance();
   @include transition($mainTransition);
 
   &:focus {
@@ -256,6 +283,68 @@ input,
       margin-top: 12px;
       margin-bottom: 12px;
       width: 100%;
+    }
+  }
+}
+
+#main {
+  margin-top: 64px;
+  padding: {
+    top: 48px;
+    left: 96px;
+    right: 96px;
+  }
+}
+
+#write-note {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 24px;
+  width: 600px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+
+  .note-title {
+    margin: 0;
+    margin-bottom: 12px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.1em;
+  }
+
+  .note-content {
+    font-family: 'Roboto Slab', sans-serif;
+
+    .note-content-input {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .toolbar {
+    width: 100%;
+    display: inline-block;
+
+    .color-balls  {
+      margin-left: -3px;
+      margin-right: -3px;
+
+      .color-ball {
+        float: left;
+        margin-left: 3px;
+        margin-right: 3px;
+        width: 34px;
+        height: 34px;
+        border: 1px solid #FFFFFF;
+        border-radius: 100%;
+        display: inline-block;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, .21);
+        cursor: pointer;
+      }
+    }
+
+    .btn-container {
+      float: right;
+      margin-right: -12px;
     }
   }
 }
