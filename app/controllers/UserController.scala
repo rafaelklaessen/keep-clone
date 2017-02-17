@@ -23,6 +23,7 @@ import org.mindrot.jbcrypt._
 import play.api.data.validation._
 
 import models.Users
+import models.Notes
 
 case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
 case class LoginData(username: String, password: String)
@@ -55,6 +56,9 @@ class UserController @Inject() extends Controller {
 
   // Render login page with login form on /login
   def login = Action { implicit request =>
+    Notes.createNote("kees", 8, "henk", "iscool", "#FFFFFF") 
+    println(Notes.getNote(8))
+
     request.session.get("username").map { username =>
       Redirect("/")
     }.getOrElse {

@@ -21,7 +21,7 @@ import scala.io.Source
 object Users {
 
   // This method gets the user via a request to Firebase's REST 
-  def getUser(username: String):Map[String, String] = {
+  def getUser(username: String): Map[String, String] = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential
 
@@ -30,10 +30,10 @@ object Users {
 
     // Extract fields from user JSON
     // If a field is JsUndefined we replace it by the string null
-    var email = if ((user \ "email").isInstanceOf[JsUndefined]) "null" else (user \ "email").as[String] 
-    var firstName = if ((user \ "firstName").isInstanceOf[JsUndefined]) "null" else (user \ "firstName").as[String]
-    var lastName = if ((user \ "lastName").isInstanceOf[JsUndefined]) "null" else (user \ "lastName").as[String]
-    var password = if ((user \ "password").isInstanceOf[JsUndefined]) "null" else (user \ "password").as[String]
+    val email = if ((user \ "email").isInstanceOf[JsUndefined]) "null" else (user \ "email").as[String] 
+    val firstName = if ((user \ "firstName").isInstanceOf[JsUndefined]) "null" else (user \ "firstName").as[String]
+    val lastName = if ((user \ "lastName").isInstanceOf[JsUndefined]) "null" else (user \ "lastName").as[String]
+    val password = if ((user \ "password").isInstanceOf[JsUndefined]) "null" else (user \ "password").as[String]
 
     // Put the data in a map and return it
     val userData = Map(
