@@ -194,6 +194,7 @@ var Notes = function () {
 
       $grid.prepend($item).masonry('prepended', $item);
 
+      // Backend request would be put here
       console.log(note);
     }
 

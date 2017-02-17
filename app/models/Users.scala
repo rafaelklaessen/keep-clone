@@ -23,25 +23,17 @@ object Users {
   // This method gets the user via a request to Firebase's REST 
   def getUser(username: String):Map[String, String] = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-    val baseUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + "/"
-    
-    // Get URLs
-    var email = baseUrl + "email.json?auth=" + credential
-    var firstName = baseUrl + "firstName.json?auth=" + credential
-    var lastName = baseUrl + "lastName.json?auth=" + credential
-    var password = baseUrl + "password.json?auth=" + credential
+    val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential
 
-    // Perform request to URLs and get data
-    email = Source.fromURL(email).mkString
-    firstName = Source.fromURL(firstName).mkString
-    lastName = Source.fromURL(lastName).mkString
-    password = Source.fromURL(password).mkString
+    // Get user JSON and parse it
+    val user = Json.parse(Source.fromURL(userJsonUrl).mkString)
 
-    // All data is quoted in "", so remove those quotes (as we don't want hem)
-    email = email.slice(1, email.size - 1)
-    firstName = firstName.slice(1, firstName.size - 1)
-    lastName = lastName.slice(1, lastName.size - 1)
-    password = password.slice(1, password.size - 1)
+    // Extract fields from user JSON
+    // If a field is JsUndefined we replace it by the string null
+    var email = if ((user \ "email").isInstanceOf[JsUndefined]) "null" else (user \ "email").as[String] 
+    var firstName = if ((user \ "firstName").isInstanceOf[JsUndefined]) "null" else (user \ "firstName").as[String]
+    var lastName = if ((user \ "lastName").isInstanceOf[JsUndefined]) "null" else (user \ "lastName").as[String]
+    var password = if ((user \ "password").isInstanceOf[JsUndefined]) "null" else (user \ "password").as[String]
 
     // Put the data in a map and return it
     val userData = Map(
@@ -63,7 +55,7 @@ object Users {
   def userExists(username: String) = {
     val user = getUser(username)
 
-    user("email") != "ul" && user("firstName") != "ul" && user("lastName") != "ul" && user("password") != "ul"
+    user("email") != "null" && user("firstName") != "null" && user("lastName") != "null" && user("password") != "null"
   }
 
   // Registers user by putting the user's data in Firebase
