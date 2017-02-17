@@ -170,7 +170,7 @@ var Notes = function () {
      * @param {object} note Note to add.
      */
     value: function addNote(note) {
-      var id = 7;
+      var id = Number($('.note').eq(0).attr('id')) + 1;
 
       var title = '';
 
@@ -185,6 +185,12 @@ var Notes = function () {
       }
 
       var $item = $('\n      <article id="' + id + '" class="note grid-item" style="background-color: ' + note.color.trim() + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
+
+      $item.find('.delete-btn').click(function () {
+        var id = $(this).parents('.note').attr('id');
+
+        Notes.deleteNote(id);
+      });
 
       $grid.prepend($item).masonry('prepended', $item);
 

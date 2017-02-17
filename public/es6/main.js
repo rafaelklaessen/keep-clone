@@ -134,7 +134,7 @@ class Notes {
    * @param {object} note Note to add.
    */
   static addNote(note) {
-    const id = 7;
+    const id = Number($('.note').eq(0).attr('id')) + 1;
 
     let title = '';
 
@@ -154,7 +154,15 @@ class Notes {
         ${content}
         <button class="material-icons delete-btn md-btn btn">delete</button>
       </article>
-    `)
+    `);
+
+    $item
+      .find('.delete-btn')
+      .click(function() {
+        const id = $(this).parents('.note').attr('id');
+
+        Notes.deleteNote(id);
+      });
 
     $grid
       .prepend($item)

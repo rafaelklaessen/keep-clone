@@ -387,6 +387,7 @@ textarea {
 
 #notes {
   padding-top: 48px;
+  padding-bottom: 48px;
 
   .grid-sizer {
     width: 25%;
@@ -400,6 +401,7 @@ textarea {
     }
     padding: 12px 18px;
     width: calc(25% - 24px);
+    min-height: 100px;
     background-color: #FFFFFF;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     box-sizing: border-box;
