@@ -7,6 +7,122 @@
       <a href="/logout" class="logout-btn btn">Logout</a>
     </section>
   </header> 
-  <h1>Notes</h1>
-  @userEmail
+  <main id="main" class="main">
+    <section id="write-note" class="write-note" data-color="#FFFFFF">
+      <header class="note-title-container">
+        <h4 class="note-title">
+          <input class="note-title-input" placeholder="Title">
+        </h4>
+      </header>
+      <section class="note-content">
+        <textarea class="note-content-input" placeholder="Take a note..."></textarea>
+      </section>
+      <footer class="toolbar">
+        <section class="color-balls">
+          <span class="color-ball" style="background-color: #FFFFFF" data-color="#FFFFFF"></span>
+          <span class="color-ball" style="background-color: #80D8FF" data-color="#80D8FF"></span>
+          <span class="color-ball" style="background-color: #FFD180" data-color="#FFD180"></span>
+          <span class="color-ball" style="background-color: #B388FF" data-color="#B388FF"></span>
+          <span class="color-ball" style="background-color: #FF8A80" data-color="#FF8A80"></span>
+        </section>
+        <section class="btn-container">
+          <button class="cancel-btn md-btn btn">Cancel</button>
+          <button class="save-btn md-btn btn">Save</button>
+        </section>
+      </footer>
+    </section>
+    <section id="notes" class="notes grid">
+      <div class="grid-sizer"></div>
+      <article id="0" class="note grid-item">
+        <h4 class="note-title">My note</h4>
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #FF8A80">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="2" class="note grid-item" style="background-color: #FF8A80">
+        <h4 class="note-title">My note</h4>
+        <p class="note-content">
+          Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah
+          blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #FF8A80">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #80D8FF">
+        <p class="note-content">
+          Blah blahBlah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah
+          blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item">
+        <p class="note-content">
+          Blah blahBlah blah Blah blah Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #FFD180">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #FFD180">
+        <p class="note-content">
+          Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #80D8FF">
+        <p class="note-content">
+          Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+      <article id="1" class="note grid-item" style="background-color: #B388FF">
+        <p class="note-content">
+          Blah blah
+        </p>
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+    </section>
+  </main>
+ 
+  <script src="@routes.Assets.versioned("javascripts/masonry.pkgd.min.js")"></script>
 }
