@@ -124,6 +124,8 @@ var NoteWriter = function () {
           color: colorInput
         };
 
+        Notes.addNote(input);
+
         console.info(input);
       }
 
@@ -137,8 +139,75 @@ var NoteWriter = function () {
 // Setup masonry
 
 
-$('.grid').masonry({
+var $grid = $('.grid').masonry({
   itemSelector: '.grid-item',
   columnWidth: '.grid-sizer',
   percentPosition: true
 });
+
+// Run delete function when a note's delete button is clicked
+$('.note .delete-btn').click(function () {
+  var id = $(this).parents('.note').attr('id');
+
+  Notes.deleteNote(id);
+});
+
+/**
+ * The Notes class contains all functionality related to the notes
+ */
+
+var Notes = function () {
+  function Notes() {
+    _classCallCheck(this, Notes);
+  }
+
+  _createClass(Notes, null, [{
+    key: 'addNote',
+
+    /**
+     * Notes.addNote()
+     * Adds note to DOM and performs a request to the backend to save the note.
+     * @param {object} note Note to add.
+     */
+    value: function addNote(note) {
+      var id = 7;
+
+      var title = '';
+
+      if (note.title.trim()) {
+        title = '<h4 class="note-title">' + note.title.trim() + '</h4>';
+      }
+
+      var content = '';
+
+      if (note.content.trim()) {
+        content = '<p class="note-content">' + note.content.trim() + '</p>';
+      }
+
+      var $item = $('\n      <article id="' + id + '" class="note grid-item" style="background-color: ' + note.color.trim() + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
+
+      $grid.prepend($item).masonry('prepended', $item);
+
+      console.log(note);
+    }
+
+    /**
+     * Notes.deleteNote()
+     * Deletes note from DOM and performs request to the delete backend.
+     * @param {number} id Id of the note to delete.
+     */
+
+  }, {
+    key: 'deleteNote',
+    value: function deleteNote(id) {
+      var $toDelete = $('#' + id);
+
+      $grid.masonry('remove', $toDelete).masonry('layout');
+
+      // Backend request would be put here
+      console.log(id);
+    }
+  }]);
+
+  return Notes;
+}();

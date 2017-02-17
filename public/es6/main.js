@@ -101,6 +101,8 @@ class NoteWriter {
         color: colorInput
       }
 
+      Notes.addNote(input);
+
       console.info(input);
     }
 
@@ -109,8 +111,71 @@ class NoteWriter {
 }
 
 // Setup masonry
-$('.grid').masonry({
+const $grid = $('.grid').masonry({
   itemSelector: '.grid-item',
   columnWidth: '.grid-sizer',
   percentPosition: true
 });
+
+// Run delete function when a note's delete button is clicked
+$('.note .delete-btn').click(function() {
+  const id = $(this).parents('.note').attr('id');
+
+  Notes.deleteNote(id);
+});
+
+/**
+ * The Notes class contains all functionality related to the notes
+ */
+class Notes {
+  /**
+   * Notes.addNote()
+   * Adds note to DOM and performs a request to the backend to save the note.
+   * @param {object} note Note to add.
+   */
+  static addNote(note) {
+    const id = 7;
+
+    let title = '';
+
+    if (note.title.trim()) {
+      title = `<h4 class="note-title">${note.title.trim()}</h4>`;
+    }
+
+    let content = '';
+
+    if (note.content.trim()) {
+      content = `<p class="note-content">${note.content.trim()}</p>`;
+    }
+
+    const $item = $(`
+      <article id="${id}" class="note grid-item" style="background-color: ${note.color.trim()}">
+        ${title}
+        ${content}
+        <button class="material-icons delete-btn md-btn btn">delete</button>
+      </article>
+    `)
+
+    $grid
+      .prepend($item)
+      .masonry('prepended', $item);
+
+    console.log(note);
+  }
+
+  /**
+   * Notes.deleteNote()
+   * Deletes note from DOM and performs request to the delete backend.
+   * @param {number} id Id of the note to delete.
+   */
+  static deleteNote(id) {
+    const $toDelete = $(`#${id}`);
+    
+    $grid
+      .masonry('remove', $toDelete)
+      .masonry('layout');
+    
+    // Backend request would be put here
+    console.log(id);
+  }
+}
