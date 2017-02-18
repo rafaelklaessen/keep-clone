@@ -134,8 +134,6 @@ class Notes {
    * @param {object} note Note to add.
    */
   static addNote(note) {
-    const id = Number($('.note').eq(0).attr('id')) + 1;
-
     let title = '';
 
     if (note.title.trim()) {
@@ -149,7 +147,7 @@ class Notes {
     }
 
     const $item = $(`
-      <article id="${id}" class="note grid-item" style="background-color: ${note.color.trim()}">
+      <article id="9" class="note grid-item" style="background-color: ${note.color.trim()}">
         ${title}
         ${content}
         <button class="material-icons delete-btn md-btn btn">delete</button>
@@ -176,8 +174,6 @@ class Notes {
         delete note[item];
       }
     }
-
-    note['id'] = id;
 
     console.log(note);
 

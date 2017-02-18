@@ -22,48 +22,37 @@ class NoteController @Inject() extends Controller {
       Unauthorized("Not logged in")
     } else if (!Users.userExists(reqOwner.get)) {
       Unauthorized("Not logged in as existing user")
-    } else if (!requestContent.contains("id")) {
-      BadRequest("No ID given")
     } else {
-      try {
-        val id = requestContent("id").head.toLong
+      val id = Notes.getId()
 
-        val owner = reqOwner.get
+      val owner = reqOwner.get
         
-        def isGiven(reqParam: String): Boolean = {
-          if (requestContent.contains(reqParam)) {
-            !(requestContent(reqParam).head.length == 0)
-          } else {
-            false
-          }
-        }
-
-        val title = if (isGiven("title")) Some(requestContent("title").head) else None
-        val content = if (isGiven("content")) Some(requestContent("content").head) else None
-        val color = if (isGiven("color")) requestContent("color").head else "#FFFFFF"
-
-        println(title)
-        println(content)
-        println(color)
-
-        if (title.isEmpty && content.isEmpty) {
-          BadRequest("No title and no content given")
+      def isGiven(reqParam: String): Boolean = {
+        if (requestContent.contains(reqParam)) {
+          !(requestContent(reqParam).head.length == 0)
         } else {
-          val noteTitle = if (title.isEmpty) "" else title.get
-          val noteContent = if (content.isEmpty) "" else content.get
-
-          println("We'll send this:")
-          println(owner)
-          println(id)
-          println(noteTitle)
-          println(noteContent)
-          println(color)
-          Notes.createNote(owner, id, noteTitle, noteContent, color)
-          Ok("success")
+          false
         }
+      }
 
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Incorrect ID")
+      val title = if (isGiven("title")) Some(requestContent("title").head) else None
+      val content = if (isGiven("content")) Some(requestContent("content").head) else None
+      val color = if (isGiven("color")) requestContent("color").head else "#FFFFFF"
+
+      if (title.isEmpty && content.isEmpty) {
+        BadRequest("No title and no content given")
+      } else {
+        val noteTitle = if (title.isEmpty) "" else title.get
+        val noteContent = if (content.isEmpty) "" else content.get
+
+        println("We'll send this:")
+        println(owner)
+        println(id)
+        println(noteTitle)
+        println(noteContent)
+        println(color)
+        Notes.createNote(owner, id, noteTitle, noteContent, color)
+        Ok("success")
       }
     }
   }

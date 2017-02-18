@@ -53,7 +53,8 @@ object Notes {
       Array()
     } else { 
       val noteIds = for (i <- userNotes) yield i.replaceAll("[note-]", "").toLong
-      val notes = for (i <- noteIds) yield getNote(i)
+      val sortedNoteIds = noteIds.sortWith(_ < _)
+      val notes = for (i <- sortedNoteIds) yield getNote(i)
 
       notes
     }
@@ -92,5 +93,18 @@ object Notes {
     val currentUser = usersRef.child(username)
 
     currentUser.child("notes").child("note-" + id.toString).removeValue()
+  }
+
+  // Gets the ID for the new note by adding one the the last note's ID
+  def getId(): Long = {
+    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
+    val lastNoteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes.json/?orderBy=\"$key\"&limitToLast=1&auth=" + credential
+
+    val lastNote = Json.parse(Source.fromURL(lastNoteJsonUrl).mkString)
+    val lastNoteKey = lastNote.as[JsObject].keys.head.toLong
+    
+    val newKey = lastNoteKey + 1
+    
+    newKey
   }
 }

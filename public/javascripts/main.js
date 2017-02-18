@@ -170,8 +170,6 @@ var Notes = function () {
      * @param {object} note Note to add.
      */
     value: function addNote(note) {
-      var id = Number($('.note').eq(0).attr('id')) + 1;
-
       var title = '';
 
       if (note.title.trim()) {
@@ -184,7 +182,7 @@ var Notes = function () {
         content = '<p class="note-content">' + note.content.trim() + '</p>';
       }
 
-      var $item = $('\n      <article id="' + id + '" class="note grid-item" style="background-color: ' + note.color.trim() + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
+      var $item = $('\n      <article id="9" class="note grid-item" style="background-color: ' + note.color.trim() + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
 
       $item.find('.delete-btn').click(function () {
         var id = $(this).parents('.note').attr('id');
@@ -202,8 +200,6 @@ var Notes = function () {
           delete note[item];
         }
       }
-
-      note['id'] = id;
 
       console.log(note);
 
