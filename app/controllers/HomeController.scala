@@ -4,6 +4,8 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 
+import models.Notes
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
@@ -17,7 +19,9 @@ class HomeController @Inject() extends Controller {
    */
   def index = Action { request =>
     request.session.get("username").map { username =>
-      Ok(views.html.notes(username))
+      val notes = Notes.getNotesByUsername(username)
+  
+      Ok(views.html.notes(notes))
     }.getOrElse {
       Ok(views.html.index())
     }

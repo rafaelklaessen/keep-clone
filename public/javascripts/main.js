@@ -170,8 +170,6 @@ var Notes = function () {
      * @param {object} note Note to add.
      */
     value: function addNote(note) {
-      var id = Number($('.note').eq(0).attr('id')) + 1;
-
       var title = '';
 
       if (note.title.trim()) {
@@ -184,7 +182,7 @@ var Notes = function () {
         content = '<p class="note-content">' + note.content.trim() + '</p>';
       }
 
-      var $item = $('\n      <article id="' + id + '" class="note grid-item" style="background-color: ' + note.color.trim() + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
+      var $item = $('\n      <article class="note grid-item" style="background-color: ' + note.color.trim() + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
 
       $item.find('.delete-btn').click(function () {
         var id = $(this).parents('.note').attr('id');
@@ -196,6 +194,22 @@ var Notes = function () {
 
       // Backend request would be put here
       console.log(note);
+
+      for (var item in note) {
+        if (note[item].trim() == '') {
+          delete note[item];
+        }
+      }
+
+      console.log(note);
+
+      $.post('/notes', note, function (response) {
+        // The response contains the ID of the item we've just added.
+        // We'll have to get that ID and add it to the element.
+        $item.attr('id', response);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
     }
 
     /**
@@ -212,7 +226,11 @@ var Notes = function () {
       $grid.masonry('remove', $toDelete).masonry('layout');
 
       // Backend request would be put here
-      console.log(id);
+      $.post('/notes/delete', { id: id }, function (data) {
+        console.info(data);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
     }
   }]);
 

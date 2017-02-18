@@ -134,8 +134,6 @@ class Notes {
    * @param {object} note Note to add.
    */
   static addNote(note) {
-    const id = Number($('.note').eq(0).attr('id')) + 1;
-
     let title = '';
 
     if (note.title.trim()) {
@@ -149,7 +147,7 @@ class Notes {
     }
 
     const $item = $(`
-      <article id="${id}" class="note grid-item" style="background-color: ${note.color.trim()}">
+      <article class="note grid-item" style="background-color: ${note.color.trim()}">
         ${title}
         ${content}
         <button class="material-icons delete-btn md-btn btn">delete</button>
@@ -170,6 +168,22 @@ class Notes {
 
     // Backend request would be put here
     console.log(note);
+    
+    for (let item in note) {
+      if (note[item].trim() == '') {
+        delete note[item];
+      }
+    }
+
+    console.log(note);
+
+    $.post('/notes', note, (response) => {
+      // The response contains the ID of the item we've just added.
+      // We'll have to get that ID and add it to the element.
+      $item.attr('id', response)
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`);
+    });
   }
 
   /**
@@ -185,6 +199,10 @@ class Notes {
       .masonry('layout');
     
     // Backend request would be put here
-    console.log(id);
+    $.post('/notes/delete', {id: id}, (data) => {
+      console.info(data);
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`);
+    });
   }
 }
