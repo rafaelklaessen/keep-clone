@@ -182,9 +182,9 @@ class Notes {
     console.log(note);
 
     $.post('/notes', note, (data) => {
-      console.info(data)
+      console.info(data);
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`)
+      alert(`ERROR (${error.status}): ${error.responseText}`);
     });
   }
 
@@ -201,6 +201,10 @@ class Notes {
       .masonry('layout');
     
     // Backend request would be put here
-    console.log(id);
+    $.post('/notes/delete', {id: id}, (data) => {
+      console.info(data);
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`);
+    });
   }
 }

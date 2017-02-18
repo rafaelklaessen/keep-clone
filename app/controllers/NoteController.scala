@@ -12,7 +12,7 @@ import models.Users
 
 @Singleton
 class NoteController @Inject() extends Controller {
-  // Creates a note via Notes.createNote and sends a JSON repsonse
+  // Creates a note via Notes.createNote
   def createNote = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
 
@@ -25,10 +25,8 @@ class NoteController @Inject() extends Controller {
     } else if (!requestContent.contains("id")) {
       BadRequest("No ID given")
     } else {
-      val reqId = requestContent("id").toArray
-
       try {
-        val id = reqId(0).toLong
+        val id = requestContent("id").head.toLong
 
         val owner = reqOwner.get
         
@@ -65,7 +63,33 @@ class NoteController @Inject() extends Controller {
         }
 
       } catch {
-        case nfe: NumberFormatException => BadRequest("ID incorrect")
+        case nfe: NumberFormatException => BadRequest("Incorrect ID")
+      }
+    }
+  }
+
+  // Deletes a note via Notes.deleteNote
+  def deleteNote = Action { request =>
+    val requestContent = request.body.asFormUrlEncoded.get
+
+    val reqOwner = request.session.get("username")
+    
+    if (reqOwner.isEmpty) {
+      Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqOwner.get)) {
+      Unauthorized("Not logged in as existing user")
+    } else if (!requestContent.contains("id")) {
+      BadRequest("No ID given")
+    } else {
+      try {
+        val id = requestContent("id").head.toLong
+
+        Notes.deleteNote(id)
+        Notes.deleteNoteFromUser(id, reqOwner.get)
+
+        Ok("success")
+      } catch {
+        case nfe: NumberFormatException => BadRequest("Incorrect ID")
       }
     }
   }

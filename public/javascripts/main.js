@@ -228,7 +228,11 @@ var Notes = function () {
       $grid.masonry('remove', $toDelete).masonry('layout');
 
       // Backend request would be put here
-      console.log(id);
+      $.post('/notes/delete', { id: id }, function (data) {
+        console.info(data);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
     }
   }]);
 

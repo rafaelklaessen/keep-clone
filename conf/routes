@@ -16,6 +16,8 @@ GET     /logout                     controllers.UserController.logout
 
 # Create note page
 POST    /notes                      controllers.NoteController.createNote()
+# Delete note page
+POST    /notes/delete               controllers.NoteController.deleteNote()
 
 # Settings page
 GET     /settings                   controllers.SettingsController.show

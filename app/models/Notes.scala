@@ -84,4 +84,13 @@ object Notes {
 
     currentNote.removeValue()
   }
+
+  // Deletes note from user
+  def deleteNoteFromUser(id: Long, username: String) = {
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+    val usersRef = ref.child("users")
+    val currentUser = usersRef.child(username)
+
+    currentUser.child("notes").child("note-" + id.toString).removeValue()
+  }
 }
