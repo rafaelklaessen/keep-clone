@@ -56,7 +56,8 @@ class UserController @Inject() extends Controller {
 
   // Render login page with login form on /login
   def login = Action { implicit request =>
-    Notes.createNote("kees", 8, "henk", "iscool", "#FFFFFF") 
+    Notes.deleteNote(8)
+    Notes.createNote("kees", 7, "henk", "iscool", "#FFFFFF") 
     println(Notes.getNote(8))
 
     request.session.get("username").map { username =>

@@ -24,7 +24,7 @@ object Notes {
     val title = if ((note \ "title").isInstanceOf[JsUndefined]) "null" else (note \ "title").as[String]
     val content = if ((note \ "content").isInstanceOf[JsUndefined]) "null" else (note \ "content").as[String]
     val color = if ((note \ "color").isInstanceOf[JsUndefined]) "null" else (note \ "color").as[String]
-    val owners = (note \ "owners").as[JsObject].keys.toArray
+    val owners = if ((note \ "color").isInstanceOf[JsUndefined]) Array("null") else (note \ "owners").as[JsObject].keys.toArray
     
     // Put the note data in a map and return it
     val noteData = Map[String, Array[String]](
@@ -48,6 +48,13 @@ object Notes {
     currentNote.child("owners").child(owner).setValue(true)
   }
 
+  def deleteNote(id: Int) = {
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+    val notesRef = ref.child("notes")
+    val currentNote = notesRef.child(id.toString)
+
+    currentNote.removeValue()
+  }
 
   /** 
   val keys = user.as[JsObject].keys
