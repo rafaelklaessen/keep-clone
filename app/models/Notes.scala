@@ -14,7 +14,8 @@ import scala.io.Source
  */
 object Notes {
 
-  def getNote(id: Int): Map[String, Array[String]] = {
+  // This method gets a note from Firebase by its id
+  def getNote(id: Long): Map[String, Array[String]] = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val noteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes/" + id.toString + ".json?auth=" + credential
   
@@ -38,6 +39,12 @@ object Notes {
     noteData
   }
 
+  /**
+   * The getNotesByUsername method gets the notes field from a user, which
+   * contains the ids of the user's notes.
+   * It loops through those note ids and gets the corresponding notes.
+   * The notes that it's got are returned
+   */
   def getNotesByUsername(username: String): Array[Map[String, Array[String]]] = {
     val user = Users.getUser(username)
     val userNotes = user(1).asInstanceOf[Array[String]]
@@ -45,14 +52,15 @@ object Notes {
     if (userNotes(0) == "null") {
       Array()
     } else { 
-      val noteIds = for (i <- userNotes) yield i.replaceAll("[note-]", "").toInt
+      val noteIds = for (i <- userNotes) yield i.replaceAll("[note-]", "").toLong
       val notes = for (i <- noteIds) yield getNote(i)
 
       notes
     }
   }
 
-  def createNote(owner: String, id: Int, title: String, content: String, color: String) = {
+  // Creates note in Firebase
+  def createNote(owner: String, id: Long, title: String, content: String, color: String) = {
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val notesRef = ref.child("notes")
     val currentNote = notesRef.child(id.toString)
@@ -63,16 +71,12 @@ object Notes {
     currentNote.child("owners").child(owner).setValue(true)
   }
 
-  def deleteNote(id: Int) = {
+  // Deletes note in Firebase based on its id
+  def deleteNote(id: Long) = {
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val notesRef = ref.child("notes")
     val currentNote = notesRef.child(id.toString)
 
     currentNote.removeValue()
   }
-
-  /** 
-  val keys = user.as[JsObject].keys
-
-    keys.foreach(x => println(x))*/
 }
