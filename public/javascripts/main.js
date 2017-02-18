@@ -170,7 +170,8 @@ var Notes = function () {
      * @param {object} note Note to add.
      */
     value: function addNote(note) {
-      var id = Number($('.note').eq(0).attr('id')) + 1;
+      // Generate random ID
+      var id = Math.round(Math.random() * 10000000000000000);
 
       var title = '';
 

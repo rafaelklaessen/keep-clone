@@ -53,7 +53,8 @@ object Notes {
       Array()
     } else { 
       val noteIds = for (i <- userNotes) yield i.replaceAll("[note-]", "").toLong
-      val notes = for (i <- noteIds) yield getNote(i)
+      val sortedNoteIds = noteIds.sortWith(_ < _)
+      val notes = for (i <- sortedNoteIds) yield getNote(i)
 
       notes
     }

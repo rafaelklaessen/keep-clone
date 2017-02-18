@@ -134,7 +134,8 @@ class Notes {
    * @param {object} note Note to add.
    */
   static addNote(note) {
-    const id = Number($('.note').eq(0).attr('id')) + 1;
+    // Generate random ID
+    const id = Math.round(Math.random() * 10000000000000000);
 
     let title = '';
 
