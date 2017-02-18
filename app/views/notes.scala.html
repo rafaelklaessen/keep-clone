@@ -1,4 +1,4 @@
-@(userEmail: String)
+@(notes: Array[Map[String, Array[String]]])
 
 @main("Notes") {
   <header id="site-header" class="site-header">
@@ -33,7 +33,17 @@
     </section>
     <section id="notes" class="notes grid">
       <div class="grid-sizer"></div>
-      <article id="0" class="note grid-item">
+
+      @for(note <- notes) {
+        <article id="@note("id")(0)" class="note grid-item" style="background-color: @note("color")(0)">
+          <h4 class="note-title">@note("title")(0)</h4>
+          <p class="note-content">
+            @note("content")(0)
+          </p>
+          <button class="material-icons delete-btn md-btn btn">delete</button>
+        </article>
+      }
+      <!--<article id="0" class="note grid-item">
         <h4 class="note-title">My note</h4>
         <p class="note-content">
           Blah blah
@@ -120,7 +130,7 @@
           Blah blah
         </p>
         <button class="material-icons delete-btn md-btn btn">delete</button>
-      </article>
+      </article>-->
     </section>
   </main>
  

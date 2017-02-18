@@ -21,7 +21,7 @@ import scala.io.Source
 object Users {
 
   // This method gets the user via a request to Firebase's REST 
-  def getUser(username: String): Map[String, String] = {
+  def getUser(username: String): Array[Any] = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential
 
@@ -34,6 +34,7 @@ object Users {
     val firstName = if ((user \ "firstName").isInstanceOf[JsUndefined]) "null" else (user \ "firstName").as[String]
     val lastName = if ((user \ "lastName").isInstanceOf[JsUndefined]) "null" else (user \ "lastName").as[String]
     val password = if ((user \ "password").isInstanceOf[JsUndefined]) "null" else (user \ "password").as[String]
+    val notes = if ((user \ "notes").isInstanceOf[JsUndefined]) Array("null") else (user \ "notes").as[JsObject].keys.toArray
 
     // Put the data in a map and return it
     val userData = Map(
@@ -43,7 +44,9 @@ object Users {
       "password" -> password
     )
 
-    userData
+    val userNotes = notes
+
+    Array(userData, userNotes)
   }
 
   /**
@@ -52,10 +55,12 @@ object Users {
    * means that the field wasn't set. If that's the case, the user doesn't 
    * exist.
    */ 
-  def userExists(username: String) = {
+  def userExists(username: String): Boolean = {
     val user = getUser(username)
+    
+    val userData = user(0).asInstanceOf[Map[String, String]]
 
-    user("email") != "null" && user("firstName") != "null" && user("lastName") != "null" && user("password") != "null"
+    userData("email") != "null" && userData("firstName") != "null" && userData("lastName") != "null" && userData("password") != "null"
   }
 
   // Registers user by putting the user's data in Firebase

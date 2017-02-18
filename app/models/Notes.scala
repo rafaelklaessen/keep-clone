@@ -28,6 +28,7 @@ object Notes {
     
     // Put the note data in a map and return it
     val noteData = Map[String, Array[String]](
+      "id" -> Array(id.toString),
       "title" -> Array(title),
       "content" -> Array(content),
       "color" -> Array(color),
@@ -35,6 +36,20 @@ object Notes {
     )
 
     noteData
+  }
+
+  def getNotesByUsername(username: String): Array[Map[String, Array[String]]] = {
+    val user = Users.getUser(username)
+    val userNotes = user(1).asInstanceOf[Array[String]]
+
+    if (userNotes(0) == "null") {
+      Array()
+    } else { 
+      val noteIds = for (i <- userNotes) yield i.replaceAll("[note-]", "").toInt
+      val notes = for (i <- noteIds) yield getNote(i)
+
+      notes
+    }
   }
 
   def createNote(owner: String, id: Int, title: String, content: String, color: String) = {

@@ -59,6 +59,7 @@ class UserController @Inject() extends Controller {
     Notes.deleteNote(8)
     Notes.createNote("kees", 7, "henk", "iscool", "#FFFFFF") 
     println(Notes.getNote(8))
+    Notes.getNotesByUsername("AAA")
 
     request.session.get("username").map { username =>
       Redirect("/")
@@ -80,8 +81,11 @@ class UserController @Inject() extends Controller {
       loginData => {
         if (Users.userExists(loginData.username)) {
           val user = Users.getUser(loginData.username)
+      
+          val userData = user(0).asInstanceOf[Map[String, String]]
+          val userNotes = user(1)
 
-          if (BCrypt.checkpw(loginData.password, user("password"))) {
+          if (BCrypt.checkpw(loginData.password, userData("password"))) {
             // Log user in and redirect to homepage
             Redirect("/").withSession(
               "username" -> loginData.username)
