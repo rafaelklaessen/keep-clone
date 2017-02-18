@@ -181,8 +181,6 @@ class Notes {
 
     console.log(note);
 
-    delete note['id']
-
     $.post('/notes', note, (data) => {
       console.info(data)
     }).fail((error) => {

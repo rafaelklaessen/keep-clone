@@ -207,8 +207,6 @@ var Notes = function () {
 
       console.log(note);
 
-      delete note['id'];
-
       $.post('/notes', note, function (data) {
         console.info(data);
       }).fail(function (error) {
