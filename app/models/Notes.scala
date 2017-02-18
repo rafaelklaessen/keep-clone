@@ -96,7 +96,7 @@ object Notes {
   }
 
   // Gets the ID for the new note by adding one the the last note's ID
-  def getId(): Long = {
+  def getId: Long = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val lastNoteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes.json/?orderBy=\"$key\"&limitToLast=1&auth=" + credential
 

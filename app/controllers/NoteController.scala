@@ -23,7 +23,7 @@ class NoteController @Inject() extends Controller {
     } else if (!Users.userExists(reqOwner.get)) {
       Unauthorized("Not logged in as existing user")
     } else {
-      val id = Notes.getId()
+      val id = Notes.getId
 
       val owner = reqOwner.get
         
@@ -52,7 +52,7 @@ class NoteController @Inject() extends Controller {
         println(noteContent)
         println(color)
         Notes.createNote(owner, id, noteTitle, noteContent, color)
-        Ok("success")
+        Ok(id.toString)
       }
     }
   }

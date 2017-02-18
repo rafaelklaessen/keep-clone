@@ -147,7 +147,7 @@ class Notes {
     }
 
     const $item = $(`
-      <article id="9" class="note grid-item" style="background-color: ${note.color.trim()}">
+      <article class="note grid-item" style="background-color: ${note.color.trim()}">
         ${title}
         ${content}
         <button class="material-icons delete-btn md-btn btn">delete</button>
@@ -177,8 +177,10 @@ class Notes {
 
     console.log(note);
 
-    $.post('/notes', note, (data) => {
-      console.info(data);
+    $.post('/notes', note, (response) => {
+      // The response contains the ID of the item we've just added.
+      // We'll have to get that ID and add it to the element.
+      $item.attr('id', response)
     }).fail((error) => {
       alert(`ERROR (${error.status}): ${error.responseText}`);
     });
