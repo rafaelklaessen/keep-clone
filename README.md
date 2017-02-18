@@ -1,6 +1,6 @@
 # Keep clone
 
-![Homepage screenshot](https://github.com/rafaelklaessen/keep-clone/raw/master/screenshots/homepage.jpg "Homepage")
+![Notes page screenshot](https://github.com/rafaelklaessen/keep-clone/raw/master/screenshots/notes.jpg "Notes page")
 
 An effort to make a clone of [Google Keep](https://keep.google.com) in play-scala with Firebase.
 Version 1 should have:
