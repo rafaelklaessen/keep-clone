@@ -170,6 +170,24 @@ class Notes {
 
     // Backend request would be put here
     console.log(note);
+    
+    for (let item in note) {
+      if (note[item].trim() == '') {
+        delete note[item];
+      }
+    }
+
+    note['id'] = id;
+
+    console.log(note);
+
+    delete note['id']
+
+    $.post('/notes', note, (data) => {
+      console.info(data)
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`)
+    });
   }
 
   /**

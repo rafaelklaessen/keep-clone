@@ -69,6 +69,11 @@ object Notes {
     currentNote.child("content").setValue(content)
     currentNote.child("color").setValue(color)
     currentNote.child("owners").child(owner).setValue(true)
+
+    val usersRef = ref.child("users")
+    val currentUser = usersRef.child(owner)
+
+    currentUser.child("notes").child("note-" + id.toString).setValue(true)
   }
 
   // Deletes note in Firebase based on its id

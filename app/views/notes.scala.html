@@ -34,7 +34,7 @@
     <section id="notes" class="notes grid">
       <div class="grid-sizer"></div>
 
-      @for(note <- notes) {
+      @for(note <- notes.reverse) {
         <article id="@note("id")(0)" class="note grid-item" style="background-color: @note("color")(0)">
           <h4 class="note-title">@note("title")(0)</h4>
           <p class="note-content">

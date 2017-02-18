@@ -196,6 +196,24 @@ var Notes = function () {
 
       // Backend request would be put here
       console.log(note);
+
+      for (var item in note) {
+        if (note[item].trim() == '') {
+          delete note[item];
+        }
+      }
+
+      note['id'] = id;
+
+      console.log(note);
+
+      delete note['id'];
+
+      $.post('/notes', note, function (data) {
+        console.info(data);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
     }
 
     /**

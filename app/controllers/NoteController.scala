@@ -8,6 +8,7 @@ import play.api.libs.json._
 import play.api.libs.json._
 
 import models.Notes
+import models.Users
 
 @Singleton
 class NoteController @Inject() extends Controller {
@@ -19,6 +20,8 @@ class NoteController @Inject() extends Controller {
     
     if (reqOwner.isEmpty) {
       Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqOwner.get)) {
+      Unauthorized("Not logged in as existing user")
     } else if (!requestContent.contains("id")) {
       BadRequest("No ID given")
     } else {
@@ -58,7 +61,7 @@ class NoteController @Inject() extends Controller {
           println(noteContent)
           println(color)
           Notes.createNote(owner, id, noteTitle, noteContent, color)
-          Ok("kees")
+          Ok("success")
         }
 
       } catch {
