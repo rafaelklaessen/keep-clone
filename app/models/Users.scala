@@ -52,14 +52,11 @@ object Users {
   }
 
   // Registers user by putting the user's data in Firebase
-  def registerUser(username: String, email: String, firstName: String, lastName: String, password: String) = {
+  def registerUser(username: String, user: User) = {
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val usersRef = ref.child("users")
     val currentUser = usersRef.child(username)
 
-    currentUser.child("email").setValue(email)
-    currentUser.child("firstName").setValue(firstName)
-    currentUser.child("lastName").setValue(lastName)
-    currentUser.child("password").setValue(BCrypt.hashpw(password, BCrypt.gensalt()))
+    currentUser.setValue(user)
   }
 }

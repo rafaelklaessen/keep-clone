@@ -150,7 +150,10 @@ class UserController @Inject() extends Controller {
       },
       userData => {
         if (!Users.userExists(userData.username)) {
-          Users.registerUser(userData.username, userData.email, userData.firstName, userData.lastName, userData.password)
+          val hashedPassword = BCrypt.hashpw(userData.password, BCrypt.gensalt())
+          val user = new User(userData.email, userData.firstName, userData.lastName, hashedPassword)
+          
+          Users.registerUser(userData.username, user)
 
           // After the user is registered, login as well and redirect to 
           // homepage.
