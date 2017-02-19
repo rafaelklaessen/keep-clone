@@ -15,7 +15,7 @@ import scala.io.Source
 object Notes {
 
   // This method gets a note from Firebase by its id
-  def getNote(id: Long): Map[String, Array[String]] = {
+  def getNote(id: Long): Note = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val noteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes/" + id.toString + ".json?auth=" + credential
   
@@ -27,16 +27,7 @@ object Notes {
     val color = if ((note \ "color").isInstanceOf[JsUndefined]) "null" else (note \ "color").as[String]
     val owners = if ((note \ "color").isInstanceOf[JsUndefined]) Array("null") else (note \ "owners").as[JsObject].keys.toArray
     
-    // Put the note data in a map and return it
-    val noteData = Map[String, Array[String]](
-      "id" -> Array(id.toString),
-      "title" -> Array(title),
-      "content" -> Array(content),
-      "color" -> Array(color),
-      "owners" -> owners
-    )
-
-    noteData
+    new Note(id, title, content, color, owners)
   }
 
   /**
@@ -45,14 +36,13 @@ object Notes {
    * It loops through those note ids and gets the corresponding notes.
    * The notes that it's got are returned
    */
-  def getNotesByUsername(username: String): Array[Map[String, Array[String]]] = {
+  def getNotesByUsername(username: String): Array[Note] = {
     val user = Users.getUser(username)
-    val userNotes = user(1).asInstanceOf[Array[String]]
 
-    if (userNotes(0) == "null") {
+    if (user.notes(0) == "null") {
       Array()
     } else { 
-      val noteIds = for (i <- userNotes) yield i.replaceAll("[note-]", "").toLong
+      val noteIds = for (i <- user.notes) yield i.replaceAll("[note-]", "").toLong
       val sortedNoteIds = noteIds.sortWith(_ < _)
       val notes = for (i <- sortedNoteIds) yield getNote(i)
 

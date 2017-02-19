@@ -23,6 +23,7 @@ import org.mindrot.jbcrypt._
 import play.api.data.validation._
 
 import models.Users
+import models.User
 import models.Notes
 
 case class UserData(username: String, email: String, firstName: String, lastName: String, password: String)
@@ -77,10 +78,7 @@ class UserController @Inject() extends Controller {
         if (Users.userExists(loginData.username)) {
           val user = Users.getUser(loginData.username)
       
-          val userData = user(0).asInstanceOf[Map[String, String]]
-          val userNotes = user(1)
-
-          if (BCrypt.checkpw(loginData.password, userData("password"))) {
+          if (BCrypt.checkpw(loginData.password, user.password)) {
             // Log user in and redirect to homepage
             Redirect("/").withSession(
               "username" -> loginData.username)
