@@ -11,8 +11,13 @@ import play.api.mvc._
 @Singleton
 class SettingsController @Inject() extends Controller {
 
-  def show = Action {
-    Ok(views.html.settings())
+  // Renders the settings page, but only when you're logged in
+  def show = Action { request =>
+    request.session.get("username").map { username => 
+      Ok(views.html.settings())
+    }.getOrElse {
+      NotFound("Page not found")
+    }
   }
 
 }
