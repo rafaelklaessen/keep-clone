@@ -22,5 +22,8 @@ POST    /notes/delete               controllers.NoteController.deleteNote()
 # Settings page
 GET     /settings                   controllers.SettingsController.show
 
+# Update settings page
+POST    /settings/update             controllers.SettingsController.update()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

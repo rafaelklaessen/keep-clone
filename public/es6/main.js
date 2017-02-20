@@ -222,16 +222,28 @@ $settings.find('.edit-btn').click(function() {
   // mode.
   if ($settingsField.hasClass('editing')) {
     const orgText = $titleContent.find('.field-input').data('orgtext').trim();
-    const newText = $titleContent.find('.field-input').val().trim();
+    let newText = $titleContent.find('.field-input').val().trim();
 
     // Only save edits to backend if there are actually edits
     if (orgText != newText) {
       // Do backend stuff here
-      console.log(name, newText);
+      $.post('/settings/update',
+        { fields: JSON.stringify({ [name]: newText }) },
+        (data) => {
+          console.info(data);
+      }).fail((error) => {
+        alert(`ERROR (${error.status}): ${error.responseText}`);
+      });
+    }
+
+    // If the field we're editing is the password field, insert
+    // • instead of text.
+    if ($settingsField.hasClass('password-field')) {
+      newText = '&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;';
     }
 
     // Remove input
-    $titleContent.text(newText);
+    $titleContent.html(newText);
     // Change edit button icon back to edit icon
     $(this).text('edit');
   } else { 
