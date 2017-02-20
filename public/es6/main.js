@@ -206,3 +206,50 @@ class Notes {
     });
   }
 }
+
+const $settings = $('#settings');
+
+// Edit settings
+$settings.find('.edit-btn').click(function() {
+  const $settingsField = $(this).parents('.settings-field');
+  const $titleContent = $(this).siblings('.title-content');
+
+  // Get the name of the field we're editing
+  const name = $settingsField.data('name');
+
+  // Check if the settings field has the editing class.
+  // If it does, we save the edits. If it doesn't, we toggle editing
+  // mode.
+  if ($settingsField.hasClass('editing')) {
+    const orgText = $titleContent.find('.field-input').data('orgtext').trim();
+    const newText = $titleContent.find('.field-input').val().trim();
+
+    // Only save edits to backend if there are actually edits
+    if (orgText != newText) {
+      // Do backend stuff here
+      console.log(name, newText);
+    }
+
+    // Remove input
+    $titleContent.text(newText);
+    // Change edit button icon back to edit icon
+    $(this).text('edit');
+  } else { 
+    // Original setting content
+    const orgText = $titleContent.text().trim();
+ 
+    // Get the type of the input. Is always text except if we're editing
+    // the password
+    const type = $settingsField.hasClass('password-field') ? 'password' : 'text';
+
+    // Change title content to an input
+    $titleContent.html(`
+      <input class="field-input input" type="${type}" value="${orgText}" data-orgText="${orgText}">
+    `);
+
+    // Change edit button icon to done icon
+    $(this).text('done');
+  }
+
+  $settingsField.toggleClass('editing');
+});

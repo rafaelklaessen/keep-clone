@@ -312,6 +312,17 @@ textarea {
     left: 96px;
     right: 96px;
   }
+
+  .page-title {
+    margin: 0;
+    margin-bottom: 24px;
+    font-weight: 300;
+    font-size: 36px;
+
+    .grey {
+      color: #9E9E9E;
+    }
+  }
 }
 
 #write-note {
@@ -436,6 +447,44 @@ textarea {
 
     &:hover .delete-btn {
       display: block;
+    }
+  }
+}
+
+#settings .settings-field {
+  margin-bottom: 12px;
+  
+  .field-label {
+    margin-bottom: 4px;
+    color: #757575;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .field-title {
+    margin: 0;
+    line-height: 24px;
+    vertical-align: middle;
+    font-weight: 400;
+
+    .title-content .field-input {
+      margin-bottom: 0;
+      color: #000000;
+      background-color: #E0E0E0;
+    }
+
+    .edit-btn {
+      margin-left: 4px;
+      line-height: 24px;
+      vertical-align: text-bottom;
+      font-size: 18px;
+      cursor: pointer;
+      @include transition($mainTransition);
+
+      &:hover {
+        opacity: .5;
+      }
     }
   }
 }
