@@ -464,6 +464,27 @@ textarea {
 
   .field-title {
     margin: 0;
+    line-height: 24px;
+    vertical-align: middle;
     font-weight: 400;
+
+    .title-content .field-input {
+      margin-bottom: 0;
+      color: #000000;
+      background-color: #E0E0E0;
+    }
+
+    .edit-btn {
+      margin-left: 4px;
+      line-height: 24px;
+      vertical-align: text-bottom;
+      font-size: 18px;
+      cursor: pointer;
+      @include transition($mainTransition);
+
+      &:hover {
+        opacity: .5;
+      }
+    }
   }
 }
