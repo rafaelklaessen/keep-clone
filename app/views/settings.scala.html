@@ -1,3 +1,35 @@
+@(username: String, user: User)
+
 @main("Settings") {
-  <h1>Settings</h1>
+  <header id="site-header" class="site-header">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/logout" class="logout-btn btn">Logout</a>
+    </section>
+  </header>
+  <main id="main" class="main">
+    <h1 class="page-title">Settings <span class="grey">@@@username</span></h1>
+    <section id="settings" class="settings">
+      <section class="username-field settings-field">
+        <label class="field-label">Username:</label>
+        <h3 class="field-title">@username</h3>
+      </section>
+      <section class="email-field settings-field">
+        <label class="field-label">Email adress:</label>
+        <h3 class="field-title">@user.email</h3>
+      </section>
+      <section class="firstname-field settings-field">
+        <label class="field-label">First name:</label>
+        <h3 class="field-title">@user.firstName</h3>
+      </section>
+      <section class="lastname-field settings-field">
+        <label class="field-label">Last name:</label>
+        <h3 class="field-title">@user.lastName</h3>
+      </section>
+      <section class="password-field settings-field">
+        <label class="field-label">Password</label>
+        <h3 class="field-title">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</h3>
+      </section>
+    </section>
+  </main>
 }
