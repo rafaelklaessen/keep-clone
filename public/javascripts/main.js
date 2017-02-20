@@ -260,8 +260,14 @@ $settings.find('.edit-btn').click(function () {
       console.log(name, newText);
     }
 
+    // If the field we're editing is the password field, insert
+    // • instead of text.
+    if ($settingsField.hasClass('password-field')) {
+      newText = '&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;';
+    }
+
     // Remove input
-    $titleContent.text(newText);
+    $titleContent.html(newText);
     // Change edit button icon back to edit icon
     $(this).text('edit');
   } else {
