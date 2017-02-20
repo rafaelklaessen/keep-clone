@@ -43,6 +43,8 @@ class SettingsController @Inject() extends Controller {
       Unauthorized("Not logged in")
     } else if (!Users.userExists(reqUser.get)) {
       Unauthorized("Not logged in as existing user")
+    } else if (!requestContent.contains("fields")) {
+      BadRequest("No fields provided")
     } else {
       // Get fields from request and parse them to a map
       val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
@@ -92,7 +94,7 @@ class SettingsController @Inject() extends Controller {
         finalFields.keys.foreach(i => 
           currentUser.child(i).setValue(finalFields(i))
         )
-        
+
         Ok("success")
       }
     }

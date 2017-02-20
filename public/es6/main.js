@@ -227,7 +227,13 @@ $settings.find('.edit-btn').click(function() {
     // Only save edits to backend if there are actually edits
     if (orgText != newText) {
       // Do backend stuff here
-      console.log(name, newText);
+      $.post('/settings/update',
+        { fields: JSON.stringify({ [name]: newText }) },
+        (data) => {
+          console.info(data);
+      }).fail((error) => {
+        alert(`ERROR (${error.status}): ${error.responseText}`);
+      });
     }
 
     // If the field we're editing is the password field, insert
