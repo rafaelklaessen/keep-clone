@@ -59,4 +59,14 @@ object Users {
 
     currentUser.setValue(user)
   }
+
+  // Delete user
+  def deleteUser(username: String) = {
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+    val usersRef = ref.child("users")
+    val currentUser = usersRef.child(username)
+
+    currentUser.removeValue()
+  }
+
 }

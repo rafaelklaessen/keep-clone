@@ -301,5 +301,12 @@ $settings.find('#delete-account-btn').click(function () {
   if (confirmed) {
     // Request to backend would be put here
     console.info('Removing account... :(');
+    $.post('/settings/delete', {}, function (data) {
+      console.info(data);
+      // Redirect to homepage
+      location.assign('/');
+    }).fail(function (error) {
+      alert('ERROR (' + error.status + '): ' + error.responseText);
+    });
   }
 });

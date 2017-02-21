@@ -14,6 +14,7 @@ import play.api.libs.json._
 import org.mindrot.jbcrypt._
 
 import models.Users
+import models.Notes
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -97,6 +98,36 @@ class SettingsController @Inject() extends Controller {
 
         Ok("success")
       }
+    }
+  }
+
+  // Account deletion
+  def deleteAccount = Action { request =>
+    val reqUser = request.session.get("username")
+
+    if (reqUser.isEmpty) {
+      Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqUser.get)) {
+      Unauthorized("Not logged in as existing user")
+    } else {
+      // Get username and user
+      val username = reqUser.get
+      val user = Users.getUser(username)
+      // Get the user's note
+      val userNotes = Notes.getNotesByUsername(username)
+      // Only delete notes that are only owned by the current user
+      var notesToDelete = for (note <- userNotes if note.owners.length == 1) yield note  
+
+      // Loop through the users's notes and delete them
+      for (note <- notesToDelete) {
+        Notes.deleteNote(note.id)
+      }      
+
+      // Delete user
+      Users.deleteUser(username)
+
+      // Return success and logout
+      Ok("success").withNewSession
     }
   }
 }
