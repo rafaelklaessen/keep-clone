@@ -310,3 +310,37 @@ $settings.find('#delete-account-btn').click(function () {
     });
   }
 });
+
+/**
+ * The OAuth class contains all functionality related to logging user in with 
+ * OAuth.
+ */
+
+var OAuth = function () {
+  function OAuth() {
+    _classCallCheck(this, OAuth);
+  }
+
+  _createClass(OAuth, null, [{
+    key: 'google',
+
+    /**
+     * OAuth.google()
+     * Handles a Google signin
+     * @param {object} googleUser
+     */
+    value: function google(googleUser) {
+      var id_token = googleUser.getAuthResponse().id_token;
+
+      $.post('/oauth/google', { id_token: id_token }, function (data) {
+        console.info(data);
+        // Go to /, because we're logged in now
+        location.assign('/');
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
+    }
+  }]);
+
+  return OAuth;
+}();
