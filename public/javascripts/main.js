@@ -293,3 +293,13 @@ $settings.find('.edit-btn').click(function () {
 
   $settingsField.toggleClass('editing');
 });
+
+// Account deletion
+$settings.find('#delete-account-btn').click(function () {
+  var confirmed = confirm('Are you sure you want to remove your account? This can\'t be undone!');
+
+  if (confirmed) {
+    // Request to backend would be put here
+    console.info('Removing account... :(');
+  }
+});
