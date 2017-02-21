@@ -97,6 +97,8 @@ button {
   color: $mainColor;
   background-color: #FFFFFF;
   box-sizing: border-box;
+  display: inline-block;
+  text-decoration: none;
   @include transition($mainTransition);
 
   &:hover {

@@ -12,6 +12,7 @@ import com.google.firebase.database._
 import play.api.libs.json._
 
 import scala.io.Source
+import scalaj.http.Http
 
 @Singleton
 class OAuthController @Inject() extends Controller {
@@ -43,8 +44,22 @@ class OAuthController @Inject() extends Controller {
     }
   }
 
-  def github = Action { request => 
-    Ok("github")
+  def github(code: String) = Action { request => 
+    // Perform POST request to GitHub
+    val response = Http("https://github.com/login/oauth/access_token")
+      .postForm(Seq(
+        "code" -> code,
+        "client_id" -> "a7a2de238eb384ce3d08",
+        "client_secret" -> "client_secret"
+      )).asString
+    
+    // Get response and extract accessToken from it
+    val responseAccessToken = response.body.split("&")(0)
+    val accessToken = responseAccessToken.substring(responseAccessToken.indexOf("=") + 1, responseAccessToken.length)
+
+    println(accessToken)
+
+    Redirect("/")
   }
 
   def twitter = Action { request => 

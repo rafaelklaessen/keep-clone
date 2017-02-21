@@ -303,6 +303,11 @@ $settings.find('#delete-account-btn').click(function () {
     console.info('Removing account... :(');
     $.post('/settings/delete', {}, function (data) {
       console.info(data);
+      // Logout from Google as well
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.info('User signed out.');
+      });
       // Redirect to homepage
       location.assign('/');
     }).fail(function (error) {

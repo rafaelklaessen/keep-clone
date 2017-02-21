@@ -13,6 +13,7 @@
   <section id="register" class="register fullsize-section">
     <h1 class="page-title">Register</h1>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <a href="https://github.com/login/oauth/authorize?client_id=a7a2de238eb384ce3d08" class="github-login raised md-btn btn">Sign in with GitHub</a>
     @form(action = routes.UserController.registerUser()) {
       @inputText(userForm("username"), '_label -> "Username")
       @inputText(userForm("email"), '_label -> "Email")
