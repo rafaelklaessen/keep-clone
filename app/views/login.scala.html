@@ -12,6 +12,7 @@
 
   <section id="login" class="login fullsize-section">
     <h1 class="page-title">Login</h1>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     @form(action = routes.UserController.loginUser()) {
       @inputText(loginForm("username"), '_label -> "Username")
       @inputPassword(loginForm("password"), '_label -> "Password")
@@ -20,4 +21,10 @@
       <p class="section-text">Don't have an account? <a href="/register">Register one</a></p>
     }
   </section>
+
+  <script>
+    function onSignIn(googleUser) {
+      OAuth.google(googleUser);
+    }
+  </script>
 }

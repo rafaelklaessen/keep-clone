@@ -49,6 +49,10 @@ body {
    color: rgba(0, 0, 0, .54);
 }
 
+.hidden {
+  display: none;
+}
+
 .page-title,
 .title {
   margin-top: 0;
@@ -506,4 +510,22 @@ textarea {
   .delete-account-btn {
     background-color: #F44336;
   }
+
+  .oauth-data {
+    line-height: 64px;
+    vertical-align: middle;
+
+    .oauth-logo {
+      float: left;
+      margin-right: 12px;
+      width: 64px;
+      height: 64px;
+    }
+
+    .oauth-name {
+      font-size: 24px;
+      font-weight: 300;
+    }
+  }
 }
+

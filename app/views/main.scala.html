@@ -18,6 +18,18 @@
 
     @content
 
+    <div class="g-signin2 hidden" data-onsuccess="onSignIn"></div>
     <script src="@routes.Assets.versioned("javascripts/main.js")"></script>
+  
+    <script>
+      $('.logout-btn').click(signOut);
+
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function() {
+          console.info('User signed out.');
+        });
+      }
+    </script>
   </body>
 </html>

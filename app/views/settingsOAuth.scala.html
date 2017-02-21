@@ -1,0 +1,26 @@
+@(oauth: String, email: String)
+
+@main("Settings") {
+  <header id="site-header" class="site-header">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/logout" class="logout-btn btn">Logout</a>
+    </section>
+  </header>
+  <main id="main" class="main">
+    <h1 class="page-title">Settings <span class="grey">@email</span></h1>
+    <section id="settings" class="settings">
+      <section class="oauth-field settings-field">
+        <label class="field-label">OAuth2 service by:</label>
+        <section class="oauth-data">
+          <img class="oauth-logo" src="@routes.Assets.versioned("images/oauth/" + oauth.toLowerCase() + ".png")" alt="OAuth logo">
+          <h2 class="oauth-name">@oauth</h2>
+        </section>
+      </section>
+      <section class="delete-field settings-field">
+        <label class="field-label">Delete account</label>
+        <button id="delete-account-btn" class="delete-account-btn raised md-btn btn">Delete account</button>
+      </section>
+    </section>
+  </main>
+}

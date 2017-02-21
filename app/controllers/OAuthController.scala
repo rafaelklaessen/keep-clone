@@ -36,7 +36,8 @@ class OAuthController @Inject() extends Controller {
 
       Ok("success").withSession(
         "username" -> username,
-        "oauth" -> "true")  
+        "email" -> googleUser("email"),
+        "oauth" -> "Google")  
     } else {
       BadRequest("No ID token provided")
     }
