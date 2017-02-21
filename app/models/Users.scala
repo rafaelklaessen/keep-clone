@@ -46,9 +46,14 @@ object Users {
    * exist.
    */ 
   def userExists(username: String): Boolean = {
-    val user = getUser(username)
+    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
+    val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential
 
-    user.email != "null" && user.firstName != "null" && user.lastName != "null" && user.password != "null"
+    // Get user JSON
+    val user = Source.fromURL(userJsonUrl).mkString
+
+    // If it's "null", the user doesn't exist
+    user != "null"
   }
 
   // Registers user by putting the user's data in Firebase
