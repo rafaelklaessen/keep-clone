@@ -18,6 +18,10 @@
         <img class="logo" src="@routes.Assets.versioned("images/oauth/github-white.png")" alt="GitHub logo">
         Sign in with GitHub
       </a>
+      <a href="https://www.facebook.com/v2.8/dialog/oauth?client_id=847737378702820&redirect_uri=http%3A%2F%2Flocalhost:9000/oauth/facebook&scope=email" class="facebook-login login-btn raised md-btn btn">
+        <img class="logo" src="@routes.Assets.versioned("images/oauth/facebook-white.png")" alt="Facebook logo">
+        Sign in with Facebook
+      </a>
     </section>
     @form(action = routes.UserController.registerUser()) {
       @inputText(userForm("username"), '_label -> "Username")

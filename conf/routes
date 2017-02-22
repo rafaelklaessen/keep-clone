@@ -17,6 +17,7 @@ GET     /logout                     controllers.UserController.logout
 # OAuth
 POST    /oauth/google               controllers.OAuthController.google()
 GET     /oauth/github               controllers.OAuthController.github(code: String)
+GET     /oauth/facebook             controllers.OAuthController.facebook(code: String)
 
 # Create note page
 POST    /notes                      controllers.NoteController.createNote()
