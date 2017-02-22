@@ -31,7 +31,7 @@ class OAuthController @Inject() extends Controller {
       val usersRef = ref.child("users")
       val currentUser = usersRef.child(username)
       
-      // Create user in Firebase its sub set to true. 
+      // Create user in Firebase with its sub set to true. 
       // This way, the user exists verification will still work. 
       currentUser.child(username).setValue(true)
 
@@ -57,9 +57,27 @@ class OAuthController @Inject() extends Controller {
     val responseAccessToken = response.body.split("&")(0)
     val accessToken = responseAccessToken.substring(responseAccessToken.indexOf("=") + 1, responseAccessToken.length)
 
-    println(accessToken)
+    // Get user JSON with access token
+    val userJsonUrl = "https://api.github.com/user?access_token=" + accessToken
+    val user = Json.parse(Source.fromURL(userJsonUrl).mkString)
+    
+    // The ID functions as the username
+    val username = (user \ "id").as[JsNumber].toString
 
-    Redirect("/")
+    println(username)
+
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+    val usersRef = ref.child("users")
+    val currentUser = usersRef.child(username)
+
+    // Create user in Firebase with its ID set to true.
+    // This way, the user exists verification still works.
+    currentUser.child(username).setValue(true)
+
+    Redirect("/").withSession(
+      "username" -> username,
+      "email" -> (user \ "email").as[String],
+      "oauth" -> "GitHub")
   }
 
   def twitter = Action { request => 
