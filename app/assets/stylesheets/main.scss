@@ -296,8 +296,35 @@ textarea {
     text-align: right;
   }
 
+  .oauth-btn-container {
+    float: right;
+    width: 350px;
+    margin-bottom: 18px;
+
+    .login-btn {
+      position: relative;
+      margin-bottom: 6px;
+      width: 100% !important;
+    
+      &.github-login {
+        background-color: #000000;
+      }
+
+      .logo {
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translateY(-50%);
+        width: auto;
+        height: 18px;
+        opacity: .87;
+      }
+    }
+  }
+
   form {
     float: right;
+    clear: both;
     width: 350px;
 
     dl, dd {

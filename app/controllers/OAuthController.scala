@@ -80,10 +80,6 @@ class OAuthController @Inject() extends Controller {
       "oauth" -> "GitHub")
   }
 
-  def twitter = Action { request => 
-    Ok("twitter")
-  }
-
   def facebook = Action { request => 
     Ok("facebook")
   }

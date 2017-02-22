@@ -12,7 +12,13 @@
 
   <section id="login" class="login fullsize-section">
     <h1 class="page-title">Login</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <section class="oauth-btn-container">
+      <div class="google-login login-btn g-signin2" data-width="350" data-onsuccess="onSignIn"></div>
+      <a href="https://github.com/login/oauth/authorize?client_id=a7a2de238eb384ce3d08" class="github-login login-btn raised md-btn btn">
+        <img class="logo" src="@routes.Assets.versioned("images/oauth/github-white.png")" alt="GitHub logo">
+        Sign in with GitHub
+      </a>
+    </section>
     @form(action = routes.UserController.loginUser()) {
       @inputText(loginForm("username"), '_label -> "Username")
       @inputPassword(loginForm("password"), '_label -> "Password")
