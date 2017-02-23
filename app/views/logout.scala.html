@@ -1,5 +1,5 @@
 @main("Successfully logged out") {
-  <header id="site-header" class="site-header no-shadow">
+  <header id="site-header" class="site-header no-shadow no-bg">
     <h1 class="site-title">Keep Clone</h1>
     <section class="btn-container">
       <a href="/login" class="login-btn btn">Login</a>
@@ -7,7 +7,7 @@
     </section>
   </header>
 
-  <section id="logout" class="logout fullsize-section">
+  <section id="logout" class="logout fullsize-section" style="background-image:url(@routes.Assets.versioned("images/bg.jpg"))">
     <section class="hero-content">
       <h1 class="page-title">Successfully logged out</h1>
       <p class="section-text">You'll be redirected to the homepage <span id="countdown" class="countdown">5</span></p>
