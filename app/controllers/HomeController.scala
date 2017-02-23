@@ -20,7 +20,7 @@ class HomeController @Inject() extends Controller {
   def index = Action { request =>
     request.session.get("username").map { username =>
       val notes = Notes.getNotesByUsername(username)
-  
+
       Ok(views.html.notes(notes))
     }.getOrElse {
       Ok(views.html.index())

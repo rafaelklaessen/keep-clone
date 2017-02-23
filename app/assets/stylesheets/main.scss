@@ -49,6 +49,10 @@ body {
    color: rgba(0, 0, 0, .54);
 }
 
+.hidden {
+  display: none;
+}
+
 .page-title,
 .title {
   margin-top: 0;
@@ -93,6 +97,8 @@ button {
   color: $mainColor;
   background-color: #FFFFFF;
   box-sizing: border-box;
+  display: inline-block;
+  text-decoration: none;
   @include transition($mainTransition);
 
   &:hover {
@@ -184,9 +190,17 @@ textarea {
     box-shadow: none;
   }
 
+  &.no-bg {
+    background: none;
+  }
+
   &.white {
     color: $mainColor;
     background-color: #FFFFFF;
+
+    &.no-bg {
+      background: none;
+    }
 
     .btn-container {
       .btn:hover {
@@ -254,14 +268,13 @@ textarea {
 }
 
 .fullsize-section {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   color: #FFFFFF;
   background-color: $mainColor;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  overflow: auto;
   box-sizing: border-box;
 
   a {
@@ -290,8 +303,35 @@ textarea {
     text-align: right;
   }
 
+  .oauth-btn-container {
+    float: right;
+    width: 350px;
+    margin-bottom: 18px;
+
+    .login-btn {
+      position: relative;
+      margin-bottom: 6px;
+      width: 100% !important;
+    
+      &.github-login {
+        background-color: #000000;
+      }
+
+      .logo {
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translateY(-50%);
+        width: auto;
+        height: 18px;
+        opacity: .87;
+      }
+    }
+  }
+
   form {
     float: right;
+    clear: both;
     width: 350px;
 
     dl, dd {
@@ -506,4 +546,22 @@ textarea {
   .delete-account-btn {
     background-color: #F44336;
   }
+
+  .oauth-data {
+    line-height: 64px;
+    vertical-align: middle;
+
+    .oauth-logo {
+      float: left;
+      margin-right: 12px;
+      width: 64px;
+      height: 64px;
+    }
+
+    .oauth-name {
+      font-size: 24px;
+      font-weight: 300;
+    }
+  }
 }
+

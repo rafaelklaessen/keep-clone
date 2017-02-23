@@ -10,8 +10,19 @@
     </section>
   </header>
 
-  <section id="register" class="register fullsize-section">
+  <section id="register" class="register fullsize-section" style="background-image:url(@routes.Assets.versioned("images/bg.jpg"))">
     <h1 class="page-title">Register</h1>
+    <section class="oauth-btn-container">
+      <div class="google-login login-btn g-signin2" data-width="350" data-onsuccess="onSignIn"></div>
+      <a href="https://github.com/login/oauth/authorize?client_id=a7a2de238eb384ce3d08" class="github-login login-btn raised md-btn btn">
+        <img class="logo" src="@routes.Assets.versioned("images/oauth/github-white.png")" alt="GitHub logo">
+        Sign in with GitHub
+      </a>
+      <a href="https://www.facebook.com/v2.8/dialog/oauth?client_id=847737378702820&redirect_uri=http%3A%2F%2Flocalhost:9000/oauth/facebook&scope=email" class="facebook-login login-btn raised md-btn btn">
+        <img class="logo" src="@routes.Assets.versioned("images/oauth/facebook-white.png")" alt="Facebook logo">
+        Sign in with Facebook
+      </a>
+    </section>
     @form(action = routes.UserController.registerUser()) {
       @inputText(userForm("username"), '_label -> "Username")
       @inputText(userForm("email"), '_label -> "Email")
@@ -23,4 +34,10 @@
       <p class="section-text">Already have an account? <a href="/login">Login</a></p>
     }
   </section>
+
+  <script>
+    function onSignIn(googleUser) {
+      OAuth.google(googleUser);
+    }
+  </script>
 }

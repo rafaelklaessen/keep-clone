@@ -26,9 +26,13 @@ class SettingsController @Inject() extends Controller {
   // Renders the settings page, but only when you're logged in
   def show = Action { request =>
     request.session.get("username").map { username => 
-      val user = Users.getUser(username)
-      
-      Ok(views.html.settings(username, user))
+      // If we're logged in with OAuth, render a different settings page
+      request.session.get("oauth").map { oauth =>
+        Ok(views.html.settingsOAuth(oauth, request.session.get("email").get))
+      }.getOrElse {
+        val user = Users.getUser(username)
+        Ok(views.html.settings(username, user))
+      }
     }.getOrElse {
       NotFound("Page not found")
     }
