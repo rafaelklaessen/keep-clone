@@ -137,17 +137,17 @@ class Notes {
     let title = '';
 
     if (note.title.trim()) {
-      title = `<h4 class="note-title">${note.title.trim()}</h4>`;
+      title = `<h4 class="note-title">${escapeString(note.title.trim())}</h4>`;
     }
 
     let content = '';
 
     if (note.content.trim()) {
-      content = `<p class="note-content">${note.content.trim()}</p>`;
+      content = `<p class="note-content">${escapeString(note.content.trim())}</p>`;
     }
 
     const $item = $(`
-      <article class="note grid-item" style="background-color: ${note.color.trim()}">
+      <article class="note grid-item" style="background-color: ${escapeString(note.color.trim())}">
         ${title}
         ${content}
         <button class="material-icons delete-btn md-btn btn">delete</button>
@@ -309,4 +309,18 @@ class OAuth {
       alert(`ERROR (${error.status}): ${error.responseText}`);
     });
   }
+}
+
+/**
+ * escapeString()
+ * Escapes given string.
+ * @param {string} str String to escape
+ * @return {string} escaped string
+ */
+function escapeString(str) {
+  return str
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
