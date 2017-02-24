@@ -111,9 +111,7 @@ class NoteController @Inject() extends Controller {
         
         // Make sure note actually belongs to the current user.
         // If it doesn't, act as if it doesn't exist.
-        if (note.owners.contains(reqUser.get)) {
-          println(id)
-          
+        if (note.owners.contains(reqUser.get)) {      
           // Get fields from request and parse them to a map
           val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
 
@@ -131,10 +129,6 @@ class NoteController @Inject() extends Controller {
           // Set all Firebase fields
           filteredFields.keys.foreach(i => 
             currentNote.child(i).setValue(filteredFields(i))
-          )
-
-          filteredFields.keys.foreach(i => 
-            println("key: " + i + ", value: " + filteredFields(i))
           )
 
           Ok("success")

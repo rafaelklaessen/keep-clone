@@ -387,6 +387,7 @@ textarea {
   width: 600px;
   background-color: #FFFFFF;
   box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  @include transition(background .2s ease-in-out);
 
   .note-title {
     margin: 0;
@@ -485,23 +486,32 @@ textarea {
       font-weight: 300;
     }
 
-    .delete-btn {
+    .note-action-container {
       position: absolute;
       right: 18px;
       bottom: 12px;
+      margin: 0 -6px;
       padding: 0;
-      line-height: 1;
-      font-size: 18px;
-      display: none;
+      opacity: 0;
+      @include transition(all .2s ease-in-out);
 
-      &:hover {
-        color: rgba(0, 0, 0, .54);
-        background: none;
+      .btn {
+        float: left;
+        margin: 0 6px;
+        padding: 0;
+        line-height: 1;
+        font-size: 18px;
+        @include transition(all .2s ease-in-out);
+      
+        &:hover {
+          color: rgba(0, 0, 0, .54);
+          background: none;
+        }
       }
     }
 
-    &:hover .delete-btn {
-      display: block;
+    &:hover .note-action-container {
+      opacity: 1;
     }
   }
 }
