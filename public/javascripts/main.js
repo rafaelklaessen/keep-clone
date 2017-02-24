@@ -1,10 +1,6 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Get the note writer element
 var $noteWriter = $('#write-note');
@@ -36,10 +32,204 @@ $noteWriter.find('.color-ball').click(function () {
   NoteWriter.setColor(color);
 });
 
+// Setup masonry
+var $grid = $('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+});
+
+// Run delete function when a note's delete button is clicked
+$('.note .delete-btn').click(function () {
+  var id = $(this).parents('.note').attr('id');
+
+  Notes.deleteNote(id);
+});
+
+var $settings = $('#settings');
+
+// Edit settings
+$settings.find('.edit-btn').click(function () {
+  var $settingsField = $(this).parents('.settings-field');
+  var $titleContent = $(this).siblings('.title-content');
+
+  // Get the name of the field we're editing
+  var name = $settingsField.data('name');
+
+  // Check if the settings field has the editing class.
+  // If it does, we save the edits. If it doesn't, we toggle editing
+  // mode.
+  if ($settingsField.hasClass('editing')) {
+    var orgText = $titleContent.find('.field-input').data('orgtext').trim();
+    var newText = $titleContent.find('.field-input').val().trim();
+
+    // Only save edits to backend if there are actually edits
+    if (orgText != newText) {
+      // Do backend stuff here
+      $.post('/settings/update', { fields: JSON.stringify(_defineProperty({}, name, newText)) }, function (data) {
+        console.info(data);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
+    }
+
+    // If the field we're editing is the password field, insert
+    // • instead of text.
+    if ($settingsField.hasClass('password-field')) {
+      newText = '&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;';
+    }
+
+    // Remove input
+    $titleContent.html(newText);
+    // Change edit button icon back to edit icon
+    $(this).text('edit');
+  } else {
+    // Original setting content
+    var _orgText = $titleContent.text().trim();
+
+    // Get the type of the input. Is always text except if we're editing
+    // the password
+    var type = $settingsField.hasClass('password-field') ? 'password' : 'text';
+
+    // Change title content to an input
+    $titleContent.html('\n      <input class="field-input input" type="' + type + '" value="' + _orgText + '" data-orgText="' + _orgText + '">\n    ');
+
+    // Change edit button icon to done icon
+    $(this).text('done');
+  }
+
+  $settingsField.toggleClass('editing');
+});
+
+// Account deletion
+$settings.find('#delete-account-btn').click(function () {
+  var confirmed = confirm('Are you sure you want to remove your account? This can\'t be undone!');
+
+  if (confirmed) {
+    // Request to backend would be put here
+    console.info('Removing account... :(');
+    $.post('/settings/delete', {}, function (data) {
+      console.info(data);
+      // Logout from Google as well
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.info('User signed out.');
+      });
+      // Redirect to homepage
+      location.assign('/');
+    }).fail(function (error) {
+      alert('ERROR (' + error.status + '): ' + error.responseText);
+    });
+  }
+});
+
+/**
+ * escapeString()
+ * Escapes given string.
+ * @param {string} str String to escape
+ * @return {string} escaped string
+ */
+function escapeString(str) {
+  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * The Notes class contains all functionality related to the notes
+ */
+var Notes = function () {
+  function Notes() {
+    _classCallCheck(this, Notes);
+  }
+
+  _createClass(Notes, null, [{
+    key: 'addNote',
+
+    /**
+     * Notes.addNote()
+     * Adds note to DOM and performs a request to the backend to save the note.
+     * @param {object} note Note to add.
+     */
+    value: function addNote(note) {
+      var title = '';
+
+      if (note.title.trim()) {
+        title = '<h4 class="note-title">' + escapeString(note.title.trim()) + '</h4>';
+      }
+
+      var content = '';
+
+      if (note.content.trim()) {
+        content = '<p class="note-content">' + escapeString(note.content.trim()) + '</p>';
+      }
+
+      var $item = $('\n      <article class="note grid-item" style="background-color: ' + escapeString(note.color.trim()) + '">\n        ' + title + '\n        ' + content + '\n        <div class="note-action-container">\n          <button class="material-icons edit-btn md-btn btn">edit</button>\n          <button class="material-icons delete-btn md-btn btn">delete</button>\n        </div>\n      </article>\n    ');
+
+      $item.find('.delete-btn').click(function () {
+        var id = $(this).parents('.note').attr('id');
+
+        Notes.deleteNote(id);
+      });
+
+      $grid.prepend($item).masonry('prepended', $item);
+
+      // Backend request would be put here
+      console.log(note);
+
+      for (var item in note) {
+        if (note[item].trim() == '') {
+          delete note[item];
+        }
+      }
+
+      console.log(note);
+
+      $.post('/notes', note, function (response) {
+        // The response contains the ID of the item we've just added.
+        // We'll have to get that ID and add it to the element.
+        $item.attr('id', response);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
+    }
+
+    /**
+     * Notes.deleteNote()
+     * Deletes note from DOM and performs request to the delete backend.
+     * @param {number} id Id of the note to delete.
+     */
+
+  }, {
+    key: 'deleteNote',
+    value: function deleteNote(id) {
+      var $toDelete = $('#' + id);
+
+      $grid.masonry('remove', $toDelete).masonry('layout');
+
+      // Backend request would be put here
+      $.post('/notes/delete', { id: id }, function (data) {
+        console.info(data);
+      }).fail(function (error) {
+        alert('ERROR (' + error.status + '): ' + error.responseText);
+      });
+    }
+  }]);
+
+  return Notes;
+}();
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /**
  * The NoteWriter class contains all note writer related functionality
  */
-
 var NoteWriter = function () {
   function NoteWriter() {
     _classCallCheck(this, NoteWriter);
@@ -137,190 +327,16 @@ var NoteWriter = function () {
 
   return NoteWriter;
 }();
+'use strict';
 
-// Setup masonry
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-
-var $grid = $('.grid').masonry({
-  itemSelector: '.grid-item',
-  columnWidth: '.grid-sizer',
-  percentPosition: true
-});
-
-// Run delete function when a note's delete button is clicked
-$('.note .delete-btn').click(function () {
-  var id = $(this).parents('.note').attr('id');
-
-  Notes.deleteNote(id);
-});
-
-/**
- * The Notes class contains all functionality related to the notes
- */
-
-var Notes = function () {
-  function Notes() {
-    _classCallCheck(this, Notes);
-  }
-
-  _createClass(Notes, null, [{
-    key: 'addNote',
-
-    /**
-     * Notes.addNote()
-     * Adds note to DOM and performs a request to the backend to save the note.
-     * @param {object} note Note to add.
-     */
-    value: function addNote(note) {
-      var title = '';
-
-      if (note.title.trim()) {
-        title = '<h4 class="note-title">' + escapeString(note.title.trim()) + '</h4>';
-      }
-
-      var content = '';
-
-      if (note.content.trim()) {
-        content = '<p class="note-content">' + escapeString(note.content.trim()) + '</p>';
-      }
-
-      var $item = $('\n      <article class="note grid-item" style="background-color: ' + escapeString(note.color.trim()) + '">\n        ' + title + '\n        ' + content + '\n        <button class="material-icons delete-btn md-btn btn">delete</button>\n      </article>\n    ');
-
-      $item.find('.delete-btn').click(function () {
-        var id = $(this).parents('.note').attr('id');
-
-        Notes.deleteNote(id);
-      });
-
-      $grid.prepend($item).masonry('prepended', $item);
-
-      // Backend request would be put here
-      console.log(note);
-
-      for (var item in note) {
-        if (note[item].trim() == '') {
-          delete note[item];
-        }
-      }
-
-      console.log(note);
-
-      $.post('/notes', note, function (response) {
-        // The response contains the ID of the item we've just added.
-        // We'll have to get that ID and add it to the element.
-        $item.attr('id', response);
-      }).fail(function (error) {
-        alert('ERROR (' + error.status + '): ' + error.responseText);
-      });
-    }
-
-    /**
-     * Notes.deleteNote()
-     * Deletes note from DOM and performs request to the delete backend.
-     * @param {number} id Id of the note to delete.
-     */
-
-  }, {
-    key: 'deleteNote',
-    value: function deleteNote(id) {
-      var $toDelete = $('#' + id);
-
-      $grid.masonry('remove', $toDelete).masonry('layout');
-
-      // Backend request would be put here
-      $.post('/notes/delete', { id: id }, function (data) {
-        console.info(data);
-      }).fail(function (error) {
-        alert('ERROR (' + error.status + '): ' + error.responseText);
-      });
-    }
-  }]);
-
-  return Notes;
-}();
-
-var $settings = $('#settings');
-
-// Edit settings
-$settings.find('.edit-btn').click(function () {
-  var $settingsField = $(this).parents('.settings-field');
-  var $titleContent = $(this).siblings('.title-content');
-
-  // Get the name of the field we're editing
-  var name = $settingsField.data('name');
-
-  // Check if the settings field has the editing class.
-  // If it does, we save the edits. If it doesn't, we toggle editing
-  // mode.
-  if ($settingsField.hasClass('editing')) {
-    var orgText = $titleContent.find('.field-input').data('orgtext').trim();
-    var newText = $titleContent.find('.field-input').val().trim();
-
-    // Only save edits to backend if there are actually edits
-    if (orgText != newText) {
-      // Do backend stuff here
-      $.post('/settings/update', { fields: JSON.stringify(_defineProperty({}, name, newText)) }, function (data) {
-        console.info(data);
-      }).fail(function (error) {
-        alert('ERROR (' + error.status + '): ' + error.responseText);
-      });
-    }
-
-    // If the field we're editing is the password field, insert
-    // • instead of text.
-    if ($settingsField.hasClass('password-field')) {
-      newText = '&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;';
-    }
-
-    // Remove input
-    $titleContent.html(newText);
-    // Change edit button icon back to edit icon
-    $(this).text('edit');
-  } else {
-    // Original setting content
-    var _orgText = $titleContent.text().trim();
-
-    // Get the type of the input. Is always text except if we're editing
-    // the password
-    var type = $settingsField.hasClass('password-field') ? 'password' : 'text';
-
-    // Change title content to an input
-    $titleContent.html('\n      <input class="field-input input" type="' + type + '" value="' + _orgText + '" data-orgText="' + _orgText + '">\n    ');
-
-    // Change edit button icon to done icon
-    $(this).text('done');
-  }
-
-  $settingsField.toggleClass('editing');
-});
-
-// Account deletion
-$settings.find('#delete-account-btn').click(function () {
-  var confirmed = confirm('Are you sure you want to remove your account? This can\'t be undone!');
-
-  if (confirmed) {
-    // Request to backend would be put here
-    console.info('Removing account... :(');
-    $.post('/settings/delete', {}, function (data) {
-      console.info(data);
-      // Logout from Google as well
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.info('User signed out.');
-      });
-      // Redirect to homepage
-      location.assign('/');
-    }).fail(function (error) {
-      alert('ERROR (' + error.status + '): ' + error.responseText);
-    });
-  }
-});
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * The OAuth class contains all functionality related to logging user in with 
  * OAuth.
  */
-
 var OAuth = function () {
   function OAuth() {
     _classCallCheck(this, OAuth);
@@ -349,15 +365,3 @@ var OAuth = function () {
 
   return OAuth;
 }();
-
-/**
- * escapeString()
- * Escapes given string.
- * @param {string} str String to escape
- * @return {string} escaped string
- */
-
-
-function escapeString(str) {
-  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
