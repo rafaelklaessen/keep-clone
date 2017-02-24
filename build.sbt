@@ -14,6 +14,8 @@ libraryDependencies ++= Seq(
   "org.mindrot" % "jbcrypt" % "0.3m"
 )
 
+libraryDependencies += "org.scalaj" % "scalaj-http_2.11" % "2.3.0"
+
 // https://mvnrepository.com/artifact/com.google.firebase/firebase-admin
 libraryDependencies += "com.google.firebase" % "firebase-admin" % "4.1.1"
 
@@ -21,6 +23,10 @@ libraryDependencies += "com.google.firebase" % "firebase-admin" % "4.1.1"
 libraryDependencies += "com.firebase" % "firebase-client" % "2.2.4"
 
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
+
+fork in run := true
+
+fork in run := true
 
 fork in run := true
 

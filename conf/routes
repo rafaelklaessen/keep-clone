@@ -14,6 +14,11 @@ POST    /register                   controllers.UserController.registerUser()
 # Logout page
 GET     /logout                     controllers.UserController.logout
 
+# OAuth
+POST    /oauth/google               controllers.OAuthController.google
+GET     /oauth/github               controllers.OAuthController.github(code: String)
+GET     /oauth/facebook             controllers.OAuthController.facebook
+
 # Create note page
 POST    /notes                      controllers.NoteController.createNote
 # Delete note page
