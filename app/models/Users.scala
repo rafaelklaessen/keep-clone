@@ -39,12 +39,7 @@ object Users {
     new User(email, firstName, lastName, password, notes)
   }
 
-  /**
-   * This method checks if a user exists by getting the user and checking its
-   * data. If a field contains ul, this means that it was null before, which 
-   * means that the field wasn't set. If that's the case, the user doesn't 
-   * exist.
-   */ 
+  // Checks if user exists
   def userExists(username: String): Boolean = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential

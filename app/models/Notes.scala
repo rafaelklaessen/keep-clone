@@ -85,6 +85,18 @@ object Notes {
     currentUser.child("notes").child("note-" + id.toString).removeValue()
   }
 
+  // Checks if note exists
+  def noteExists(id: Long): Boolean = {
+    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
+    val noteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes/" + id.toString + ".json?auth=" + credential
+
+    // Get note JSON
+    val note = Source.fromURL(noteJsonUrl).mkString
+
+    // If it's "null", the note doesn't exist
+    note != "null"
+  }
+
   // Gets the ID for the new note by adding one the the last note's ID
   def getId: Long = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"

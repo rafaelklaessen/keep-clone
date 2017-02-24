@@ -1,5 +1,10 @@
 package controllers
 
+import com.google.firebase
+import com.google.firebase._
+import com.google.firebase.auth._
+import com.google.firebase.database._
+
 import javax.inject._
 import play.api._
 import play.api.mvc._
@@ -79,6 +84,65 @@ class NoteController @Inject() extends Controller {
         Ok("success")
       } catch {
         case nfe: NumberFormatException => BadRequest("Incorrect ID")
+      }
+    }
+  }
+
+  // Updates a note
+  def updateNote = Action { request => 
+    val requestContent = request.body.asFormUrlEncoded.get
+    val reqUser = request.session.get("username")
+
+    if (reqUser.isEmpty) {
+      Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqUser.get)) {
+      Unauthorized("Not logged in as existing user")
+    } else if (!requestContent.contains("id")) {
+      BadRequest("No note ID provided")
+    } else if (!requestContent.contains("fields")) {
+      BadRequest("No fields provided")
+    } else {
+      // Get ID from request
+      val id = requestContent("id").head.toString
+
+      // Make sure note actually exists
+      if (Notes.noteExists(id.toLong)) {
+        val note = Notes.getNote(id.toLong)
+        
+        // Make sure note actually belongs to the current user.
+        // If it doesn't, act as if it doesn't exist.
+        if (note.owners.contains(reqUser.get)) {
+          println(id)
+          
+          // Get fields from request and parse them to a map
+          val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
+
+          // Make sure we're only setting valid fields
+          val filteredFields = fields.filterKeys(_ match {
+            case "title" | "content" | "color" => true
+            case _ => false
+          })
+
+          // Get Firebase reference
+          val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+          val notesRef = ref.child("notes")
+          val currentNote = notesRef.child(id)
+
+          // Set all Firebase fields
+          filteredFields.keys.foreach(i => 
+            currentNote.child(i).setValue(filteredFields(i))
+          )
+
+          filteredFields.keys.foreach(i => 
+            println("key: " + i + ", value: " + filteredFields(i))
+          )
+
+          Ok("success")
+        } else {
+          BadRequest("Note doesn't exist!")
+        }
+      } else {
+        BadRequest("Note doesn't exist!")
       }
     }
   }

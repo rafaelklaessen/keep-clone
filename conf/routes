@@ -20,9 +20,11 @@ GET     /oauth/github               controllers.OAuthController.github(code: Str
 GET     /oauth/facebook             controllers.OAuthController.facebook
 
 # Create note page
-POST    /notes                      controllers.NoteController.createNote()
+POST    /notes                      controllers.NoteController.createNote
 # Delete note page
-POST    /notes/delete               controllers.NoteController.deleteNote()
+POST    /notes/delete               controllers.NoteController.deleteNote
+# Update note page
+POST    /notes/update               controllers.NoteController.updateNote
 
 # Settings page
 GET     /settings                   controllers.SettingsController.show
