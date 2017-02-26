@@ -243,7 +243,46 @@ var NoteEditor = function () {
       if (oldNote.title == newNote.title && oldNote.content == newNote.content && oldNote.color == newNote.color) {
         NoteEditor.cancel();
       } else {
-        console.log('Request to backend here');
+        // Perform request to backend
+        $.post('/notes/update', {
+          id: noteId,
+          fields: JSON.stringify(newNote)
+        }, function (data) {
+          console.info(data);
+        }).fail(function (error) {
+          alert('ERROR (' + error.status + '): ' + error.responseText);
+        });
+
+        // Update DOM
+        var $note = $('#' + noteId);
+        var $noteTitle = $note.find('.note-title');
+        var $noteContent = $note.find('.note-content');
+
+        // Create elements if they don't exist yet
+        if ($noteTitle.length) {
+          $noteTitle.text(newNote.title);
+        } else {
+          $note.append('<h4 class="note-title">' + newNote.title + '</h4>');
+        }
+
+        if ($noteContent.length) {
+          $noteContent.text(newNote.content);
+        } else {
+          $note.append('<p class="note-content">' + newNote.content + '</p>');
+        }
+
+        // Remove elements if they aren't required anymore
+        if (!newNote.title) {
+          $noteTitle.remove();
+        }
+
+        if (!newNote.content) {
+          $noteContent.remove();
+        }
+
+        $note.css({ 'background-color': newNote.color });
+
+        // Remove the note editor
         NoteEditor.cancel();
       }
     }
