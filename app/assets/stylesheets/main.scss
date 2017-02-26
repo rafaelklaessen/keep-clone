@@ -380,7 +380,8 @@ textarea {
   }
 }
 
-#write-note {
+#write-note,
+#edit-note {
   margin-left: auto;
   margin-right: auto;
   padding: 12px 24px;
@@ -449,6 +450,20 @@ textarea {
       float: right;
       margin-right: -12px;
     }
+  }
+}
+
+#edit-note {
+  .note-content {
+    height: 50px;
+    opacity: 1;
+    display: block;
+  }
+
+  .toolbar {
+    height: 36px;
+    opacity: 1;
+    display: inline-block;
   }
 }
 

@@ -139,6 +139,47 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
+ * The NoteEditor class contains all functionality related to editing notes.
+ */
+var NoteEditor = function () {
+  function NoteEditor() {
+    _classCallCheck(this, NoteEditor);
+  }
+
+  _createClass(NoteEditor, null, [{
+    key: 'show',
+
+    /**
+     * NoteEditor.show()
+     * Adds note editor to DOM and shows it.
+     * @param {string} id The id of the note we're editing.
+     * @param {object} note The previous note.
+     */
+    value: function show(id, note) {
+      // Make sure note exists
+      if (!$('#' + id).length) {
+        return;
+      }
+
+      var title = note.title || '';
+      var content = note.content || '';
+      var color = note.color || '#FFFFFF';
+
+      var $noteEditor = $('\n      <section class="overlay-black">\n        <section id="edit-note" class="edit-note" data-color="' + color + '" style="background-color: ' + color + '">\n          <header class="note-title-container">\n            <h4 class="note-title">\n              <input class="note-title-input" placeholder="Title" value="' + title + '">\n            </h4>\n          </header>\n          <section class="note-content">\n            <textarea class="note-content-input" placeholder="Take a note...">' + content + '</textarea>\n          </section>\n          <footer class="toolbar">\n            <section class="color-balls">\n              <span class="color-ball" style="background-color: #FFFFFF" data-color="#FFFFFF"></span>\n              <span class="color-ball" style="background-color: #80D8FF" data-color="#80D8FF"></span>\n              <span class="color-ball" style="background-color: #FFD180" data-color="#FFD180"></span>\n              <span class="color-ball" style="background-color: #B388FF" data-color="#B388FF"></span>\n              <span class="color-ball" style="background-color: #FF8A80" data-color="#FF8A80"></span>\n            </section>\n            <section class="btn-container">\n              <button class="cancel-btn md-btn btn">Cancel</button>\n              <button class="save-btn md-btn btn">Save</button>\n            </section>\n          </footer>\n        </section>\n      </section>\n    ');
+
+      $noteEditor.appendTo('body');
+    }
+  }]);
+
+  return NoteEditor;
+}();
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
  * The Notes class contains all functionality related to the notes
  */
 var Notes = function () {
