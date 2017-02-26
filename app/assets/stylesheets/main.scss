@@ -111,7 +111,9 @@ button {
     vertical-align: middle;
     color: inherit;
     background: none;
-    border-radius: 3px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 2px;
     
     &:hover {
       background-color: rgba(0, 0, 0, .08);
@@ -121,14 +123,16 @@ button {
       background-color: rgba(0, 0, 0, .16)
     }
 
+    // The material icon font doesn't work in uppercase
+    &.material-icons {
+      text-transform: none;
+    }
+
     &.raised {
       padding-left: 16px;
       padding-right: 16px;
       color: rgba(255, 255, 255, .87);
       background-color: $mainColor;
-      font-weight: 500;
-      border-radius: 2px;
-      text-transform: uppercase;
       box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, .2), 0px 2px 2px 0px rgba(0, 0, 0, .14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
 
       &:active {
