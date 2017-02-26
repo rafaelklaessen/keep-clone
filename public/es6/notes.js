@@ -31,12 +31,20 @@ class Notes {
       </article>
     `);
 
+    // Add listeners
     $item
       .find('.delete-btn')
       .click(function() {
         const id = $(this).parents('.note').attr('id');
 
         Notes.deleteNote(id);
+      })
+      .siblings('.edit-btn')
+      .click(function() {
+        const id = $(this).parents('.note').attr('id');
+        const note = Notes.getNote(id);
+
+        NoteEditor.show(id, note);
       });
 
     $grid

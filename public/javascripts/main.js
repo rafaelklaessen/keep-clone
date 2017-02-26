@@ -339,10 +339,16 @@ var Notes = function () {
 
       var $item = $('\n      <article class="note grid-item" style="background-color: ' + escapeString(note.color.trim()) + '">\n        ' + title + '\n        ' + content + '\n        <div class="note-action-container">\n          <button class="material-icons edit-btn md-btn btn">edit</button>\n          <button class="material-icons delete-btn md-btn btn">delete</button>\n        </div>\n      </article>\n    ');
 
+      // Add listeners
       $item.find('.delete-btn').click(function () {
         var id = $(this).parents('.note').attr('id');
 
         Notes.deleteNote(id);
+      }).siblings('.edit-btn').click(function () {
+        var id = $(this).parents('.note').attr('id');
+        var note = Notes.getNote(id);
+
+        NoteEditor.show(id, note);
       });
 
       $grid.prepend($item).masonry('prepended', $item);
