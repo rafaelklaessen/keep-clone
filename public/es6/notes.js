@@ -82,4 +82,20 @@ class Notes {
       alert(`ERROR (${error.status}): ${error.responseText}`);
     });
   }
+
+  /**
+   * Notes.getNote()
+   * Gets a note's data.
+   * @param {string} id The id of the note to get.
+   * @return {object} The note's data
+   */
+  static getNote(id) {
+    const $note = $(`#${id}`);
+
+    return {
+      title: $note.find('.note-title').text().trim() || '',
+      content: $note.find('.note-content').text().trim() || '',
+      color: $note.css('background-color').trim() || '#FFFFFF'
+    };
+  }
 }

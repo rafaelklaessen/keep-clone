@@ -46,6 +46,14 @@ $('.note .delete-btn').click(function () {
   Notes.deleteNote(id);
 });
 
+// Run edit function when a note's edit button is clicked
+$('.note .edit-btn').click(function () {
+  var id = $(this).parents('.note').attr('id');
+  var note = Notes.getNote(id);
+
+  NoteEditor.show(id, note);
+});
+
 var $settings = $('#settings');
 
 // Edit settings
@@ -165,9 +173,91 @@ var NoteEditor = function () {
       var content = note.content || '';
       var color = note.color || '#FFFFFF';
 
-      var $noteEditor = $('\n      <section class="overlay-black">\n        <section id="edit-note" class="edit-note" data-color="' + color + '" style="background-color: ' + color + '">\n          <header class="note-title-container">\n            <h4 class="note-title">\n              <input class="note-title-input" placeholder="Title" value="' + title + '">\n            </h4>\n          </header>\n          <section class="note-content">\n            <textarea class="note-content-input" placeholder="Take a note...">' + content + '</textarea>\n          </section>\n          <footer class="toolbar">\n            <section class="color-balls">\n              <span class="color-ball" style="background-color: #FFFFFF" data-color="#FFFFFF"></span>\n              <span class="color-ball" style="background-color: #80D8FF" data-color="#80D8FF"></span>\n              <span class="color-ball" style="background-color: #FFD180" data-color="#FFD180"></span>\n              <span class="color-ball" style="background-color: #B388FF" data-color="#B388FF"></span>\n              <span class="color-ball" style="background-color: #FF8A80" data-color="#FF8A80"></span>\n            </section>\n            <section class="btn-container">\n              <button class="cancel-btn md-btn btn">Cancel</button>\n              <button class="save-btn md-btn btn">Save</button>\n            </section>\n          </footer>\n        </section>\n      </section>\n    ');
+      // Generate HTML
+      var $noteEditor = $('\n      <section class="overlay-black">\n        <section id="edit-note" class="edit-note" data-note="' + id + '" data-color="' + color + '" style="background-color: ' + color + '">\n          <header class="note-title-container">\n            <h4 class="note-title">\n              <input class="note-title-input" placeholder="Title" value="' + title + '">\n            </h4>\n          </header>\n          <section class="note-content">\n            <textarea class="note-content-input" placeholder="Take a note...">' + content + '</textarea>\n          </section>\n          <footer class="toolbar">\n            <section class="color-balls">\n              <span class="color-ball" style="background-color: #FFFFFF" data-color="#FFFFFF"></span>\n              <span class="color-ball" style="background-color: #80D8FF" data-color="#80D8FF"></span>\n              <span class="color-ball" style="background-color: #FFD180" data-color="#FFD180"></span>\n              <span class="color-ball" style="background-color: #B388FF" data-color="#B388FF"></span>\n              <span class="color-ball" style="background-color: #FF8A80" data-color="#FF8A80"></span>\n            </section>\n            <section class="btn-container">\n              <button class="cancel-btn md-btn btn">Cancel</button>\n              <button class="save-btn md-btn btn">Save</button>\n            </section>\n          </footer>\n        </section>\n      </section>\n    ');
 
+      // Append HTML to body
       $noteEditor.appendTo('body');
+
+      // Fade the note editor in
+      $noteEditor.fadeIn(200);
+      $noteEditor.find('#edit-note').fadeIn(400);
+
+      // Add listeners
+      $noteEditor.find('.cancel-btn').click(function () {
+        NoteEditor.cancel();
+      });
+
+      $noteEditor.find('.save-btn').click(function () {
+        NoteEditor.save();
+      });
+
+      $noteEditor.find('.color-ball').click(function () {
+        var color = $(this).data('color');
+
+        NoteEditor.setColor(color);
+      });
+    }
+
+    /**
+     * NoteEditor.cancel()
+     * Cancels note editing.
+     */
+
+  }, {
+    key: 'cancel',
+    value: function cancel() {
+      $('#edit-note').fadeOut(200).parent().fadeOut(400);
+
+      setTimeout(function () {
+        $('#edit-note').parent().remove();
+      }, 400);
+    }
+
+    /**
+     * NoteEditor.save()
+     * Saves note edits.
+     */
+
+  }, {
+    key: 'save',
+    value: function save() {
+      var $noteEditor = $('#edit-note');
+
+      // Get note id
+      var noteId = $noteEditor.data('note');
+      var oldNote = Notes.getNote(noteId);
+      var newNote = {
+        title: $noteEditor.find('.note-title-input').val().trim() || '',
+        content: $noteEditor.find('.note-content-input').val().trim() || '',
+        color: $noteEditor.data('color').trim() || '#FFFFFF'
+      };
+
+      // Make sure that either the note title or note content is given (or both)
+      if (newNote.title == '' && newNote.content == '') {
+        NoteEditor.cancel();
+        return;
+      }
+
+      // Only update the database when there actually are changes
+      if (oldNote.title == newNote.title && oldNote.content == newNote.content && oldNote.color == newNote.color) {
+        NoteEditor.cancel();
+      } else {
+        console.log('Request to backend here');
+        NoteEditor.cancel();
+      }
+    }
+
+    /**
+     * NoteEditor.setColor()
+     * Sets the color of the note editor.
+     * @param {string} color Color to set the note editor to.
+     */
+
+  }, {
+    key: 'setColor',
+    value: function setColor(color) {
+      $('#edit-note').data('color', color).css({ 'background-color': color });
     }
   }]);
 
@@ -257,6 +347,25 @@ var Notes = function () {
       }).fail(function (error) {
         alert('ERROR (' + error.status + '): ' + error.responseText);
       });
+    }
+
+    /**
+     * Notes.getNote()
+     * Gets a note's data.
+     * @param {string} id The id of the note to get.
+     * @return {object} The note's data
+     */
+
+  }, {
+    key: 'getNote',
+    value: function getNote(id) {
+      var $note = $('#' + id);
+
+      return {
+        title: $note.find('.note-title').text().trim() || '',
+        content: $note.find('.note-content').text().trim() || '',
+        color: $note.css('background-color').trim() || '#FFFFFF'
+      };
     }
   }]);
 

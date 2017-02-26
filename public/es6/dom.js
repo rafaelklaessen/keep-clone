@@ -42,6 +42,14 @@ $('.note .delete-btn').click(function() {
   Notes.deleteNote(id);
 });
 
+// Run edit function when a note's edit button is clicked
+$('.note .edit-btn').click(function() {
+  const id = $(this).parents('.note').attr('id');
+  const note = Notes.getNote(id);
+
+  NoteEditor.show(id, note);
+});
+
 const $settings = $('#settings');
 
 // Edit settings

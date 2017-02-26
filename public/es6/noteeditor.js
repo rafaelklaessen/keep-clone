@@ -18,9 +18,10 @@ class NoteEditor {
     const content = note.content || '';
     const color = note.color || '#FFFFFF';
 
+    // Generate HTML
     const $noteEditor = $(`
       <section class="overlay-black">
-        <section id="edit-note" class="edit-note" data-color="${color}" style="background-color: ${color}">
+        <section id="edit-note" class="edit-note" data-note="${id}" data-color="${color}" style="background-color: ${color}">
           <header class="note-title-container">
             <h4 class="note-title">
               <input class="note-title-input" placeholder="Title" value="${title}">
@@ -46,7 +47,83 @@ class NoteEditor {
       </section>
     `);
 
+    // Append HTML to body
     $noteEditor.appendTo('body');
+
+    // Fade the note editor in
+    $noteEditor.fadeIn(200);
+    $noteEditor.find('#edit-note').fadeIn(400);
+
+    // Add listeners
+    $noteEditor.find('.cancel-btn').click(function() {
+      NoteEditor.cancel();
+    });
+
+    $noteEditor.find('.save-btn').click(function() {
+      NoteEditor.save();
+    });
+
+    $noteEditor.find('.color-ball').click(function() {
+      const color = $(this).data('color');
+      
+      NoteEditor.setColor(color);
+    });
   }
 
+  /**
+   * NoteEditor.cancel()
+   * Cancels note editing.
+   */
+  static cancel() {
+    $('#edit-note')
+      .fadeOut(200)
+      .parent()
+      .fadeOut(400);
+
+    setTimeout(() => {
+      $('#edit-note').parent().remove();
+    }, 400);
+  }
+
+  /**
+   * NoteEditor.save()
+   * Saves note edits.
+   */
+  static save() {
+    const $noteEditor = $('#edit-note');
+
+    // Get note id
+    const noteId = $noteEditor.data('note');
+    const oldNote = Notes.getNote(noteId);
+    const newNote = {
+      title: $noteEditor.find('.note-title-input').val().trim() || '',
+      content: $noteEditor.find('.note-content-input').val().trim() || '',
+      color: $noteEditor.data('color').trim() || '#FFFFFF'
+    };
+
+    // Make sure that either the note title or note content is given (or both)
+    if (newNote.title == '' && newNote.content == '') {
+      NoteEditor.cancel();
+      return;
+    }
+
+    // Only update the database when there actually are changes
+    if (oldNote.title == newNote.title && oldNote.content == newNote.content && oldNote.color == newNote.color) {
+      NoteEditor.cancel();
+    } else {
+      console.log('Request to backend here');
+      NoteEditor.cancel();
+    }
+  }
+
+  /**
+   * NoteEditor.setColor()
+   * Sets the color of the note editor.
+   * @param {string} color Color to set the note editor to.
+   */
+  static setColor(color) {
+    $('#edit-note')
+      .data('color', color)
+      .css({'background-color': color});
+  }
 }
