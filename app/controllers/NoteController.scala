@@ -105,44 +105,44 @@ class NoteController @Inject() extends Controller {
       // Get ID from request
       val id = requestContent("id").head.toString
 
-      // Make sure note actually exists
-      if (Notes.noteExists(id.toLong)) {
-        val note = Notes.getNote(id.toLong)
-        
-        // Make sure note actually belongs to the current user.
-        // If it doesn't, act as if it doesn't exist.
-        if (note.owners.contains(reqUser.get)) {
-          println(id)
+      try {
+        // Make sure note actually exists
+        if (Notes.noteExists(id.toLong)) {
+          val note = Notes.getNote(id.toLong)
           
-          // Get fields from request and parse them to a map
-          val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
+          // Make sure note actually belongs to the current user.
+          // If it doesn't, act as if it doesn't exist.
+          if (note.owners.contains(reqUser.get)) {      
+            // Get fields from request and parse them to a map
+            val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
 
-          // Make sure we're only setting valid fields
-          val filteredFields = fields.filterKeys(_ match {
-            case "title" | "content" | "color" => true
-            case _ => false
-          })
+            // Make sure we're only setting valid fields
+            val filteredFields = fields.filterKeys(_ match {
+              case "title" | "content" | "color" => true
+              case _ => false
+            })
 
-          // Get Firebase reference
-          val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-          val notesRef = ref.child("notes")
-          val currentNote = notesRef.child(id)
+            // Get Firebase reference
+            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+            val notesRef = ref.child("notes")
+            val currentNote = notesRef.child(id)
 
-          // Set all Firebase fields
-          filteredFields.keys.foreach(i => 
-            currentNote.child(i).setValue(filteredFields(i))
-          )
+            // Set all Firebase fields
+            filteredFields.keys.foreach(i => 
+              currentNote.child(i).setValue(filteredFields(i))
+            )
 
-          filteredFields.keys.foreach(i => 
-            println("key: " + i + ", value: " + filteredFields(i))
-          )
-
-          Ok("success")
+            Ok("success")
+          } else {
+            BadRequest("Note doesn't exist!")
+          }
         } else {
           BadRequest("Note doesn't exist!")
         }
-      } else {
-        BadRequest("Note doesn't exist!")
+      } catch {
+        case nfe: NumberFormatException => BadRequest("Invalid ID")
+        case jpe: com.fasterxml.jackson.core.JsonParseException => BadRequest("Invalid fields")
+        case e: Exception => BadRequest("Unknown parameter error")
       }
     }
   }

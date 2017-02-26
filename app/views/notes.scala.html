@@ -39,10 +39,15 @@
           @if(note.title.length > 0) {
             <h4 class="note-title">@note.title</h4>
           }
-          <p class="note-content">
-            @note.content
-          </p>
-          <button class="material-icons delete-btn md-btn btn">delete</button>
+          @if(note.content.length > 0) {
+            <p class="note-content">
+              @note.content
+            </p>
+          }
+          <div class="note-action-container">
+            <button class="material-icons edit-btn md-btn btn">edit</button>
+            <button class="material-icons delete-btn md-btn btn">delete</button>
+          </div>
         </article>
       }
     </section>

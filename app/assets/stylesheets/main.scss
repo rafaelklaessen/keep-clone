@@ -171,6 +171,24 @@ textarea {
   }
 }
 
+.overlay-black {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+
+  #edit-note {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+}
+
 #site-header {
   position: fixed;
   top: 0;
@@ -380,13 +398,15 @@ textarea {
   }
 }
 
-#write-note {
+#write-note,
+#edit-note {
   margin-left: auto;
   margin-right: auto;
   padding: 12px 24px;
   width: 600px;
   background-color: #FFFFFF;
   box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  @include transition(background .2s ease-in-out);
 
   .note-title {
     margin: 0;
@@ -451,6 +471,20 @@ textarea {
   }
 }
 
+#edit-note {
+  .note-content {
+    height: 50px;
+    opacity: 1;
+    display: block;
+  }
+
+  .toolbar {
+    height: 36px;
+    opacity: 1;
+    display: inline-block;
+  }
+}
+
 #notes {
   padding-top: 48px;
   padding-bottom: 48px;
@@ -485,23 +519,32 @@ textarea {
       font-weight: 300;
     }
 
-    .delete-btn {
+    .note-action-container {
       position: absolute;
       right: 18px;
       bottom: 12px;
+      margin: 0 -6px;
       padding: 0;
-      line-height: 1;
-      font-size: 18px;
-      display: none;
+      opacity: 0;
+      @include transition(all .2s ease-in-out);
 
-      &:hover {
-        color: rgba(0, 0, 0, .54);
-        background: none;
+      .btn {
+        float: left;
+        margin: 0 6px;
+        padding: 0;
+        line-height: 1;
+        font-size: 18px;
+        @include transition(all .2s ease-in-out);
+      
+        &:hover {
+          color: rgba(0, 0, 0, .54);
+          background: none;
+        }
       }
     }
 
-    &:hover .delete-btn {
-      display: block;
+    &:hover .note-action-container {
+      opacity: 1;
     }
   }
 }
