@@ -258,25 +258,25 @@ var NoteEditor = function () {
         var $noteTitle = $note.find('.note-title');
         var $noteContent = $note.find('.note-content');
 
-        // Create elements if they don't exist yet
-        if ($noteTitle.length) {
-          $noteTitle.text(newNote.title);
+        // Create elements if they don't exist yet. Only do this if the field
+        // is actually set. If it isn't, remove the element.
+        if (newNote.title) {
+          if ($noteTitle.length) {
+            $noteTitle.text(newNote.title);
+          } else {
+            $note.prepend('<h4 class="note-title">' + newNote.title + '</h4>');
+          }
         } else {
-          $note.append('<h4 class="note-title">' + newNote.title + '</h4>');
-        }
-
-        if ($noteContent.length) {
-          $noteContent.text(newNote.content);
-        } else {
-          $note.append('<p class="note-content">' + newNote.content + '</p>');
-        }
-
-        // Remove elements if they aren't required anymore
-        if (!newNote.title) {
           $noteTitle.remove();
         }
 
-        if (!newNote.content) {
+        if (newNote.content) {
+          if ($noteContent.length) {
+            $noteContent.text(newNote.content);
+          } else {
+            $note.append('<p class="note-content">' + newNote.content + '</p>');
+          }
+        } else {
           $noteContent.remove();
         }
 
