@@ -54,7 +54,7 @@ $('.note .edit-btn').click(function() {
 $('.note .share-btn').click(function() {
   const $note = $(this).parents('.note');
   const id = $note.attr('id');
-  const owners = $note.data('owners') || [];
+  const owners = $note.data('owners');
 
   NoteSharing.show(id, owners);
 });

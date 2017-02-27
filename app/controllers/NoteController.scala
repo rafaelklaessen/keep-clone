@@ -201,8 +201,8 @@ class NoteController @Inject() extends Controller {
     }
   }
 
-    // Deletes owner from note
-  def deleteNoteOwner = Action { request =>
+  // Removes owner from note
+  def removeNoteOwner = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
     val reqUser = request.session.get("username")
 

@@ -21,7 +21,7 @@ class NoteEditor {
     // Generate HTML
     const $noteEditor = $(`
       <section class="overlay-black">
-        <section id="edit-note" class="edit-note" data-note="${id}" data-color="${color}" style="background-color: ${color}">
+        <section id="edit-note" class="edit-note popup" data-note="${id}" data-color="${color}" style="background-color: ${color}">
           <header class="note-title-container">
             <h4 class="note-title">
               <input class="note-title-input" placeholder="Title" value="${title}">

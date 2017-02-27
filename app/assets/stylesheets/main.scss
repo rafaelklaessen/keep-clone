@@ -184,12 +184,40 @@ textarea {
   background-color: rgba(0, 0, 0, .5);
   display: none;
 
-  #edit-note {
+  .popup {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    min-width: 480px;
+    background-color: #FFFFFF;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     display: none;
+
+    .popup-title-container {
+      padding: 6px 12px;
+      border-bottom: 1px solid #E0E0E0;
+    
+      .popup-title {
+        margin: 9px 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    .popup-content {
+      padding: 6px 12px;
+    }
+
+    .popup-footer {
+      padding: 6px 12px;
+      background-color: #EEEEEE;
+      overflow: auto;
+
+      .btn-container {
+        float: right;
+      }
+    }
   }
 }
 
@@ -612,3 +640,35 @@ textarea {
   }
 }
 
+#note-sharing .popup-content {
+  .note-owners {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .note-owner {
+      margin-top: 6px;
+      margin-bottom: 6px;
+
+      .note-owner-username {
+        margin: 0;
+        line-height: 24px;
+        vertical-align: middle;
+        font-size: 1em;
+        font-weight: 400;
+        display: inline-block;
+      }
+
+      .btn {
+        float: right;
+        font-size: 20px;
+        line-height: 24px;
+
+        &:hover {
+          color: rgba(0,0,0,0.54);
+          background: none;
+        }
+      }
+    }
+  }
+}

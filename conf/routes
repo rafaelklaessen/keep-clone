@@ -28,7 +28,7 @@ POST    /notes/update               controllers.NoteController.updateNote
 # Add note owner page
 POST    /notes/addowner             controllers.NoteController.addNoteOwner
 # Delete note owner page
-POST    /notes/deleteowner          controllers.NoteController.deleteNoteOwner
+POST    /notes/removeowner          controllers.NoteController.removeNoteOwner
 
 # Settings page
 GET     /settings                   controllers.SettingsController.show
