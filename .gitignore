@@ -8,3 +8,4 @@ target
 /RUNNING_PID
 .sbtserver/*
 project/.sbtserver
+public/javascripts/main.js
