@@ -50,6 +50,15 @@ $('.note .edit-btn').click(function() {
   NoteEditor.show(id, note);
 });
 
+// Run sharing function when a note's sharing button is clicked
+$('.note .share-btn').click(function() {
+  const $note = $(this).parents('.note');
+  const id = $note.attr('id');
+  const owners = $note.data('owners') || [];
+
+  NoteSharing.show(id, owners);
+});
+
 const $settings = $('#settings');
 
 // Edit settings

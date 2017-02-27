@@ -35,7 +35,19 @@
       <div class="grid-sizer"></div>
 
       @for(note <- notes.reverse) {
-        <article id="@note.id.toString" class="note grid-item" style="background-color: @note.color">
+        <article 
+          id="@note.id.toString" 
+          class="note grid-item"
+          style="background-color: @note.color"
+          
+          data-owners='@{ 
+            var owners = "["
+            note.owners.foreach(i => owners += "\"" + i.replaceAll("[\"]", """\\\"""") + "\",")
+            owners = owners.substring(0, owners.length - 1)
+            owners += "]"
+            owners
+          }'
+          >
           @if(note.title.length > 0) {
             <h4 class="note-title">@note.title</h4>
           }
@@ -45,6 +57,7 @@
             </p>
           }
           <div class="note-action-container">
+            <button class="material-icons share-btn md-btn btn">person_add</button>
             <button class="material-icons edit-btn md-btn btn">edit</button>
             <button class="material-icons delete-btn md-btn btn">delete</button>
           </div>
