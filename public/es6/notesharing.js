@@ -128,7 +128,15 @@ class NoteSharing {
         $usernameInput.removeClass('valid');
 
         // Perform request to backend
-        console.info('Post waddup');
+        $.post('/notes/addowner', {
+          id: id,
+          owner: username
+          },
+          (data) => {
+            console.info(data);
+        }).fail((error) => {
+          alert(`ERROR (${error.status}): ${error.responseText}`);
+        });
       }
     }
   }
@@ -166,7 +174,16 @@ class NoteSharing {
       console.warn('Couldn\'t remove owner from DOM.');
     }
 
-    console.info(`Removing ${username} from ${id}`);
+    // Perform request to backend
+    $.post('/notes/removeowner', {
+      id: id,
+      owner: username
+      },
+      (data) => {
+        console.info(data);
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`);
+    });
   }
 
   /**
