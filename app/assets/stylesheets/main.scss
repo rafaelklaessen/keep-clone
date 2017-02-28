@@ -195,7 +195,9 @@ textarea {
     display: none;
 
     .popup-title-container {
-      padding: 6px 12px;
+      margin-left: 12px;
+      margin-right: 12px;
+      padding: 6px 0;
       border-bottom: 1px solid #E0E0E0;
     
       .popup-title {
@@ -667,6 +669,21 @@ textarea {
         &:hover {
           color: rgba(0,0,0,0.54);
           background: none;
+        }
+      }
+
+      .username-input {
+        width: calc(100% - 44px);
+
+        & + .save-owner-btn {
+          font-size: 0;
+          opacity: 0;
+          @include transition(all .2s ease-in-out);
+        }
+
+        &.valid + .save-owner-btn {
+          font-size: 20px;
+          opacity: 1;
         }
       }
     }
