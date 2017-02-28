@@ -60,7 +60,7 @@ class UserController @Inject() extends Controller {
     request.session.get("username").map { username =>
       Redirect("/")
     }.getOrElse {
-      Ok(views.html.login(loginForm))
+      Ok(views.html.user.login(loginForm))
     }
   }
 
@@ -72,7 +72,7 @@ class UserController @Inject() extends Controller {
   def loginUser = Action { implicit request =>
     val loginData = loginForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest(views.html.login(formWithErrors))
+        BadRequest(views.html.user.login(formWithErrors))
       },
       loginData => {
         if (Users.userExists(loginData.username)) {
@@ -83,10 +83,10 @@ class UserController @Inject() extends Controller {
             Redirect("/").withSession(
               "username" -> loginData.username)
           } else {
-            Ok(views.html.wrongpassword(loginForm))
+            Ok(views.html.user.wrongpassword(loginForm))
           }
         } else {
-          Ok(views.html.usernotfound(loginForm))
+          Ok(views.html.user.usernotfound(loginForm))
         }
       }
     )
@@ -134,7 +134,7 @@ class UserController @Inject() extends Controller {
     request.session.get("username").map { username =>
       Redirect("/")
     }.getOrElse {
-      Ok(views.html.register(userForm))
+      Ok(views.html.user.register(userForm))
     }
   }
 
@@ -146,7 +146,7 @@ class UserController @Inject() extends Controller {
   def registerUser() = Action { implicit request => 
     val userData = userForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest(views.html.register(formWithErrors))
+        BadRequest(views.html.user.register(formWithErrors))
       },
       userData => {
         if (!Users.userExists(userData.username)) {
@@ -160,7 +160,7 @@ class UserController @Inject() extends Controller {
           Redirect("/").withSession(
             "username" -> userData.username)
         } else {
-          Ok(views.html.userexists(userForm))
+          Ok(views.html.user.userexists(userForm))
         }
       }
     )
@@ -171,7 +171,7 @@ class UserController @Inject() extends Controller {
   // When a user goes to /logout, the user session is ended and a successfully
   // logged out page will show.
   def logout = Action {
-    Ok(views.html.logout()).withNewSession
+    Ok(views.html.user.logout()).withNewSession
   }
 
 }

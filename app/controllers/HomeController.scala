@@ -21,9 +21,9 @@ class HomeController @Inject() extends Controller {
     request.session.get("username").map { username =>
       val notes = Notes.getNotesByUsername(username)
 
-      Ok(views.html.notes(notes))
+      Ok(views.html.home.notes(username, notes))
     }.getOrElse {
-      Ok(views.html.index())
+      Ok(views.html.home.index())
     }
   }
 

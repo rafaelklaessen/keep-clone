@@ -21,10 +21,11 @@ class Notes {
     }
 
     const $item = $(`
-      <article class="note grid-item" style="background-color: ${escapeString(note.color.trim())}">
+      <article class="note grid-item" style="background-color: ${escapeString(note.color.trim())}" data-owners='${JSON.stringify([sessionUser])}'>
         ${title}
         ${content}
         <div class="note-action-container">
+          <button class="material-icons share-btn md-btn btn">person_add</button>
           <button class="material-icons edit-btn md-btn btn">edit</button>
           <button class="material-icons delete-btn md-btn btn">delete</button>
         </div>
@@ -45,6 +46,14 @@ class Notes {
         const note = Notes.getNote(id);
 
         NoteEditor.show(id, note);
+      })
+      .siblings('.share-btn')
+      .click(function() {
+        const $note = $(this).parents('.note');
+        const id = $note.attr('id');
+        const owners = $note.data('owners');
+
+        NoteSharing.show(id, owners);
       });
 
     $grid

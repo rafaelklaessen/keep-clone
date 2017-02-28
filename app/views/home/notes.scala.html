@@ -1,4 +1,4 @@
-@(notes: Array[Note])
+@(sessionUser: String, notes: Array[Note])
 
 @main("Notes") {
   <header id="site-header" class="site-header">
@@ -65,4 +65,8 @@
       }
     </section>
   </main>
+
+  <script>
+    var sessionUser = "@Html(sessionUser.replaceAll("[\"]", """\\\""""))";
+  </script>
 }

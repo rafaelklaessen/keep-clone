@@ -28,10 +28,10 @@ class SettingsController @Inject() extends Controller {
     request.session.get("username").map { username => 
       // If we're logged in with OAuth, render a different settings page
       request.session.get("oauth").map { oauth =>
-        Ok(views.html.settingsOAuth(oauth, request.session.get("email").get))
+        Ok(views.html.settings.settingsOAuth(oauth, request.session.get("email").get))
       }.getOrElse {
         val user = Users.getUser(username)
-        Ok(views.html.settings(username, user))
+        Ok(views.html.settings.settings(username, user))
       }
     }.getOrElse {
       NotFound("Page not found")
