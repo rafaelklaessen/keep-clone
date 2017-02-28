@@ -35,7 +35,7 @@ class NoteSharing {
     // Generate popup HTML
     const $noteSharing = $(`
       <section class="overlay-black">
-        <section id="note-sharing" class="note-sharing popup" data-note="${id}" data-owners='${JSON.stringify(owners)}'>
+        <section id="note-sharing" class="note-sharing popup" data-note="${id}">
           <header class="popup-title-container">
             <h2 class="popup-title">Sharing</h2>
           </header>
@@ -59,6 +59,9 @@ class NoteSharing {
 
     // Append HTML to body 
     $noteSharing.appendTo('body');
+
+    // Set data-owners
+    $noteSharing.find('#note-sharing').data('owners', owners);
 
     // Fade the note sharing popup adding
     $noteSharing.fadeIn(200);
@@ -122,13 +125,10 @@ class NoteSharing {
               `)
               .insertBefore($noteSharing.find('.add-note-owner'));
             
-            // Add new owner to note DOM
+            // Add new owner to DOM
             const $note = $(`#${id}`);
             $note.data('owners').push(username);
-            
-            // Add new owner to the sharing popup DOM
-            $noteSharing.data('owners').push(username);
-            
+                        
             // Clear input
             $usernameInput.val('');
             $usernameInput.removeClass('valid');

@@ -21,7 +21,7 @@ class Notes {
     }
 
     const $item = $(`
-      <article class="note grid-item" style="background-color: ${escapeString(note.color.trim())}" data-owners='${JSON.stringify([sessionUser])}'>
+      <article class="note grid-item" style="background-color: ${escapeString(note.color.trim())}">
         ${title}
         ${content}
         <div class="note-action-container">
@@ -55,6 +55,9 @@ class Notes {
 
         NoteSharing.show(id, owners);
       });
+
+    // Set data-owners
+    $item.data('owners', [JSON.stringify(sessionUser)]);
 
     $grid
       .prepend($item)
