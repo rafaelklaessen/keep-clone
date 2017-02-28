@@ -10,8 +10,6 @@ import play.api._
 import play.api.mvc._
 import play.api.libs.json._
 
-import play.api.libs.json._
-
 import models.Notes
 import models.Users
 
@@ -142,6 +140,118 @@ class NoteController @Inject() extends Controller {
       } catch {
         case nfe: NumberFormatException => BadRequest("Invalid ID")
         case jpe: com.fasterxml.jackson.core.JsonParseException => BadRequest("Invalid fields")
+        case e: Exception => BadRequest("Unknown parameter error")
+      }
+    }
+  }
+
+  // Adds owner to note
+  def addNoteOwner = Action { request =>
+    val requestContent = request.body.asFormUrlEncoded.get
+    val reqUser = request.session.get("username")
+
+    if (reqUser.isEmpty) {
+      Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqUser.get)) {
+      Unauthorized("Not logged in as existing user")
+    } else if (!requestContent.contains("id")) {
+      BadRequest("No note ID provided")
+    } else if (!requestContent.contains("owner")) {
+      BadRequest("No new owner provided")
+    } else {
+      // Get ID from request 
+      val id = requestContent("id").head.toString
+      // Get owner to add from request
+      val owner = requestContent("owner").head
+
+      try {
+        // Make sure note and owner to add exist
+        if (Notes.noteExists(id.toLong) && Users.userExists(owner)) {
+          val note = Notes.getNote(id.toLong)
+
+          // Make sure note actually belongs to the current user.
+          // If it doesn't, act as if it doesn't exist.
+          if (note.owners.contains(reqUser.get)) {
+            // Get Firebase reference
+            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+            val notesRef = ref.child("notes")
+            val usersRef = ref.child("users")
+            val currentNote = notesRef.child(id)
+            val currentUser = usersRef.child(owner)
+
+            // Add new owner to note
+            currentNote.child("owners").child(owner).setValue(true)
+            
+            // Add note to new owner
+            currentUser.child("notes").child("note-" + id).setValue(true)
+
+            Ok("success")
+          } else {
+            BadRequest("Note doesn't exist")
+          }
+        } else if (!Notes.noteExists(id.toLong)) {
+          BadRequest("Note doesn't exist")
+        } else {
+          BadRequest("User to add doesn't exist")
+        }
+      } catch {
+        case nfe: NumberFormatException => BadRequest("Invalid ID")
+        case e: Exception => BadRequest("Unknown parameter error")
+      }
+    }
+  }
+
+  // Removes owner from note
+  def removeNoteOwner = Action { request =>
+    val requestContent = request.body.asFormUrlEncoded.get
+    val reqUser = request.session.get("username")
+
+    if (reqUser.isEmpty) {
+      Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqUser.get)) {
+      Unauthorized("Not logged in as existing user")
+    } else if (!requestContent.contains("id")) {
+      BadRequest("No note ID provided")
+    } else if (!requestContent.contains("owner")) {
+      BadRequest("No owner to delete provided")
+    } else {
+      // Get ID from request 
+      val id = requestContent("id").head.toString
+      // Get owner to add from request
+      val owner = requestContent("owner").head
+
+      try {
+        // Make sure note and owner to add exist
+        if (Notes.noteExists(id.toLong) && Users.userExists(owner)) {
+          val note = Notes.getNote(id.toLong)
+
+          // Make sure note actually belongs to the current user.
+          // If it doesn't, act as if it doesn't exist.
+          if (note.owners.contains(reqUser.get)) {
+            // Get Firebase reference
+            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+            val notesRef = ref.child("notes")
+            val usersRef = ref.child("users")
+            val currentNote = notesRef.child(id)
+            val currentUser = usersRef.child(owner)
+
+            // Add new owner to note
+            currentNote.child("owners").child(owner).removeValue()
+            
+            // Add note to new owner
+            currentUser.child("notes").child("note-" + id).removeValue()
+
+            Ok("success")
+          } else {
+            BadRequest("Note doesn't exist")
+          }
+        } else if (!Notes.noteExists(id.toLong)) {
+          BadRequest("Note doesn't exist")
+        } else {
+          BadRequest("Owner to delete doesn't exist")
+        }
+      } catch {
+        case nfe: NumberFormatException => BadRequest("Invalid ID")
         case e: Exception => BadRequest("Unknown parameter error")
       }
     }
