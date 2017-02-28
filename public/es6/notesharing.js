@@ -107,33 +107,31 @@ class NoteSharing {
         // Get note ID
         const id = $noteSharing.data('note');
 
-        // Update DOM
-        $(`
-            <li class="note-owner">
-              <h4 class="note-owner-username">@<span class="username">${username}</span></h4>
-              <button class="material-icons delete-owner-btn md-btn btn" onclick="NoteSharing.removeOwner($(this).parent());">remove_circle</button>
-            </li>
-          `)
-          .insertBefore($noteSharing.find('.add-note-owner'));
-        
-        // Add new owner to note DOM
-        const $note = $(`#${id}`);
-        $note.data('owners').push(username);
-        
-        // Add new owner to the sharing popup DOM
-        $noteSharing.data('owners').push(username);
-        
-        // Clear input
-        $usernameInput.val('');
-        $usernameInput.removeClass('valid');
-
         // Perform request to backend
         $.post('/notes/addowner', {
           id: id,
           owner: username
           },
           (data) => {
-            console.info(data);
+            // Update DOM after request is successfully done
+            $(`
+                <li class="note-owner">
+                  <h4 class="note-owner-username">@<span class="username">${username}</span></h4>
+                  <button class="material-icons delete-owner-btn md-btn btn" onclick="NoteSharing.removeOwner($(this).parent());">remove_circle</button>
+                </li>
+              `)
+              .insertBefore($noteSharing.find('.add-note-owner'));
+            
+            // Add new owner to note DOM
+            const $note = $(`#${id}`);
+            $note.data('owners').push(username);
+            
+            // Add new owner to the sharing popup DOM
+            $noteSharing.data('owners').push(username);
+            
+            // Clear input
+            $usernameInput.val('');
+            $usernameInput.removeClass('valid');
         }).fail((error) => {
           alert(`ERROR (${error.status}): ${error.responseText}`);
         });
@@ -156,31 +154,30 @@ class NoteSharing {
     // Get username of the owner to remove
     const username = $noteOwner.find('.username').text().trim();
 
-    // Remove note owner element
-    $noteOwner.slideUp(200);
-    setTimeout(() => {
-      $noteOwner.remove();
-    }, 200);
-
-    // Remove owner from note & sharing popup DOM
-    const $note = $(`#${id}`);
-    const noteUsernameIndex = $note.data('owners').indexOf(username);
-    const sharingUsernameIndex = $noteSharing.data('owners').indexOf(username);
-
-    if (noteUsernameIndex >= 0 && sharingUsernameIndex >= 0) {
-      $note.data('owners').splice(noteUsernameIndex, 1)
-      $noteSharing.data('owners').splice(sharingUsernameIndex, 1);
-    } else {
-      console.warn('Couldn\'t remove owner from DOM.');
-    }
-
     // Perform request to backend
     $.post('/notes/removeowner', {
       id: id,
       owner: username
       },
       (data) => {
-        console.info(data);
+        // Update DOM after request is successfully done
+        // Remove note owner element
+        $noteOwner.slideUp(200);
+        setTimeout(() => {
+          $noteOwner.remove();
+        }, 200);
+
+        // Remove owner from note & sharing popup DOM
+        const $note = $(`#${id}`);
+        const noteUsernameIndex = $note.data('owners').indexOf(username);
+        const sharingUsernameIndex = $noteSharing.data('owners').indexOf(username);
+
+        if (noteUsernameIndex >= 0 && sharingUsernameIndex >= 0) {
+          $note.data('owners').splice(noteUsernameIndex, 1)
+          $noteSharing.data('owners').splice(sharingUsernameIndex, 1);
+        } else {
+          console.warn('Couldn\'t remove owner from DOM.');
+        }
     }).fail((error) => {
       alert(`ERROR (${error.status}): ${error.responseText}`);
     });
