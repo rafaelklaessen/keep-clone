@@ -256,4 +256,52 @@ class NoteController @Inject() extends Controller {
       }
     }
   }
+
+  // Pins or unpins note
+  def setPinned = Action { request =>
+    val requestContent = request.body.asFormUrlEncoded.get
+    val reqUser = request.session.get("username")
+
+    if (reqUser.isEmpty) {
+      Unauthorized("Not logged in")
+    } else if (!Users.userExists(reqUser.get)) {
+      Unauthorized("Not logged in as existing user")
+    } else if (!requestContent.contains("id")) {
+      BadRequest("No note ID provided")
+    } else if (!requestContent.contains("pinned")) {
+      BadRequest("No pinned state provided")
+    } else {
+      // Get ID from request
+      val id = requestContent("id").head.toString
+      // Get pinnned state from request
+      val pinned = requestContent("pinned").head
+
+      try {
+        // Make sure note exists
+        if (Notes.noteExists(id.toLong)) {
+          val note = Notes.getNote(id.toLong)
+
+          // Make sure note actually beloongs to the current user.
+          // If it doesn't, act as if it doesn't exist.
+          if (note.owners.contains(reqUser.get)) {
+            // Convert pinned string to boolean
+            try {
+              Notes.setPinned(id.toLong, pinned.toBoolean)
+              Ok("success")
+            } catch {
+              case iae: IllegalArgumentException => BadRequest("Invalid pinned state")
+              case e: Exception => BadRequest("Unknown parameter error")
+            }
+          } else {
+            BadRequest("Note doesn't exist")
+          }
+        } else {
+          BadRequest("Note doesn't exist")
+        }
+      } catch {
+        case nfe: NumberFormatException => BadRequest("Invalid ID")
+        case e: Exception => BadRequest("Unknown parameter error")
+      }
+    }
+  }
 }
