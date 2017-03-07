@@ -71,11 +71,20 @@ object Notes {
 
   // Deletes note in Firebase based on its id
   def deleteNote(id: Long) = {
+    // Get old note
+    val note = Notes.getNote(id)
+    
+    // Delete note from Firebase
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val notesRef = ref.child("notes")
     val currentNote = notesRef.child(id.toString)
 
     currentNote.removeValue()
+
+    // Loop through all note owners and delete the note from them
+    for (owner <- note.owners) {
+      Notes.deleteNoteFromUser(id, owner)
+    }
   }
 
   // Deletes note from user

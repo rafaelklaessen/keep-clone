@@ -76,10 +76,21 @@ class NoteController @Inject() extends Controller {
       try {
         val id = requestContent("id").head.toLong
 
-        Notes.deleteNote(id)
-        Notes.deleteNoteFromUser(id, reqOwner.get)
+        // Make sure note exists
+        if (Notes.noteExists(id)) {
+          // Get note and make sure it actually belongs to the current user
+          val note = Notes.getNote(id)
 
-        Ok("success")
+          if (note.owners.contains(reqOwner.get)) {
+            Notes.deleteNote(id)
+            Ok("success")
+          } else {
+            // Act as if note doesn't exist
+            BadRequest("Note doesn't exist")
+          }
+        } else {
+          BadRequest("Note doesn't exist")
+        }
       } catch {
         case nfe: NumberFormatException => BadRequest("Incorrect ID")
       }

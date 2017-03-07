@@ -72,9 +72,6 @@ class Notes {
     $grid
       .prepend($item)
       .masonry('prepended', $item);
-
-    // Backend request would be put here
-    console.log(note);
     
     for (let item in note) {
       if (note[item].trim() == '') {
@@ -91,6 +88,11 @@ class Notes {
     }).fail((error) => {
       alert(`ERROR (${error.status}): ${error.responseText}`);
     });
+
+    // Update titles
+    setTimeout(() => {
+      Notes.updateTitles();
+    }, 500)
   }
 
   /**
