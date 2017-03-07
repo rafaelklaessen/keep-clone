@@ -27,8 +27,9 @@ object Notes {
     val color = if ((note \ "color").isInstanceOf[JsUndefined]) "null" else (note \ "color").as[String]
     val owners = if ((note \ "owners").isInstanceOf[JsUndefined]) Array("null") else (note \ "owners").as[JsObject].keys.toArray
     val pinned = !(note \ "pinned").isInstanceOf[JsUndefined]
+    val archived = !(note \ "archived").isInstanceOf[JsUndefined]
 
-    new Note(id, title, content, color, owners, pinned)
+    new Note(id, title, content, color, owners, pinned, archived)
   }
 
   /**
@@ -118,6 +119,19 @@ object Notes {
       currentNote.child("pinned").setValue(true)
     } else {
       currentNote.child("pinned").removeValue()
+    }
+  }
+
+  // Archives/unarchives a note
+  def setArchived(id: Long, archived: Boolean) = {
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+    val notesRef = ref.child("notes")
+    val currentNote = notesRef.child(id.toString)
+
+    if (archived) {
+      currentNote.child("archived").setValue(true)
+    } else {
+      currentNote.child("archived").removeValue()
     }
   }
 

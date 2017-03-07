@@ -1,0 +1,54 @@
+@(sessionUser: String, notes: Array[Note])
+
+@main("Notes") {
+  <header id="site-header" class="site-header">
+    <h1 class="site-title">Keep Clone</h1>
+    <section class="btn-container">
+      <a href="/logout" class="logout-btn btn">Logout</a>
+    </section>
+  </header> 
+  <main id="main" class="main">
+    <section id="notes" class="notes grid">
+      <div class="grid-sizer"></div>
+
+      @for(note <- notes.reverse if (note.archived)) {
+        <article 
+          id="@note.id.toString" 
+          class="note grid-item"
+          style="background-color: @note.color"
+          
+          data-owners='@{ 
+            var owners = "["
+            note.owners.foreach(i => owners += "\"" + i.replaceAll("[\"]", """\\\"""") + "\",")
+            owners = owners.substring(0, owners.length - 1)
+            owners += "]"
+            owners
+          }'
+
+          data-pinned="false"
+          >
+
+          @if(note.title.length > 0) {
+            <h4 class="note-title">@note.title</h4>
+          }
+
+          @if(note.content.length > 0) {
+            <p class="note-content">
+              @note.content
+            </p>
+          }
+          
+          <div class="note-action-container">
+            <button class="material-icons share-btn md-btn btn">person_add</button>
+            <button class="material-icons edit-btn md-btn btn">edit</button>
+            <button class="material-icons delete-btn md-btn btn">delete</button>
+          </div>
+        </article>
+      }
+    </section>
+  </main>
+
+  <script>
+    var sessionUser = "@Html(sessionUser.replaceAll("[\"]", """\\\""""))";
+  </script>
+}

@@ -4,6 +4,8 @@
 
 # Homepage
 GET     /                           controllers.HomeController.index
+# Archive page
+GET     /archive                    controllers.HomeController.archive
 
 # Login page
 GET     /login                      controllers.UserController.login
@@ -31,6 +33,8 @@ POST    /notes/addowner             controllers.NoteController.addNoteOwner
 POST    /notes/removeowner          controllers.NoteController.removeNoteOwner
 # Set pinned state page
 POST    /notes/setpinned            controllers.NoteController.setPinned
+# Set archived state page
+POST    /notes/setarchived          controllers.NoteController.setArchived
 
 # Settings page
 GET     /settings                   controllers.SettingsController.show

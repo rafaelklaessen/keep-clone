@@ -36,7 +36,7 @@
     <section id="pinned-notes" class="pinned-notes grid">
       <div class="grid-sizer"></div>
 
-      @for(note <- notes.reverse if (note.pinned) ) {
+      @for(note <- notes.reverse if (note.pinned && !note.archived) ) {
         <article 
           id="@note.id.toString" 
           class="note grid-item"
@@ -80,7 +80,7 @@
     <section id="notes" class="notes grid">
       <div class="grid-sizer"></div>
 
-      @for(note <- notes.reverse if (!note.pinned)) {
+      @for(note <- notes.reverse if (!note.pinned && !note.archived)) {
         <article 
           id="@note.id.toString" 
           class="note grid-item"
