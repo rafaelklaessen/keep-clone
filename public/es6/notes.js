@@ -56,6 +56,16 @@ class Notes {
         const id = $note.attr('id');
         const owners = $note.data('owners');
 
+        // Parse owners JSON if required (cancel function execution if 
+        // that fails)
+        if (typeof owners == 'string') {
+          try {
+            $note.data('owners', JSON.parse(owners));
+          } catch (e) {
+            return;
+          }
+        }
+
         NoteSharing.show(id, owners);
       })
       .parents('.note')
@@ -67,7 +77,7 @@ class Notes {
       });
 
     // Set data-owners
-    $item.data('owners', [JSON.stringify(sessionUser)]);
+    $item.data('owners', JSON.stringify([sessionUser]));
 
     $grid
       .prepend($item)
@@ -148,6 +158,9 @@ class Notes {
   static togglePin(id) {
     const $note = $(`#${id}`);
     const $noteClone = $note.clone();
+
+    // If we don't do this, data-pinned is incorrect
+    $noteClone.data('pinned', $note.data('pinned'));
 
     // Add listeners
     $noteClone
