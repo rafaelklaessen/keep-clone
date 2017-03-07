@@ -519,7 +519,8 @@ textarea {
   }
 }
 
-#notes {
+#notes,
+#pinned-notes {
   padding-top: 48px;
   padding-bottom: 48px;
 
@@ -553,10 +554,34 @@ textarea {
       font-weight: 300;
     }
 
+    &:hover .pin-btn {
+      opacity: 1;
+    }
+
+    .pin-btn {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      padding: 0;
+      line-height: 1;
+      opacity: 0;
+      @include transition(all .2s ease-in-out);
+
+      &:hover {
+        background: none;
+        opacity: .54;
+      }
+
+      .icon {
+        width: 18px;
+        height: auto;
+      }
+    }
+
     .note-action-container {
       position: absolute;
-      right: 18px;
       bottom: 12px;
+      right: 18px;
       margin: 0 -6px;
       padding: 0;
       opacity: 0;

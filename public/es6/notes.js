@@ -118,4 +118,13 @@ class Notes {
       color: $note.css('background-color').trim() || '#FFFFFF'
     };
   }
+
+  /**
+   * Notes.togglePin()
+   * Toggles given note's pin state & updates DOM.
+   * @param {string} id The id of the note to pin.
+   */
+  static togglePin(id) {
+    console.info('Pinning note ' + id)
+  }
 }
