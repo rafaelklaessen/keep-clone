@@ -25,7 +25,7 @@ class Notes {
         ${title}
         ${content}
         <button class="pin-btn md-btn btn">
-          <img class="icon" src="@routes.Assets.versioned("images/icons/pin.png")" alt="Pin icon">
+          <img class="icon" src="assets/images/icons/pin.png" alt="Pin icon">
         </button>
         <div class="note-action-container">
           <button class="material-icons share-btn md-btn btn">person_add</button>
@@ -61,7 +61,7 @@ class Notes {
       .parents('.note')
       .find('.pin-btn')
       .click(function() {
-        const id = $note.attr('id');
+        const id = $(this).parents('.note').attr('id');
 
         Notes.togglePin(id);
       });
@@ -207,6 +207,16 @@ class Notes {
     $note.data('pinned', !$note.data('pinned'));
     $noteClone.data('pinned', !$noteClone.data('pinned'));
 
+    // Perform request to backend
+    $.post('/notes/setpinned', {
+      id: id,
+      pinned: $noteClone.data('pinned')
+    }, (data) => {
+      console.info(data);
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`);
+    });
+
     // Update titles
     setTimeout(() => {
       Notes.updateTitles();
@@ -220,9 +230,6 @@ class Notes {
   static updateTitles() {
     const $notes = $('#notes .note');
     const $pinnedNotes = $('#pinned-notes .note');
-  
-    console.log($notes.length)
-    console.log($pinnedNotes.length)
 
     if ($notes.length) {
       $('.other-notes-title').removeClass('deactivated');
