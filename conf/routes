@@ -29,6 +29,8 @@ POST    /notes/update               controllers.NoteController.updateNote
 POST    /notes/addowner             controllers.NoteController.addNoteOwner
 # Delete note owner page
 POST    /notes/removeowner          controllers.NoteController.removeNoteOwner
+# Set pinned state page
+POST    /notes/setpinned            controllers.NoteController.setPinned
 
 # Settings page
 GET     /settings                   controllers.SettingsController.show

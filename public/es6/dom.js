@@ -29,10 +29,23 @@ $noteWriter.find('.color-ball').click(function() {
 });
 
 // Setup masonry
-const $grid = $('.grid').masonry({
+const $grid = $('#notes').masonry({
   itemSelector: '.grid-item',
   columnWidth: '.grid-sizer',
   percentPosition: true
+});
+
+const $pinnedGrid = $('#pinned-notes').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+});
+
+// Run pin function when a note's pin button is clicked
+$('.note .pin-btn').click(function() {
+  const id = $(this).parents('.note').attr('id');
+
+  Notes.togglePin(id);
 });
 
 // Run delete function when a note's delete button is clicked

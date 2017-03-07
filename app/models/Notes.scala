@@ -25,9 +25,10 @@ object Notes {
     val title = if ((note \ "title").isInstanceOf[JsUndefined]) "null" else (note \ "title").as[String]
     val content = if ((note \ "content").isInstanceOf[JsUndefined]) "null" else (note \ "content").as[String]
     val color = if ((note \ "color").isInstanceOf[JsUndefined]) "null" else (note \ "color").as[String]
-    val owners = if ((note \ "color").isInstanceOf[JsUndefined]) Array("null") else (note \ "owners").as[JsObject].keys.toArray
-    
-    new Note(id, title, content, color, owners)
+    val owners = if ((note \ "owners").isInstanceOf[JsUndefined]) Array("null") else (note \ "owners").as[JsObject].keys.toArray
+    val pinned = !(note \ "pinned").isInstanceOf[JsUndefined]
+
+    new Note(id, title, content, color, owners, pinned)
   }
 
   /**
@@ -51,7 +52,7 @@ object Notes {
   }
 
   // Creates note in Firebase
-  def createNote(owner: String, id: Long, title: String, content: String, color: String) = {
+  def createNote(owner: String, id: Long, title: String, content: String, color: String, pinned: Boolean = false) = {
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val notesRef = ref.child("notes")
     val currentNote = notesRef.child(id.toString)
@@ -60,6 +61,7 @@ object Notes {
     currentNote.child("content").setValue(content)
     currentNote.child("color").setValue(color)
     currentNote.child("owners").child(owner).setValue(true)
+    if (pinned) currentNote.child("pinned").setValue(true)
 
     val usersRef = ref.child("users")
     val currentUser = usersRef.child(owner)
@@ -95,6 +97,19 @@ object Notes {
 
     // If it's "null", the note doesn't exist
     note != "null"
+  }
+
+  // Pins/unpins a note
+  def setPinned(id: Long, pinned: Boolean) = {
+    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+    val notesRef = ref.child("notes")
+    val currentNote = notesRef.child(id.toString)
+
+    if (pinned) {
+      currentNote.child("pinned").setValue(true)
+    } else {
+      currentNote.child("pinned").removeValue()
+    }
   }
 
   // Gets the ID for the new note by adding one the the last note's ID

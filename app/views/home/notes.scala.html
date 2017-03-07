@@ -31,10 +31,12 @@
         </section>
       </footer>
     </section>
-    <section id="notes" class="notes grid">
+
+    <h4 class="pinned-notes-title notes-title">Pinned</h4>
+    <section id="pinned-notes" class="pinned-notes grid">
       <div class="grid-sizer"></div>
 
-      @for(note <- notes.reverse) {
+      @for(note <- notes.reverse if (note.pinned) ) {
         <article 
           id="@note.id.toString" 
           class="note grid-item"
@@ -47,15 +49,68 @@
             owners += "]"
             owners
           }'
+
+          data-pinned="true"
           >
+
           @if(note.title.length > 0) {
             <h4 class="note-title">@note.title</h4>
           }
+          
           @if(note.content.length > 0) {
             <p class="note-content">
               @note.content
             </p>
           }
+
+          <button class="pin-btn md-btn btn">
+            <img class="icon" src="@routes.Assets.versioned("images/icons/pin-blue.png")" alt="Pin icon">
+          </button>
+
+          <div class="note-action-container">
+            <button class="material-icons share-btn md-btn btn">person_add</button>
+            <button class="material-icons edit-btn md-btn btn">edit</button>
+            <button class="material-icons delete-btn md-btn btn">delete</button>
+          </div>
+        </article>
+      }
+    </section>
+
+    <h4 class="other-notes-title notes-title">Others</h4>
+    <section id="notes" class="notes grid">
+      <div class="grid-sizer"></div>
+
+      @for(note <- notes.reverse if (!note.pinned)) {
+        <article 
+          id="@note.id.toString" 
+          class="note grid-item"
+          style="background-color: @note.color"
+          
+          data-owners='@{ 
+            var owners = "["
+            note.owners.foreach(i => owners += "\"" + i.replaceAll("[\"]", """\\\"""") + "\",")
+            owners = owners.substring(0, owners.length - 1)
+            owners += "]"
+            owners
+          }'
+
+          data-pinned="false"
+          >
+
+          @if(note.title.length > 0) {
+            <h4 class="note-title">@note.title</h4>
+          }
+
+          @if(note.content.length > 0) {
+            <p class="note-content">
+              @note.content
+            </p>
+          }
+
+          <button class="pin-btn md-btn btn">
+            <img class="icon" src="@routes.Assets.versioned("images/icons/pin.png")" alt="Pin icon">
+          </button>
+
           <div class="note-action-container">
             <button class="material-icons share-btn md-btn btn">person_add</button>
             <button class="material-icons edit-btn md-btn btn">edit</button>
