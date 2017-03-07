@@ -519,10 +519,32 @@ textarea {
   }
 }
 
+.notes-title {
+  margin-top: 36px;
+  margin-bottom: 18px;
+  color: #757575;
+  font-weight: 400;
+  @include transition(all .2s ease-in-out);
+
+  &.deactivated {
+    margin-bottom: 0;
+    font-size: 0;
+  }
+}
+
 #notes,
 #pinned-notes {
-  padding-top: 48px;
-  padding-bottom: 48px;
+  margin-left: -12px;
+  margin-right: -12px;
+  margin: {
+    bottom: -24px;
+    left: -12px;
+    right: -12px;
+  }
+
+  &:last-child {
+    padding-bottom: 36px;
+  }
 
   .grid-sizer {
     width: 25%;
@@ -530,7 +552,7 @@ textarea {
 
   .note {
     margin: {
-      top: 24px;
+      bottom: 24px;
       left: 12px;
       right: 12px;
     }

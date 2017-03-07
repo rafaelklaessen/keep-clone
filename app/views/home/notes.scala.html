@@ -32,6 +32,7 @@
       </footer>
     </section>
 
+    <h4 class="pinned-notes-title notes-title">Pinned</h4>
     <section id="pinned-notes" class="pinned-notes grid">
       <div class="grid-sizer"></div>
 
@@ -48,6 +49,8 @@
             owners += "]"
             owners
           }'
+
+          data-pinned="true"
           >
 
           @if(note.title.length > 0) {
@@ -61,7 +64,7 @@
           }
 
           <button class="pin-btn md-btn btn">
-            <img class="icon" src="@routes.Assets.versioned("images/icons/pin.png")" alt="Pin icon">
+            <img class="icon" src="@routes.Assets.versioned("images/icons/pin-blue.png")" alt="Pin icon">
           </button>
 
           <div class="note-action-container">
@@ -73,6 +76,7 @@
       }
     </section>
 
+    <h4 class="other-notes-title notes-title">Others</h4>
     <section id="notes" class="notes grid">
       <div class="grid-sizer"></div>
 
@@ -89,6 +93,8 @@
             owners += "]"
             owners
           }'
+
+          data-pinned="false"
           >
 
           @if(note.title.length > 0) {
