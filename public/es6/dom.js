@@ -72,6 +72,14 @@ $('.note .share-btn').click(function() {
   NoteSharing.show(id, owners);
 });
 
+// Run archiving/unarchiving function when a note's archive button is clicked
+$('.note .archive-btn').click(function() {
+  const $note = $(this).parents('.note');
+  const id = $note.attr('id');
+
+  Notes.toggleArchived(id);
+});
+
 const $settings = $('#settings');
 
 // Edit settings

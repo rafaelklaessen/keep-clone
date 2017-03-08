@@ -6,8 +6,10 @@
     <section class="btn-container">
       <a href="/logout" class="logout-btn btn">Logout</a>
     </section>
-  </header> 
+  </header>
+
   <main id="main" class="main">
+    <h1 class="page-title">Archive</h1>
     <section id="notes" class="notes grid">
       <div class="grid-sizer"></div>
 
@@ -37,8 +39,9 @@
               @note.content
             </p>
           }
-          
+
           <div class="note-action-container">
+            <button class="material-icons archive-btn md-btn btn">unarchive</button>
             <button class="material-icons share-btn md-btn btn">person_add</button>
             <button class="material-icons edit-btn md-btn btn">edit</button>
             <button class="material-icons delete-btn md-btn btn">delete</button>

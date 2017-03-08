@@ -316,6 +316,11 @@ textarea {
     .logout-btn {
       margin-right: -24px;
     }
+
+    .archive-btn {
+      float: left;
+      line-height: 64px;
+    }
   }
 }
 
@@ -543,7 +548,7 @@ textarea {
   }
 
   &:last-child {
-    padding-bottom: 36px;
+    padding-bottom: 12px;
   }
 
   .grid-sizer {

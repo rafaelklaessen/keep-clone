@@ -28,6 +28,7 @@ class Notes {
           <img class="icon" src="assets/images/icons/pin.png" alt="Pin icon">
         </button>
         <div class="note-action-container">
+          <button class="material-icons archive-btn md-btn btn">archive</button>
           <button class="material-icons share-btn md-btn btn">person_add</button>
           <button class="material-icons edit-btn md-btn btn">edit</button>
           <button class="material-icons delete-btn md-btn btn">delete</button>
@@ -67,6 +68,13 @@ class Notes {
         }
 
         NoteSharing.show(id, owners);
+      })
+      .siblings('.archive-btn')
+      .click(function() {
+        const $note = $(this).parents('.note');
+        const id = $note.attr('id');
+
+        Notes.toggleArchived(id);
       })
       .parents('.note')
       .find('.pin-btn')
@@ -121,8 +129,8 @@ class Notes {
       .masonry('remove', $toDelete)
       .masonry('layout');
     
-    // Backend request would be put here
-    $.post('/notes/delete', {id: id}, (data) => {
+    // Perform request to backend
+    $.post('/notes/delete', { id: id }, (data) => {
       console.info(data);
     }).fail((error) => {
       alert(`ERROR (${error.status}): ${error.responseText}`);
@@ -185,6 +193,13 @@ class Notes {
 
         NoteSharing.show(id, owners);
       })
+      .siblings('.archive-btn')
+      .click(function() {
+        const $note = $(this).parents('.note');
+        const id = $note.attr('id');
+
+        Notes.toggleArchived(id);
+      })
       .parents('.note')
       .find('.pin-btn')
       .click(function() {
@@ -236,6 +251,46 @@ class Notes {
     setTimeout(() => {
       Notes.updateTitles();
     }, 500);
+  }
+
+  /**
+   * Notes.toggleArchived()
+   * Toggles the note's archived status.
+   * @param {string} id Id of the note.
+   */
+  static toggleArchived(id) {
+    const $note = $(`#${id}`);
+    const btnText = $note.find('.archive-btn').text().trim();
+
+    $grid
+      .masonry('remove', $note)
+      .masonry('layout');
+
+    $pinnedGrid
+      .masonry('remove', $note)
+      .masonry('layout');
+
+    // Update titles
+    setTimeout(() => {
+      Notes.updateTitles();
+    }, 500);
+
+    // Get new archived status
+    let archived = false;
+
+    if (btnText == 'archive') {
+      archived = true;
+    }
+
+    // Perform request to backend
+    $.post('/notes/setarchived', {
+        id: id,
+        archived: archived
+      }, (data) => {
+        console.info(data);
+    }).fail((error) => {
+      alert(`ERROR (${error.status}): ${error.responseText}`);
+    });
   }
 
   /**
