@@ -189,7 +189,8 @@ textarea {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 480px;
+    width: 480px;
+    max-width: calc(100% - 48px);
     background-color: #FFFFFF;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     display: none;
@@ -345,9 +346,11 @@ textarea {
   .hero-content {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
     text-align: center;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
   }
 }
 
@@ -362,9 +365,10 @@ textarea {
 
   .oauth-btn-container {
     float: right;
-    width: 350px;
     margin-bottom: 18px;
-
+    width: 350px;
+    max-width: 100%;
+    
     .login-btn {
       position: relative;
       margin-bottom: 6px;
@@ -372,6 +376,10 @@ textarea {
     
       &.github-login {
         background-color: #000000;
+      }
+
+      &.google-login * {
+        max-width: 100%;
       }
 
       .logo {
@@ -390,6 +398,7 @@ textarea {
     float: right;
     clear: both;
     width: 350px;
+    max-width: 100%;
 
     dl, dd {
       margin: 0;
@@ -430,6 +439,7 @@ textarea {
     margin-bottom: 24px;
     font-weight: 300;
     font-size: 36px;
+    word-break: break-word;
 
     .grey {
       color: #9E9E9E;
@@ -512,6 +522,8 @@ textarea {
 }
 
 #edit-note {
+  max-width: calc(100% - 96px);
+
   .note-content {
     height: 50px;
     opacity: 1;
@@ -767,10 +779,20 @@ textarea {
       width: calc(33.33333333% - 24px);
     }
   }
+
+  #login,
+  #register {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   #main {
+    .page-title {
+      font-size: 26px;
+    }
+
     .grid-sizer {
       width: 50%;
     }
@@ -804,6 +826,11 @@ textarea {
 }
 
 @media screen and (max-width: 400px) {
+  #site-header .btn-container .btn {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
   #write-note .toolbar .btn-container .md-btn, 
   #edit-note .toolbar .btn-container .md-btn {
     padding: 0 6px;

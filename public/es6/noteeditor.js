@@ -68,6 +68,9 @@ class NoteEditor {
       
       NoteEditor.setColor(color);
     });
+
+    // Make sure the buttons are shown correctly
+    NoteWriter.fixButtons();
   }
 
   /**
