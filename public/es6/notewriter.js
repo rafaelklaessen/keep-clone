@@ -78,4 +78,24 @@ class NoteWriter {
 
     NoteWriter.close();
   }
+
+  /**
+   * NoteWriter.fixButtons()
+   * Changes the notewriter buttons to icons (instead of text) if we're 
+   * on a mobile device.
+   */
+  static fixButtons() {
+    const $noteWriter = $('#write-note, #edit-note');
+    
+    if ($(window).width() <= 400) {
+      $noteWriter.find('.cancel-btn').addClass('material-icons').text('close');
+      $noteWriter.find('.save-btn').addClass('material-icons').text('done');
+    } else {
+      $noteWriter.find('.cancel-btn').removeClass('material-icons').text('Cancel');
+      $noteWriter.find('.save-btn').removeClass('material-icons').text('Save');
+    }
+  }
 }
+
+// Make sure notewriter buttons are showing correctly
+NoteWriter.fixButtons();

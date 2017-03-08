@@ -443,6 +443,7 @@ textarea {
   margin-right: auto;
   padding: 12px 24px;
   width: 600px;
+  max-width: calc(100% - 48px);
   background-color: #FFFFFF;
   box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
   @include transition(background .2s ease-in-out);
@@ -740,5 +741,71 @@ textarea {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1368px) {
+  #main {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #main {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  #notes,
+  #pinned-notes {
+    .grid-sizer {
+      width: 33.33333333%;
+    }
+
+    .note {
+      width: calc(33.33333333% - 24px);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #main {
+    .grid-sizer {
+      width: 50%;
+    }
+
+    .note {
+      width: calc(50% - 24px);
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #notes,
+  #pinned-notes {
+    .grid-sizer {
+      width: 100%;
+    }
+
+    .note {
+      width: calc(100% - 24px);
+    }
+  }
+
+  #write-note .toolbar .color-balls, 
+  #edit-note .toolbar .color-balls {
+    .color-ball {
+      margin-top: 5px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #write-note .toolbar .btn-container .md-btn, 
+  #edit-note .toolbar .btn-container .md-btn {
+    padding: 0 6px;
   }
 }
