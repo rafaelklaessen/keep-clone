@@ -41,6 +41,27 @@ const $pinnedGrid = $('#pinned-notes').masonry({
   percentPosition: true
 });
 
+// If the window size changes, the note width might have updated (which
+// requires the masonry to layout again)
+const $window = $(window);
+
+$window.resize(function() {
+  $grid.masonry('layout');
+  $pinnedGrid.masonry('layout');
+});
+
+let windowWidth = $window.width();
+setInterval(function() {
+  if (windowWidth != $window.width()) {
+    $grid.masonry('layout');
+    $pinnedGrid.masonry('layout');
+
+    NoteWriter.fixButtons();
+
+    windowWidth = $window.width();
+  }
+}, 300);
+
 // Run pin function when a note's pin button is clicked
 $('.note .pin-btn').click(function() {
   const id = $(this).parents('.note').attr('id');
