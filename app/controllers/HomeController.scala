@@ -27,4 +27,16 @@ class HomeController @Inject() extends Controller {
     }
   }
 
+  /**
+   * Renders the archived notes page.
+   */
+  def archive = Action { request =>
+    request.session.get("username").map { username => 
+      val notes = Notes.getNotesByUsername(username)
+      
+      Ok(views.html.home.archive(username, notes))
+    }.getOrElse {
+      NotFound("Page not found")
+    }
+  }
 }
