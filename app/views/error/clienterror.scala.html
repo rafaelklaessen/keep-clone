@@ -1,0 +1,30 @@
+@(statusCode: Int, message: String)
+
+@main("Client error") {
+  <main id="main" class="main">
+    <section id="error-page" class="error-page">
+      <h1 class="page-title">Whoops!</h1>
+      <p>Seems like something broke!</p>
+      <div class="page-description">
+        <h4 class="error-field-title" data-for="what-happened">What happened?</h4>
+        <p class="error-field-description" data-name="what-happened">
+          You've done something that you shouldn't have done, which caused the server to go crazy.
+          <br>
+          <strong>Statuscode:</strong> @statusCode
+          @if(message.length > 0) {
+            <strong>Message:</strong> @message
+          }
+        </p>
+        <h4 class="error-field-title" data-for="what-can-i-do">What can I do?</h4>
+        <p class="error-field-description" data-name="what-can-i-do">
+          You can try again later. If that doesn't help, you can create an issue on <a href="https://github.com/rafaelklaessen/keep-clone/issues/new" target="_blank">GitHub</a> or <a href="mailto:rafaelklaessen.nl@@gmail.com">report the issue via email</a>.
+          We'll be happy to solve it!
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    $('body').css({ 'background-color': '#1A237E' });
+  </script>
+}

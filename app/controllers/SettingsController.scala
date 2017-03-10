@@ -25,7 +25,7 @@ class SettingsController @Inject() extends Controller {
 
   // Renders the settings page, but only when you're logged in
   def show = Action { request =>
-    request.session.get("username").map { username => 
+    request.session.get("username").map { username =>
       // If we're logged in with OAuth, render a different settings page
       request.session.get("oauth").map { oauth =>
         Ok(views.html.settings.settingsOAuth(oauth, request.session.get("email").get))
@@ -34,7 +34,7 @@ class SettingsController @Inject() extends Controller {
         Ok(views.html.settings.settings(username, user))
       }
     }.getOrElse {
-      NotFound("Page not found")
+      NotFound(views.html.error.notfound())
     }
   }
 
@@ -53,7 +53,7 @@ class SettingsController @Inject() extends Controller {
     } else {
       // Get fields from request and parse them to a map
       val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
-      
+
       // Make sure we're only setting valid fields
       val filteredFields = fields.filterKeys(_ match {
         case "email" | "firstName" | "lastName" | "password" => true
@@ -96,7 +96,7 @@ class SettingsController @Inject() extends Controller {
         val currentUser = usersRef.child(reqUser.get)
 
         // Set all Firebase fields
-        finalFields.keys.foreach(i => 
+        finalFields.keys.foreach(i =>
           currentUser.child(i).setValue(finalFields(i))
         )
 
@@ -120,12 +120,12 @@ class SettingsController @Inject() extends Controller {
       // Get the user's note
       val userNotes = Notes.getNotesByUsername(username)
       // Only delete notes that are only owned by the current user
-      var notesToDelete = for (note <- userNotes if note.owners.length == 1) yield note  
+      var notesToDelete = for (note <- userNotes if note.owners.length == 1) yield note
 
       // Loop through the users's notes and delete them
       for (note <- notesToDelete) {
         Notes.deleteNote(note.id)
-      }      
+      }
 
       // Delete user
       Users.deleteUser(username)

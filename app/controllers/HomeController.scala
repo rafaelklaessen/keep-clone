@@ -13,7 +13,7 @@ import models.Notes
 @Singleton
 class HomeController @Inject() extends Controller {
 
-  /** 
+  /**
    * Render the homepage when the user isn't logged in. Otherwise, render
    * notes page.
    */
@@ -31,12 +31,12 @@ class HomeController @Inject() extends Controller {
    * Renders the archived notes page.
    */
   def archive = Action { request =>
-    request.session.get("username").map { username => 
+    request.session.get("username").map { username =>
       val notes = Notes.getNotesByUsername(username)
-      
+
       Ok(views.html.home.archive(username, notes))
     }.getOrElse {
-      NotFound("Page not found")
+      NotFound(views.html.error.notfound())
     }
   }
 }
