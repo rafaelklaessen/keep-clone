@@ -37,7 +37,7 @@ body {
    color: rgba(0, 0, 0, .54);
 }
 
-:-moz-placeholder { 
+:-moz-placeholder {
    color: rgba(0, 0, 0, .54);
 }
 
@@ -45,7 +45,7 @@ body {
    color: rgba(0, 0, 0, .54);
 }
 
-:-ms-input-placeholder {  
+:-ms-input-placeholder {
    color: rgba(0, 0, 0, .54);
 }
 
@@ -114,7 +114,7 @@ button {
     font-weight: 500;
     text-transform: uppercase;
     border-radius: 2px;
-    
+
     &:hover {
       background-color: rgba(0, 0, 0, .08);
     }
@@ -200,7 +200,7 @@ textarea {
       margin-right: 12px;
       padding: 6px 0;
       border-bottom: 1px solid #E0E0E0;
-    
+
       .popup-title {
         margin: 9px 0;
         font-size: 18px;
@@ -259,7 +259,7 @@ textarea {
       .btn:hover {
         color: rgba($mainColor, .7);
       }
-      
+
       .register-btn {
         color: #FFFFFF;
         background-color: $mainColor;
@@ -296,7 +296,7 @@ textarea {
 
       &:hover {
         color: rgba(255, 255, 255, .7);
-      }  
+      }
     }
 
     .login-btn:last-child {
@@ -307,7 +307,7 @@ textarea {
       margin-right: -24px;
       color: $mainColor;
       background-color: #FFFFFF;
-      
+
       &:hover {
         color: $mainColor;
         background-color: rgba(255, 255, 255, .7);
@@ -368,12 +368,12 @@ textarea {
     margin-bottom: 18px;
     width: 350px;
     max-width: 100%;
-    
+
     .login-btn {
       position: relative;
       margin-bottom: 6px;
       width: 100% !important;
-    
+
       &.github-login {
         background-color: #000000;
       }
@@ -635,7 +635,7 @@ textarea {
         line-height: 1;
         font-size: 18px;
         @include transition(all .2s ease-in-out);
-      
+
         &:hover {
           color: rgba(0, 0, 0, .54);
           background: none;
@@ -651,7 +651,7 @@ textarea {
 
 #settings .settings-field {
   margin-bottom: 12px;
-  
+
   .field-label {
     margin-bottom: 4px;
     color: #757575;
@@ -756,6 +756,35 @@ textarea {
   }
 }
 
+#error-page {
+  color: #FFFFFF;
+  text-align: center;
+
+  .page-title {
+    font-size: 56px;
+  }
+
+  .error-field-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, .87);
+  }
+
+  .error-field-description {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    width: 400px;
+    max-width: 100%;
+    color: rgba(255, 255, 255, .87);
+    display: inline-block;
+
+    a {
+      cursor: pointer;
+    }
+  }
+}
+
 @media screen and (max-width: 1368px) {
   #main {
     padding-left: 48px;
@@ -816,7 +845,7 @@ textarea {
     }
   }
 
-  #write-note .toolbar .color-balls, 
+  #write-note .toolbar .color-balls,
   #edit-note .toolbar .color-balls {
     .color-ball {
       margin-top: 5px;
@@ -832,7 +861,7 @@ textarea {
     padding-right: 18px;
   }
 
-  #write-note .toolbar .btn-container .md-btn, 
+  #write-note .toolbar .btn-container .md-btn,
   #edit-note .toolbar .btn-container .md-btn {
     padding: 0 6px;
   }
