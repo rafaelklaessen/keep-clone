@@ -195,6 +195,17 @@ textarea {
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     display: none;
 
+    .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 12px;
+
+      &:hover {
+        background: none;
+        opacity: .54;
+      }
+    }
+
     .popup-title-container {
       margin-left: 12px;
       margin-right: 12px;

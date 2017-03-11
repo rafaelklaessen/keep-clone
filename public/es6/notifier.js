@@ -42,7 +42,43 @@ class Notifier {
    * @param {string} title The title of the alert.
    * @param {string} content The content of the alert.
    */
-  static alert(title, content) {}
+  static alert(title, content) {
+    // Generate HTML
+    const $alert = $(`
+      <section class="overlay-black">
+        <section class="alert popup">
+          <button class="material-icons close-btn md-btn btn">close</button>
+          <header class="popup-title-container">
+            <h1 class="popup-title">${title}</h1>
+          </header>
+          <p class="popup-content">
+            ${content}
+          </p>
+          <footer class="popup-footer">
+            <section class="btn-container">
+              <button class="ok-btn md-btn btn">OK</button>
+            </section>
+          </footer>
+        </section>
+      </section>
+    `);
+
+    // Append HTML to body
+    $alert.appendTo('body');
+
+    // Show the alert
+    $alert.fadeIn(200);
+    $alert.find('.popup').fadeIn(400);
+
+    // Add closing listener to ok and close button
+    $alert.find('.close-btn, .ok-btn').click(function() {
+      $alert.find('popup').fadeOut(200);
+      $alert.fadeOut(400);
+      setTimeout(() => {
+        $alert.remove();
+      }, 400);
+    });
+  }
 
   /**
    * Notifier.confirm()
