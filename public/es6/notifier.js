@@ -87,6 +87,55 @@ class Notifier {
    * @param {string} content The content of the confirm.
    * @param {object} btnHandlers Handlers for the ok and cancel button
    */
-  static confirm(title, content, btnHandlers) {}
+  static confirm(title, content, btnHandlers) {
+    // Generate HTML
+    const $confirm = $(`
+      <section class="overlay-black">
+        <section class="confirm popup">
+          <button class="material-icons close-btn md-btn btn">close</button>
+          <header class="popup-title-container">
+            <h1 class="popup-title">${title}</h1>
+          </header>
+          <p class="popup-content">
+            ${content}
+          </p>
+          <footer class="popup-footer">
+            <section class="btn-container">
+              <button class="cancel-btn md-btn btn">Cancel</button>
+              <button class="ok-btn md-btn btn">OK</button>
+            </section>
+          </footer>
+        </section>
+      </section>
+    `);
+
+    // Append HTML to body
+    $confirm.appendTo('body');
+
+    // Show the alert
+    $confirm.fadeIn(200);
+    $confirm.find('.popup').fadeIn(400);
+
+    // Add closing listener to ok and close button
+    $confirm.find('.close-btn, .cancel-btn, .ok-btn').click(function() {
+      // Call correct button handler if it exists
+      if ($(this).hasClass('ok-btn')) {
+        if (typeof btnHandlers.ok == 'function') {
+          btnHandlers.ok();
+        }
+      } else {
+        if (typeof btnHandlers.cancel == 'function') {
+          btnHandlers.cancel();
+        }
+      }
+
+      $confirm.find('popup').fadeOut(200);
+      $confirm.fadeOut(400);
+      setTimeout(() => {
+        $confirm.remove();
+      }, 400);
+    });
+
+  }
 
 }
