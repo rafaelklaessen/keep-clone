@@ -99,6 +99,7 @@ button {
   box-sizing: border-box;
   display: inline-block;
   text-decoration: none;
+  outline-width: 0;
   @include transition($mainTransition);
 
   &:hover {
@@ -807,7 +808,8 @@ textarea {
   box-sizing: border-box;
 
   .toast {
-    margin-top: 12px;
+    margin-top: 0;
+    margin-bottom: -12px;
     padding: 12px 24px;
     width: 100%;
     color: #FFFFFF;
@@ -816,7 +818,14 @@ textarea {
     overflow: auto;
     border-radius: 3px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
-    display: none;
+    opacity: 0;
+    @include transition(all .2s ease-in-out);
+
+    &.activated {
+      margin-top: 12px;
+      margin-bottom: 0;
+      opacity: 1;
+    }
 
     p {
       float: left;

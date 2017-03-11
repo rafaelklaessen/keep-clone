@@ -17,19 +17,23 @@ class Notifier {
       </article>
     `);
 
-    $toast
-      .appendTo('#toast-container')
-      .show(200);
+    $toast.appendTo('#toast-container');
+
+    // Add activated class after a little delay because otherwise the animation
+    // won't work
+    setTimeout(() => {
+      $toast.addClass('activated');
+    }, 10)
 
     $toast.find('.close-btn').click(function() {
-      $toast.hide(200);
+      $toast.removeClass('activated');
       setTimeout(() => {
         $toast.remove();
       }, 200);
     });
 
     setTimeout(() => {
-      $toast.hide(200);
+      $toast.removeClass('activated');
       setTimeout(() => {
         $toast.remove();
       }, 200);
