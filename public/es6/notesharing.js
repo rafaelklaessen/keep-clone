@@ -133,7 +133,13 @@ class NoteSharing {
             $usernameInput.val('');
             $usernameInput.removeClass('valid');
         }).fail((error) => {
-          alert(`ERROR (${error.status}): ${error.responseText}`);
+          Notifier.alert(
+            `Error ${error.status}`,
+            `An error occured while trying to add an owner to that note.
+            <br>
+            <strong>Error ${error.status}:</strong>
+            <br>
+            ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
         });
       }
     }
@@ -179,7 +185,13 @@ class NoteSharing {
           console.warn('Couldn\'t remove owner from DOM.');
         }
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to remove an owner from that note.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
   }
 
