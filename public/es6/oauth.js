@@ -1,5 +1,5 @@
 /**
- * The OAuth class contains all functionality related to logging user in with 
+ * The OAuth class contains all functionality related to logging user in with
  * OAuth.
  */
 class OAuth {
@@ -16,7 +16,13 @@ class OAuth {
       // Go to /, because we're logged in now
       location.assign('/');
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to log you in with Google.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
   }
 }
