@@ -785,6 +785,49 @@ textarea {
   }
 }
 
+#toast-container {
+  position: fixed;
+  left: 0;
+  bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 400px;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  .toast {
+    margin-top: 12px;
+    padding: 12px 24px;
+    width: 100%;
+    color: #FFFFFF;
+    background-color: #212121;
+    box-sizing: border-box;
+    overflow: auto;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+    display: none;
+
+    p {
+      float: left;
+      margin: 0;
+      line-height: 26px;
+      vertical-align: middle;
+    }
+
+    .close-btn {
+      float: right;
+      padding-right: 0;
+      line-height: 1;
+      vertical-align: text-bottom;
+
+      &:hover {
+        background: none;
+        opacity: .54;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1368px) {
   #main {
     padding-left: 48px;
