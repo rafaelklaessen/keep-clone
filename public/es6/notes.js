@@ -99,7 +99,7 @@ class Notes {
 
     console.log(note);
 
-    $.post('/notes/kees', note, (response) => {
+    $.post('/notes', note, (response) => {
       // The response contains the ID of the item we've just added.
       // We'll have to get that ID and add it to the element.
       $item.attr('id', response)
@@ -138,6 +138,7 @@ class Notes {
     // Perform request to backend
     $.post('/notes/delete', { id: id }, (data) => {
       console.info(data);
+      Notifier.toast('Note successfully deleted');
     }).fail((error) => {
       Notifier.alert(
         `Error ${error.status}`,
@@ -306,6 +307,11 @@ class Notes {
         archived: archived
       }, (data) => {
         console.info(data);
+        if (archived) {
+          Notifier.toast('Note successfully archived');
+        } else {
+          Notifier.toast('Note successfully unarchived');
+        }
     }).fail((error) => {
       Notifier.alert(
         `Error ${error.status}`,

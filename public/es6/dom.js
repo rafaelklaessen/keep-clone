@@ -125,6 +125,7 @@ $settings.find('.edit-btn').click(function() {
         { fields: JSON.stringify({ [name]: newText }) },
         (data) => {
           console.info(data);
+          Notifier.toast('Successfully updated settings');
       }).fail((error) => {
         Notifier.alert(
           `Error ${error.status}`,
