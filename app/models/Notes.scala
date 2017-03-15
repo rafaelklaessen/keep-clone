@@ -17,11 +17,12 @@ import scala.io.Source
  */
 object Notes {
   implicit val formats = DefaultFormats
+  private val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
+  private val firebaseUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone"
 
   // This method gets a note from Firebase by its id
   def getNote(id: Long): Note = {
-    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-    val noteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes/" + id.toString + ".json?auth=" + credential
+    val noteJsonUrl = firebaseUrl + "/notes/" + id.toString + ".json?auth=" + credential
 
     // Get note JSON and parse it
     val note = parse(Source.fromURL(noteJsonUrl).mkString).extract[Note]
@@ -39,10 +40,10 @@ object Notes {
   def getNotesByUsername(username: String): Array[Note] = {
     val user = Users.getUser(username)
 
-    if (user.notes(0) == "null") {
+    if (user.notes.keys.size == 0) {
       Array()
     } else {
-      val noteIds = for (i <- user.notes) yield i.replaceAll("[note-]", "").toLong
+      val noteIds = for (i <- user.notes.keys.toArray) yield i.replaceAll("[note-]", "").toLong
       val sortedNoteIds = noteIds.sortWith(_ < _)
       val notes = for (i <- sortedNoteIds) yield getNote(i)
 
@@ -97,8 +98,7 @@ object Notes {
 
   // Checks if note exists
   def noteExists(id: Long): Boolean = {
-    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-    val noteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes/" + id.toString + ".json?auth=" + credential
+    val noteJsonUrl = firebaseUrl + "/notes/" + id.toString + ".json?auth=" + credential
 
     // Get note JSON
     val note = Source.fromURL(noteJsonUrl).mkString
@@ -135,8 +135,7 @@ object Notes {
 
   // Gets the ID for the new note by adding one the the last note's ID
   def getId: Long = {
-    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-    val lastNoteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes.json/?orderBy=\"$key\"&limitToLast=1&auth=" + credential
+    val lastNoteJsonUrl = firebaseUrl + "/notes.json/?orderBy=\"$key\"&limitToLast=1&auth=" + credential
 
     val lastNote = Json.parse(Source.fromURL(lastNoteJsonUrl).mkString)
     val lastNoteKey = lastNote.as[JsObject].keys.head.toLong

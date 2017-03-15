@@ -12,6 +12,9 @@ import org.mindrot.jbcrypt._
 
 import play.api.libs.json._
 
+import org.json4s._
+import org.json4s.native.JsonMethods._
+
 import scala.io.Source
 
 /**
@@ -19,30 +22,21 @@ import scala.io.Source
  * and checking if a user exists.
  */
 object Users {
+  implicit val formats = DefaultFormats
+  private val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
+  private val firebaseUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone"
 
-  // This method gets the user via a request to Firebase's REST 
+  // This method gets the user via a request to Firebase's REST
   def getUser(username: String): User = {
-    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-    val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential
+    val userJsonUrl = firebaseUrl + "/users/" + username + ".json?auth=" + credential
 
-    // Get user JSON and parse it
-    val user = Json.parse(Source.fromURL(userJsonUrl).mkString)
-
-    // Extract fields from user JSON
-    // If a field is JsUndefined we replace it by the string null
-    val email = if ((user \ "email").isInstanceOf[JsUndefined]) "null" else (user \ "email").as[String] 
-    val firstName = if ((user \ "firstName").isInstanceOf[JsUndefined]) "null" else (user \ "firstName").as[String]
-    val lastName = if ((user \ "lastName").isInstanceOf[JsUndefined]) "null" else (user \ "lastName").as[String]
-    val password = if ((user \ "password").isInstanceOf[JsUndefined]) "null" else (user \ "password").as[String]
-    val notes = if ((user \ "notes").isInstanceOf[JsUndefined]) Array("null") else (user \ "notes").as[JsObject].keys.toArray
-
-    new User(email, firstName, lastName, password, notes)
+    // Get JSON and parse it
+    parse(Source.fromURL(userJsonUrl).mkString).extract[User]
   }
 
   // Checks if user exists
   def userExists(username: String): Boolean = {
-    val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-    val userJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/users/" + username + ".json?auth=" + credential
+    val userJsonUrl = firebaseUrl + "/users/" + username + ".json?auth=" + credential
 
     // Get user JSON
     val user = Source.fromURL(userJsonUrl).mkString

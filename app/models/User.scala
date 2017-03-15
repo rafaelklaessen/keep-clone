@@ -3,13 +3,7 @@ package models
 /**
  * This class is used to store users. All users are handled via this class.
  */
-class User(userEmail: String, userFirstName: String, userLastName: String, userPassword: String, userNotes: Array[String] = Array()) {
-  val email = userEmail
-  val firstName = userFirstName
-  val lastName = userLastName
-  val password = userPassword
-  val notes = userNotes
-
+case class User(email: String, firstName: String, lastName: String, password: String, notes: Map[String, Boolean] = Map()) {
   // For Firebase
   def getEmail = email
   def getFirstName = firstName

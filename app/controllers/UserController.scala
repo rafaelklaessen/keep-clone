@@ -65,7 +65,7 @@ class UserController @Inject() extends Controller {
   }
 
   /**
-   * This action handles post requests to /login. It logs users in when 
+   * This action handles post requests to /login. It logs users in when
    * all form fields are filled, the user exists and the password is correct.
    * Otherwise, it will show an error/errors.
    */
@@ -77,7 +77,7 @@ class UserController @Inject() extends Controller {
       loginData => {
         if (Users.userExists(loginData.username)) {
           val user = Users.getUser(loginData.username)
-      
+
           if (BCrypt.checkpw(loginData.password, user.password)) {
             // Log user in and redirect to homepage
             Redirect("/").withSession(
@@ -140,10 +140,10 @@ class UserController @Inject() extends Controller {
 
   /**
    * This action handles post requests to /register. It registers users when
-   * all form fields are filled and the username is not yet taken. 
+   * all form fields are filled and the username is not yet taken.
    * After a user successfully registers, he/she is redirected to the homepage.
    */
-  def registerUser() = Action { implicit request => 
+  def registerUser() = Action { implicit request =>
     val userData = userForm.bindFromRequest.fold(
       formWithErrors => {
         BadRequest(views.html.user.register(formWithErrors))
@@ -151,11 +151,13 @@ class UserController @Inject() extends Controller {
       userData => {
         if (!Users.userExists(userData.username)) {
           val hashedPassword = BCrypt.hashpw(userData.password, BCrypt.gensalt())
-          val user = new User(userData.email, userData.firstName, userData.lastName, hashedPassword)
-          
+          val user = User(userData.email, userData.firstName, userData.lastName, hashedPassword)
+
+          println("register")
+
           Users.registerUser(userData.username, user)
 
-          // After the user is registered, login as well and redirect to 
+          // After the user is registered, login as well and redirect to
           // homepage.
           Redirect("/").withSession(
             "username" -> userData.username)

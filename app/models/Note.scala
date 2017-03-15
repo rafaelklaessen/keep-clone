@@ -1,8 +1,5 @@
 package models
 
-import play.api.libs.json._
-import play.api.libs.functional.syntax._
-
 /**
  * This class is used to store notes. All notes are handled via this class.
  */
