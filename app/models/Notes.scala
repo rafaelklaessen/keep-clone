@@ -7,29 +7,27 @@ import com.google.firebase.database._
 
 import play.api.libs.json._
 
+import org.json4s._
+import org.json4s.native.JsonMethods._
+
 import scala.io.Source
 
 /**
  * This object is for all Notes related stuff, like adding and deleting notes.
  */
 object Notes {
+  implicit val formats = DefaultFormats
 
   // This method gets a note from Firebase by its id
   def getNote(id: Long): Note = {
     val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
     val noteJsonUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone/notes/" + id.toString + ".json?auth=" + credential
-  
-    // Get note JSON and parse it 
-    val note = Json.parse(Source.fromURL(noteJsonUrl).mkString)
 
-    val title = if ((note \ "title").isInstanceOf[JsUndefined]) "null" else (note \ "title").as[String]
-    val content = if ((note \ "content").isInstanceOf[JsUndefined]) "null" else (note \ "content").as[String]
-    val color = if ((note \ "color").isInstanceOf[JsUndefined]) "null" else (note \ "color").as[String]
-    val owners = if ((note \ "owners").isInstanceOf[JsUndefined]) Array("null") else (note \ "owners").as[JsObject].keys.toArray
-    val pinned = !(note \ "pinned").isInstanceOf[JsUndefined]
-    val archived = !(note \ "archived").isInstanceOf[JsUndefined]
+    // Get note JSON and parse it
+    val note = parse(Source.fromURL(noteJsonUrl).mkString).extract[Note]
+    note.id = id
 
-    new Note(id, title, content, color, owners, pinned, archived)
+    note
   }
 
   /**
@@ -43,7 +41,7 @@ object Notes {
 
     if (user.notes(0) == "null") {
       Array()
-    } else { 
+    } else {
       val noteIds = for (i <- user.notes) yield i.replaceAll("[note-]", "").toLong
       val sortedNoteIds = noteIds.sortWith(_ < _)
       val notes = for (i <- sortedNoteIds) yield getNote(i)
@@ -74,7 +72,7 @@ object Notes {
   def deleteNote(id: Long) = {
     // Get old note
     val note = Notes.getNote(id)
-    
+
     // Delete note from Firebase
     val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
     val notesRef = ref.child("notes")
@@ -142,9 +140,9 @@ object Notes {
 
     val lastNote = Json.parse(Source.fromURL(lastNoteJsonUrl).mkString)
     val lastNoteKey = lastNote.as[JsObject].keys.head.toLong
-    
+
     val newKey = lastNoteKey + 1
-    
+
     newKey
   }
 }
