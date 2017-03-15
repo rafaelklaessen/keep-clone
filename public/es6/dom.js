@@ -120,13 +120,20 @@ $settings.find('.edit-btn').click(function() {
 
     // Only save edits to backend if there are actually edits
     if (orgText != newText) {
-      // Do backend stuff here
+      // Perform request to backend
       $.post('/settings/update',
         { fields: JSON.stringify({ [name]: newText }) },
         (data) => {
           console.info(data);
+          Notifier.toast('Successfully updated settings');
       }).fail((error) => {
-        alert(`ERROR (${error.status}): ${error.responseText}`);
+        Notifier.alert(
+          `Error ${error.status}`,
+          `An error occured while trying to update your settings.
+          <br>
+          <strong>Error ${error.status}:</strong>
+          <br>
+          ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
       });
     }
 
@@ -140,10 +147,10 @@ $settings.find('.edit-btn').click(function() {
     $titleContent.html(newText);
     // Change edit button icon back to edit icon
     $(this).text('edit');
-  } else { 
+  } else {
     // Original setting content
     const orgText = $titleContent.text().trim();
- 
+
     // Get the type of the input. Is always text except if we're editing
     // the password
     const type = $settingsField.hasClass('password-field') ? 'password' : 'text';
@@ -162,24 +169,35 @@ $settings.find('.edit-btn').click(function() {
 
 // Account deletion
 $settings.find('#delete-account-btn').click(function() {
-  const confirmed = confirm('Are you sure you want to remove your account? This can\'t be undone!');
-
-  if (confirmed) {
-    // Request to backend would be put here
-    console.info('Removing account... :(');
-    $.post('/settings/delete', {}, (data) => {
-      console.info(data);
-      // Logout from Google as well
-      const auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-        console.info('User signed out.');
+    const btnHandlers = {
+    ok: () => {
+      // Perform request to backend
+      console.info('Removing account... :(');
+      $.post('/settings/delete', {}, (data) => {
+        console.info(data);
+        // Logout from Google as well
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(() => {
+          console.info('User signed out.');
+        });
+        // Redirect to homepage
+        location.assign('/');
+      }).fail((error) => {
+        Notifier.alert(
+          `Error ${error.status}`,
+          `An error occured while trying to delete your account.
+          <br>
+          <strong>Error ${error.status}:</strong>
+          <br>
+          ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
       });
-      // Redirect to homepage
-      location.assign('/');
-    }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
-    });
+    }
   }
+
+  Notifier.confirm(
+    'Are you sure?',
+    'Are you sure you want to delete your account? There is no way back!',
+    btnHandlers);
 });
 
 /**

@@ -57,7 +57,7 @@ class Notes {
         const id = $note.attr('id');
         const owners = $note.data('owners');
 
-        // Parse owners JSON if required (cancel function execution if 
+        // Parse owners JSON if required (cancel function execution if
         // that fails)
         if (typeof owners == 'string') {
           try {
@@ -90,7 +90,7 @@ class Notes {
     $grid
       .prepend($item)
       .masonry('prepended', $item);
-    
+
     for (let item in note) {
       if (note[item].trim() == '') {
         delete note[item];
@@ -104,7 +104,13 @@ class Notes {
       // We'll have to get that ID and add it to the element.
       $item.attr('id', response)
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to save that note.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
 
     // Update titles
@@ -120,7 +126,7 @@ class Notes {
    */
   static deleteNote(id) {
     const $toDelete = $(`#${id}`);
-    
+
     $grid
       .masonry('remove', $toDelete)
       .masonry('layout');
@@ -128,12 +134,19 @@ class Notes {
     $pinnedGrid
       .masonry('remove', $toDelete)
       .masonry('layout');
-    
+
     // Perform request to backend
     $.post('/notes/delete', { id: id }, (data) => {
       console.info(data);
+      Notifier.toast('Note successfully deleted');
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to delete that note.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
 
     // Update titles
@@ -206,7 +219,7 @@ class Notes {
         const id = $note.attr('id');
 
         Notes.togglePin(id);
-      });    
+      });
 
     if ($note.data('pinned')) {
       $grid
@@ -244,7 +257,13 @@ class Notes {
     }, (data) => {
       console.info(data);
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to pin that note.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
 
     // Update titles
@@ -288,8 +307,19 @@ class Notes {
         archived: archived
       }, (data) => {
         console.info(data);
+        if (archived) {
+          Notifier.toast('Note successfully archived');
+        } else {
+          Notifier.toast('Note successfully unarchived');
+        }
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to archive that note.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
   }
 
