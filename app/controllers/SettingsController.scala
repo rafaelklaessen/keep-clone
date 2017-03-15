@@ -15,6 +15,7 @@ import org.mindrot.jbcrypt._
 
 import models.Users
 import models.Notes
+import models.Firebase
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -91,9 +92,7 @@ class SettingsController @Inject() extends Controller {
         BadRequest("Not a valid email")
       } else {
         // Get Firebase reference
-        val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-        val usersRef = ref.child("users")
-        val currentUser = usersRef.child(reqUser.get)
+        val currentUser = Firebase.usersRef.child(reqUser.get)
 
         // Set all Firebase fields
         finalFields.keys.foreach(i =>

@@ -17,15 +17,12 @@ import scala.io.Source
  */
 object Notes {
   implicit val formats = DefaultFormats
-  private val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
-  private val firebaseUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone"
 
   // This method gets a note from Firebase by its id
   def getNote(id: Long): Note = {
-    val noteJsonUrl = firebaseUrl + "/notes/" + id.toString + ".json?auth=" + credential
-
     // Get note JSON and parse it
-    val note = parse(Source.fromURL(noteJsonUrl).mkString).extract[Note]
+    val note = parse(Firebase.getJson("/notes/" + id.toString)).extract[Note]
+    // Add note ID
     note.id = id
 
     note
@@ -59,9 +56,7 @@ object Notes {
 
   // Creates note in Firebase
   def createNote(owner: String, id: Long, title: String, content: String, color: String, pinned: Boolean = false) = {
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val notesRef = ref.child("notes")
-    val currentNote = notesRef.child(id.toString)
+    val currentNote = Firebase.notesRef.child(id.toString)
 
     currentNote.child("title").setValue(title)
     currentNote.child("content").setValue(content)
@@ -69,10 +64,9 @@ object Notes {
     currentNote.child("owners").child(owner).setValue(true)
     if (pinned) currentNote.child("pinned").setValue(true)
 
-    val usersRef = ref.child("users")
-    val currentUser = usersRef.child(owner)
+    val currentUser = Firebase.usersRef.child(owner)
 
-    currentUser.child("notes").child("note-" + id.toString).setValue(true)
+    currentUser.child("notes/note-" + id.toString).setValue(true)
   }
 
   // Deletes note in Firebase based on its id
@@ -81,9 +75,7 @@ object Notes {
     val note = Notes.getNote(id)
 
     // Delete note from Firebase
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val notesRef = ref.child("notes")
-    val currentNote = notesRef.child(id.toString)
+    val currentNote = Firebase.notesRef.child(id.toString)
 
     currentNote.removeValue()
 
@@ -94,54 +86,28 @@ object Notes {
   }
 
   // Deletes note from user
-  def deleteNoteFromUser(id: Long, username: String) = {
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val usersRef = ref.child("users")
-    val currentUser = usersRef.child(username)
-
-    currentUser.child("notes").child("note-" + id.toString).removeValue()
-  }
+  def deleteNoteFromUser(id: Long, username: String) = Firebase.usersRef.child(username + "/notes/note-" + id.toString).removeValue()
 
   // Checks if note exists
-  def noteExists(id: Long): Boolean = {
-    val noteJsonUrl = firebaseUrl + "/notes/" + id.toString + ".json?auth=" + credential
-
-    // Get note JSON
-    val note = Source.fromURL(noteJsonUrl).mkString
-
-    // If it's "null", the note doesn't exist
-    note != "null"
-  }
+  def noteExists(id: Long): Boolean = Firebase.getJson("/notes/" + id.toString) != "null"
 
   // Pins/unpins a note
   def setPinned(id: Long, pinned: Boolean) = {
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val notesRef = ref.child("notes")
-    val currentNote = notesRef.child(id.toString)
+    val notePinned = Firebase.notesRef.child(id.toString).child("pinned")
 
-    if (pinned) {
-      currentNote.child("pinned").setValue(true)
-    } else {
-      currentNote.child("pinned").removeValue()
-    }
+    if (pinned) notePinned.setValue(true) else notePinned.removeValue()
   }
 
   // Archives/unarchives a note
   def setArchived(id: Long, archived: Boolean) = {
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val notesRef = ref.child("notes")
-    val currentNote = notesRef.child(id.toString)
+    val noteArchived = Firebase.notesRef.child(id.toString).child("archived")
 
-    if (archived) {
-      currentNote.child("archived").setValue(true)
-    } else {
-      currentNote.child("archived").removeValue()
-    }
+    if (archived) noteArchived.setValue(true) else noteArchived.removeValue()
   }
 
   // Gets the ID for the new note by adding one the the last note's ID
   def getId: Long = {
-    val lastNoteJsonUrl = firebaseUrl + "/notes.json/?orderBy=\"$key\"&limitToLast=1&auth=" + credential
+    val lastNoteJsonUrl = Firebase.firebaseUrl + "/notes.json/?orderBy=\"$key\"&limitToLast=1&auth=" + Firebase.credential
 
     val lastNote = Json.parse(Source.fromURL(lastNoteJsonUrl).mkString)
     val lastNoteKey = lastNote.as[JsObject].keys.head.toLong

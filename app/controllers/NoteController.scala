@@ -12,6 +12,7 @@ import play.api.libs.json._
 
 import models.Notes
 import models.Users
+import models.Firebase
 
 @Singleton
 class NoteController @Inject() extends Controller {
@@ -20,7 +21,7 @@ class NoteController @Inject() extends Controller {
     val requestContent = request.body.asFormUrlEncoded.get
 
     val reqOwner = request.session.get("username")
-    
+
     if (reqOwner.isEmpty) {
       Unauthorized("Not logged in")
     } else if (!Users.userExists(reqOwner.get)) {
@@ -29,7 +30,7 @@ class NoteController @Inject() extends Controller {
       val id = Notes.getId
 
       val owner = reqOwner.get
-        
+
       def isGiven(reqParam: String): Boolean = {
         if (requestContent.contains(reqParam)) {
           !(requestContent(reqParam).head.length == 0)
@@ -65,7 +66,7 @@ class NoteController @Inject() extends Controller {
     val requestContent = request.body.asFormUrlEncoded.get
 
     val reqOwner = request.session.get("username")
-    
+
     if (reqOwner.isEmpty) {
       Unauthorized("Not logged in")
     } else if (!Users.userExists(reqOwner.get)) {
@@ -98,7 +99,7 @@ class NoteController @Inject() extends Controller {
   }
 
   // Updates a note
-  def updateNote = Action { request => 
+  def updateNote = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
     val reqUser = request.session.get("username")
 
@@ -118,10 +119,10 @@ class NoteController @Inject() extends Controller {
         // Make sure note actually exists
         if (Notes.noteExists(id.toLong)) {
           val note = Notes.getNote(id.toLong)
-          
+
           // Make sure note actually belongs to the current user.
           // If it doesn't, act as if it doesn't exist.
-          if (note.owners.contains(reqUser.get)) {      
+          if (note.owners.contains(reqUser.get)) {
             // Get fields from request and parse them to a map
             val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
 
@@ -132,12 +133,10 @@ class NoteController @Inject() extends Controller {
             })
 
             // Get Firebase reference
-            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-            val notesRef = ref.child("notes")
-            val currentNote = notesRef.child(id)
+            val currentNote = Firebase.notesRef.child(id)
 
             // Set all Firebase fields
-            filteredFields.keys.foreach(i => 
+            filteredFields.keys.foreach(i =>
               currentNote.child(i).setValue(filteredFields(i))
             )
 
@@ -170,7 +169,7 @@ class NoteController @Inject() extends Controller {
     } else if (!requestContent.contains("owner")) {
       BadRequest("No new owner provided")
     } else {
-      // Get ID from request 
+      // Get ID from request
       val id = requestContent("id").head.toString
       // Get owner to add from request
       val owner = requestContent("owner").head
@@ -184,15 +183,12 @@ class NoteController @Inject() extends Controller {
           // If it doesn't, act as if it doesn't exist.
           if (note.owners.contains(reqUser.get)) {
             // Get Firebase reference
-            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-            val notesRef = ref.child("notes")
-            val usersRef = ref.child("users")
-            val currentNote = notesRef.child(id)
-            val currentUser = usersRef.child(owner)
+            val currentNote = Firebase.notesRef.child(id)
+            val currentUser = Firebase.usersRef.child(owner)
 
             // Add new owner to note
             currentNote.child("owners").child(owner).setValue(true)
-            
+
             // Add note to new owner
             currentUser.child("notes").child("note-" + id).setValue(true)
 
@@ -226,7 +222,7 @@ class NoteController @Inject() extends Controller {
     } else if (!requestContent.contains("owner")) {
       BadRequest("No owner to delete provided")
     } else {
-      // Get ID from request 
+      // Get ID from request
       val id = requestContent("id").head.toString
       // Get owner to add from request
       val owner = requestContent("owner").head
@@ -240,15 +236,12 @@ class NoteController @Inject() extends Controller {
           // If it doesn't, act as if it doesn't exist.
           if (note.owners.contains(reqUser.get)) {
             // Get Firebase reference
-            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-            val notesRef = ref.child("notes")
-            val usersRef = ref.child("users")
-            val currentNote = notesRef.child(id)
-            val currentUser = usersRef.child(owner)
+            val currentNote = Firebase.notesRef.child(id)
+            val currentUser = Firebase.usersRef.child(owner)
 
             // Add new owner to note
             currentNote.child("owners").child(owner).removeValue()
-            
+
             // Add note to new owner
             currentUser.child("notes").child("note-" + id).removeValue()
 
@@ -317,10 +310,10 @@ class NoteController @Inject() extends Controller {
   }
 
   // Archives or unarchieves note
-  def setArchived = Action { request => 
+  def setArchived = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
     val reqUser = request.session.get("username")
-  
+
     if (reqUser.isEmpty) {
       Unauthorized("Not logged in")
     } else if (!Users.userExists(reqUser.get)) {
