@@ -65,7 +65,7 @@ class NoteEditor {
 
     $noteEditor.find('.color-ball').click(function() {
       const color = $(this).data('color');
-      
+
       NoteEditor.setColor(color);
     });
 
@@ -122,7 +122,13 @@ class NoteEditor {
         (data) => {
           console.info(data);
       }).fail((error) => {
-        alert(`ERROR (${error.status}): ${error.responseText}`);
+        Notifier.alert(
+          `Error ${error.status}`,
+          `An error occured while trying to update that note.
+          <br>
+          <strong>Error ${error.status}:</strong>
+          <br>
+          ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
       });
 
       // Update DOM

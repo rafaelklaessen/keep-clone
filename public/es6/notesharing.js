@@ -45,7 +45,7 @@ class NoteSharing {
               <li class="add-note-owner note-owner">
                 <input class="username-input" placeholder="Username of the user to share with">
                 <button class="material-icons save-owner-btn md-btn btn">check</button>
-              </li>  
+              </li>
             </ul>
           </section>
           <footer class="popup-footer">
@@ -57,19 +57,19 @@ class NoteSharing {
       </section>
     `);
 
-    // Append HTML to body 
+    // Append HTML to body
     $noteSharing.appendTo('body');
 
     // Set data-owners
     $noteSharing.find('#note-sharing').data('owners', owners);
 
-    // Fade the note sharing popup adding
+    // Fade the note sharing popup in
     $noteSharing.fadeIn(200);
     $noteSharing.find('.popup').fadeIn(400);
 
     // Add listeners
     $noteSharing.find('.username-input').on('keyup keydown click input propertychange', function() {
-      // Add valid class if there's a username given (in order to show the 
+      // Add valid class if there's a username given (in order to show the
       // check icon).
       if ($(this).val().length > 0) {
         $(this).addClass('valid');
@@ -124,16 +124,22 @@ class NoteSharing {
                 </li>
               `)
               .insertBefore($noteSharing.find('.add-note-owner'));
-            
+
             // Add new owner to DOM
             const $note = $(`#${id}`);
             $note.data('owners').push(username);
-                        
+
             // Clear input
             $usernameInput.val('');
             $usernameInput.removeClass('valid');
         }).fail((error) => {
-          alert(`ERROR (${error.status}): ${error.responseText}`);
+          Notifier.alert(
+            `Error ${error.status}`,
+            `An error occured while trying to add an owner to that note.
+            <br>
+            <strong>Error ${error.status}:</strong>
+            <br>
+            ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
         });
       }
     }
@@ -179,7 +185,13 @@ class NoteSharing {
           console.warn('Couldn\'t remove owner from DOM.');
         }
     }).fail((error) => {
-      alert(`ERROR (${error.status}): ${error.responseText}`);
+      Notifier.alert(
+        `Error ${error.status}`,
+        `An error occured while trying to remove an owner from that note.
+        <br>
+        <strong>Error ${error.status}:</strong>
+        <br>
+        ${error.status == '404' ? 'Page not found' : escapeString(error.responseText)}`);
     });
   }
 

@@ -99,6 +99,7 @@ button {
   box-sizing: border-box;
   display: inline-block;
   text-decoration: none;
+  outline-width: 0;
   @include transition($mainTransition);
 
   &:hover {
@@ -194,6 +195,17 @@ textarea {
     background-color: #FFFFFF;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     display: none;
+
+    .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 12px;
+
+      &:hover {
+        background: none;
+        opacity: .54;
+      }
+    }
 
     .popup-title-container {
       margin-left: 12px;
@@ -781,6 +793,57 @@ textarea {
 
     a {
       cursor: pointer;
+    }
+  }
+}
+
+#toast-container {
+  position: fixed;
+  left: 0;
+  bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 400px;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  .toast {
+    margin-top: 0;
+    margin-bottom: -12px;
+    padding: 12px 24px;
+    width: 100%;
+    color: #FFFFFF;
+    background-color: #212121;
+    box-sizing: border-box;
+    overflow: auto;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+    opacity: 0;
+    @include transition(all .2s ease-in-out);
+
+    &.activated {
+      margin-top: 12px;
+      margin-bottom: 0;
+      opacity: 1;
+    }
+
+    p {
+      float: left;
+      margin: 0;
+      line-height: 26px;
+      vertical-align: middle;
+    }
+
+    .close-btn {
+      float: right;
+      padding-right: 0;
+      line-height: 1;
+      vertical-align: text-bottom;
+
+      &:hover {
+        background: none;
+        opacity: .54;
+      }
     }
   }
 }
