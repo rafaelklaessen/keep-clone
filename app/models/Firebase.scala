@@ -18,8 +18,8 @@ object Firebase {
   val usersRef = ref.child("users")
   val notesRef = ref.child("notes")
 
-  // Gets full Firebase url from path (eg, when you put in /notes/111 you get a complete)
-  // url back
+  // Gets full Firebase url from path (eg, when you put in /notes/111 you'll get the complete
+  // url back)
   def getUrl(url: String): String = firebaseUrl + url + ".json?auth=" + credential
 
   // Gets Firebase JSON
