@@ -120,7 +120,7 @@ class SettingsController @Inject() extends Controller {
       // Get the user's note
       val userNotes = Notes.getNotesByUsername(username)
       // Only delete notes that are only owned by the current user
-      var notesToDelete = for (note <- userNotes if note.owners.length == 1) yield note
+      var notesToDelete = for (note <- userNotes if note.owners.keys.size == 1) yield note
 
       // Loop through the users's notes and delete them
       for (note <- notesToDelete) {

@@ -153,8 +153,6 @@ class UserController @Inject() extends Controller {
           val hashedPassword = BCrypt.hashpw(userData.password, BCrypt.gensalt())
           val user = User(userData.email, userData.firstName, userData.lastName, hashedPassword)
 
-          println("register")
-
           Users.registerUser(userData.username, user)
 
           // After the user is registered, login as well and redirect to

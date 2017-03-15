@@ -25,6 +25,8 @@ object Users {
   implicit val formats = DefaultFormats
   private val credential = "IhfqZxphYqBqLgi0cUX18n8qvYY46dgmNMO3sZG8"
   private val firebaseUrl = "https://keep-clone-840b5.firebaseio.com/keep-clone"
+  private val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
+  private val usersRef = ref.child("users")
 
   // This method gets the user via a request to Firebase's REST
   def getUser(username: String): User = {
@@ -46,21 +48,9 @@ object Users {
   }
 
   // Registers user by putting the user's data in Firebase
-  def registerUser(username: String, user: User) = {
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val usersRef = ref.child("users")
-    val currentUser = usersRef.child(username)
-
-    currentUser.setValue(user)
-  }
+  def registerUser(username: String, user: User) = usersRef.child(username).setValue(user)
 
   // Delete user
-  def deleteUser(username: String) = {
-    val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-    val usersRef = ref.child("users")
-    val currentUser = usersRef.child(username)
-
-    currentUser.removeValue()
-  }
+  def deleteUser(username: String) = usersRef.child(username).removeValue()
 
 }

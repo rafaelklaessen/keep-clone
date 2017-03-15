@@ -38,16 +38,22 @@ object Notes {
    * The notes that it's got are returned
    */
   def getNotesByUsername(username: String): Array[Note] = {
-    val user = Users.getUser(username)
+    // If the user doesn't exist, we're logged in after register and the user
+    // isn't put in Firebase yet. That user won't have any notes, so return an
+    // empty array.
+    if (Users.userExists(username)) {
+      val user = Users.getUser(username)
 
-    if (user.notes.keys.size == 0) {
-      Array()
+      if (user.notes.keys.size == 0) {
+        Array()
+      } else {
+        val noteIds = for (i <- user.notes.keys.toArray) yield i.replaceAll("[note-]", "").toLong
+        val sortedNoteIds = noteIds.sortWith(_ < _)
+        val notes = for (i <- sortedNoteIds) yield getNote(i)
+        notes
+      }
     } else {
-      val noteIds = for (i <- user.notes.keys.toArray) yield i.replaceAll("[note-]", "").toLong
-      val sortedNoteIds = noteIds.sortWith(_ < _)
-      val notes = for (i <- sortedNoteIds) yield getNote(i)
-
-      notes
+      Array()
     }
   }
 
@@ -82,7 +88,7 @@ object Notes {
     currentNote.removeValue()
 
     // Loop through all note owners and delete the note from them
-    for (owner <- note.owners) {
+    for (owner <- note.owners.keys) {
       Notes.deleteNoteFromUser(id, owner)
     }
   }
