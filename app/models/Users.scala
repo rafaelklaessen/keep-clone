@@ -21,8 +21,8 @@ import scala.io.Source
 object Users {
   implicit val formats = DefaultFormats
 
-  def getUser(username: String): User = parse(Firebase.getJson("/users/" + username)).extract[User]
-  def userExists(username: String): Boolean = Firebase.getJson("/users/" + username) != "null"
+  def getUser(username: String) = parse(Firebase.getJson("/users/" + username)).extract[User]
+  def userExists(username: String) = Firebase.getJson("/users/" + username) != "null"
   def registerUser(username: String, user: User) = Firebase.usersRef.child(username).setValue(user)
   def deleteUser(username: String) = Firebase.usersRef.child(username).removeValue()
 }
