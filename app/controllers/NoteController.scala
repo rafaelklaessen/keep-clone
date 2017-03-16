@@ -17,21 +17,19 @@ import models.Firebase
 import scala.collection.mutable.ListBuffer
 import scala.util.Try
 
+import controllers.RequestUtils.{requestBodyErrors, userSessionErrors}
+
 @Singleton
 class NoteController @Inject() extends Controller {
   // Creates a note via Notes.createNote
   def createNote = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
-
     val reqOwner = request.session.get("username")
 
-    if (reqOwner.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqOwner.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else {
       val id = Notes.getId
-
       val owner = reqOwner.get
 
       def isGiven(reqParam: String): Boolean = {
@@ -62,17 +60,16 @@ class NoteController @Inject() extends Controller {
   def deleteNote = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
 
-    val reqOwner = request.session.get("username")
-
-    if (reqOwner.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqOwner.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else if (!requestContent.contains("id")) {
       BadRequest("No ID given")
     } else {
-      try {
-        val id = requestContent("id").head.toLong
+      val reqOwner = request.session.get("username")
+      var idString = requestContent("id").head
+
+      if (Try(idString.toLong).isSuccess) {
+        val id = idString.toLong
 
         // Make sure note exists
         if (Notes.noteExists(id)) {
@@ -89,29 +86,20 @@ class NoteController @Inject() extends Controller {
         } else {
           BadRequest("Note doesn't exist")
         }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Incorrect ID")
+      } else {
+        BadRequest("Invalid ID")
       }
     }
   }
 
   // Updates a note
   def updateNote = Action { request =>
-    val missing = validateRequest(request, List("id", "fields"))
-    var result = Ok("default")
+    val missing = requestBodyErrors(request, List("id", "fields"))
 
-    if (!missing("session").isEmpty) {
-      missing("session").foreach(sessionField => result = sessionField match {
-        case "username" => Unauthorized("Not logged in")
-      })
-      result
-    } else if (!missing("body").isEmpty) {
-      missing("body").foreach(bodyField => result = bodyField match {
-        case "id" => BadRequest("No note ID provided")
-        case "fields" => BadRequest("No fields provided")
-        case "body" => BadRequest("No request body was given")
-      })
-      result
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
       val requestContent = request.body.asFormUrlEncoded.get
       val reqUser = request.session.get("username")
@@ -169,21 +157,12 @@ class NoteController @Inject() extends Controller {
 
   // Sets or removes a note owner, a helper method for addNoteOwner and removeNoteOwner
   def setNoteOwner(request: Request[AnyContent], add: Boolean): Result = {
-    val missing = validateRequest(request, List("id", "owner"))
-    var result = Ok("default")
+    val missing = requestBodyErrors(request, List("id", "owner"))
 
-    if (!missing("session").isEmpty) {
-      missing("session").foreach(sessionField => result = sessionField match {
-        case "username" => Unauthorized("Not logged in")
-      })
-      result
-    } else if (!missing("body").isEmpty) {
-      missing("body").foreach(bodyField => result = bodyField match {
-        case "id" => BadRequest("No note ID provided")
-        case "owner" => BadRequest("No owner provided")
-        case "body" => BadRequest("No request body was given")
-      })
-      result
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
       val requestContent = request.body.asFormUrlEncoded.get
       val reqUser = request.session("username")
@@ -237,21 +216,12 @@ class NoteController @Inject() extends Controller {
 
   // Pins or unpins note
   def setPinned = Action { request =>
-    val missing = validateRequest(request, List("id", "pinned"))
-    var result = Ok("default")
+    val missing = requestBodyErrors(request, List("id", "pinned"))
 
-    if (!missing("session").isEmpty)  {
-      missing("session").foreach(sessionField => result = sessionField match {
-        case "username" => Unauthorized("Not logged in")
-      })
-      result
-    } else if (!missing("body").isEmpty) {
-      missing("body").foreach(bodyField => result = bodyField match {
-        case "id" => BadRequest("No note ID provided")
-        case "pinned" => BadRequest("No pinned state provided")
-        case "body" => BadRequest("No request body was given")
-      })
-      result
+    if (!userSessionErrors(request).isEmpty)  {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
       val requestContent = request.body.asFormUrlEncoded.get
       val reqUser = request.session.get("username")
@@ -284,21 +254,12 @@ class NoteController @Inject() extends Controller {
 
   // Archives or unarchieves note
   def setArchived = Action { request =>
-    val missing = validateRequest(request, List("id", "archived"))
-    var result = Ok("default")
+    val missing = requestBodyErrors(request, List("id", "archived"))
 
-    if (!missing("session").isEmpty)  {
-      missing("session").foreach(sessionField => result = sessionField match {
-        case "username" => Unauthorized("Not logged in")
-      })
-      result
-    } else if (!missing("body").isEmpty) {
-      missing("body").foreach(bodyField => result = bodyField match {
-        case "id" => BadRequest("No note ID provided")
-        case "archived" => BadRequest("No archived state provided")
-        case "body" => BadRequest("No request body was given")
-      })
-      result
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
       val requestContent = request.body.asFormUrlEncoded.get
       val reqUser = request.session.get("username")
@@ -328,29 +289,5 @@ class NoteController @Inject() extends Controller {
         BadRequest("Invalid ID or archived state")
       }
     }
-  }
-
-  def validateRequest(request: Request[AnyContent], bodyContent: List[String] = List(), sessionContent: List[String] = List("username")): Map[String, ListBuffer[String]] = {
-    val bodyMissing = ListBuffer[String]()
-    val sessionMissing = ListBuffer[String]()
-
-    for (sessionField <- sessionContent) {
-      if (request.session.get(sessionField).isEmpty) sessionMissing += sessionField
-    }
-
-    if (request.body.asFormUrlEncoded.isEmpty) {
-      bodyMissing += "body"
-    } else {
-      val requestBody = request.body.asFormUrlEncoded.get
-
-      for (bodyField <- bodyContent) {
-        if (!requestBody.contains(bodyField)) bodyMissing += bodyField
-      }
-    }
-
-    Map[String, ListBuffer[String]](
-      "session" -> sessionMissing,
-      "body" -> bodyMissing
-    )
   }
 }

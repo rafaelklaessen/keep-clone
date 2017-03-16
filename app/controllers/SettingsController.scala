@@ -17,6 +17,8 @@ import models.Users
 import models.Notes
 import models.Firebase
 
+import controllers.RequestUtils.userSessionErrors
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
@@ -42,13 +44,10 @@ class SettingsController @Inject() extends Controller {
   // Update user settings
   def update = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
-
     val reqUser = request.session.get("username")
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else if (!requestContent.contains("fields")) {
       BadRequest("No fields provided")
     } else {
@@ -108,10 +107,8 @@ class SettingsController @Inject() extends Controller {
   def deleteAccount = Action { request =>
     val reqUser = request.session.get("username")
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else {
       // Get username and user
       val username = reqUser.get
