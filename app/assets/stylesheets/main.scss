@@ -754,6 +754,7 @@ textarea {
         width: calc(100% - 44px);
 
         & + .save-owner-btn {
+          padding-left: 0;
           font-size: 0;
           opacity: 0;
           @include transition(all .2s ease-in-out);

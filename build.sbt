@@ -22,6 +22,9 @@ libraryDependencies += "com.google.firebase" % "firebase-admin" % "4.1.1"
 // https://mvnrepository.com/artifact/com.firebase/firebase-client
 libraryDependencies += "com.firebase" % "firebase-client" % "2.2.4"
 
+// https://mvnrepository.com/artifact/org.json4s/json4s-native_2.10
+libraryDependencies += "org.json4s" % "json4s-native_2.11" % "3.5.0"
+
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
 
 fork in run := true

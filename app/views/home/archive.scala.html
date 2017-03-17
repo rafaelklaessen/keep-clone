@@ -14,14 +14,14 @@
       <div class="grid-sizer"></div>
 
       @for(note <- notes.reverse if (note.archived)) {
-        <article 
-          id="@note.id.toString" 
+        <article
+          id="@note.id.toString"
           class="note grid-item"
           style="background-color: @note.color"
-          
-          data-owners='@{ 
+
+          data-owners='@{
             var owners = "["
-            note.owners.foreach(i => owners += "\"" + i.replaceAll("[\"]", """\\\"""") + "\",")
+            note.owners.keys.foreach(i => owners += "\"" + i.replaceAll("[\"]", """\\\"""") + "\",")
             owners = owners.substring(0, owners.length - 1)
             owners += "]"
             owners

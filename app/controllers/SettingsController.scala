@@ -15,6 +15,9 @@ import org.mindrot.jbcrypt._
 
 import models.Users
 import models.Notes
+import models.Firebase
+
+import controllers.RequestUtils.userSessionErrors
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -41,13 +44,10 @@ class SettingsController @Inject() extends Controller {
   // Update user settings
   def update = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
-
     val reqUser = request.session.get("username")
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else if (!requestContent.contains("fields")) {
       BadRequest("No fields provided")
     } else {
@@ -91,9 +91,7 @@ class SettingsController @Inject() extends Controller {
         BadRequest("Not a valid email")
       } else {
         // Get Firebase reference
-        val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-        val usersRef = ref.child("users")
-        val currentUser = usersRef.child(reqUser.get)
+        val currentUser = Firebase.usersRef.child(reqUser.get)
 
         // Set all Firebase fields
         finalFields.keys.foreach(i =>
@@ -109,10 +107,8 @@ class SettingsController @Inject() extends Controller {
   def deleteAccount = Action { request =>
     val reqUser = request.session.get("username")
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else {
       // Get username and user
       val username = reqUser.get
@@ -120,7 +116,7 @@ class SettingsController @Inject() extends Controller {
       // Get the user's note
       val userNotes = Notes.getNotesByUsername(username)
       // Only delete notes that are only owned by the current user
-      var notesToDelete = for (note <- userNotes if note.owners.length == 1) yield note
+      var notesToDelete = for (note <- userNotes if note.owners.keys.size == 1) yield note
 
       // Loop through the users's notes and delete them
       for (note <- notesToDelete) {

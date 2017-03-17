@@ -12,24 +12,26 @@ import play.api.libs.json._
 
 import models.Notes
 import models.Users
+import models.Firebase
+
+import scala.collection.mutable.ListBuffer
+import scala.util.Try
+
+import controllers.RequestUtils.{requestBodyErrors, userSessionErrors}
 
 @Singleton
 class NoteController @Inject() extends Controller {
   // Creates a note via Notes.createNote
   def createNote = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
-
     val reqOwner = request.session.get("username")
-    
-    if (reqOwner.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqOwner.get)) {
-      Unauthorized("Not logged in as existing user")
+
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else {
       val id = Notes.getId
-
       val owner = reqOwner.get
-        
+
       def isGiven(reqParam: String): Boolean = {
         if (requestContent.contains(reqParam)) {
           !(requestContent(reqParam).head.length == 0)
@@ -48,12 +50,6 @@ class NoteController @Inject() extends Controller {
         val noteTitle = if (title.isEmpty) "" else title.get
         val noteContent = if (content.isEmpty) "" else content.get
 
-        println("We'll send this:")
-        println(owner)
-        println(id)
-        println(noteTitle)
-        println(noteContent)
-        println(color)
         Notes.createNote(owner, id, noteTitle, noteContent, color)
         Ok(id.toString)
       }
@@ -64,17 +60,16 @@ class NoteController @Inject() extends Controller {
   def deleteNote = Action { request =>
     val requestContent = request.body.asFormUrlEncoded.get
 
-    val reqOwner = request.session.get("username")
-    
-    if (reqOwner.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqOwner.get)) {
-      Unauthorized("Not logged in as existing user")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
     } else if (!requestContent.contains("id")) {
       BadRequest("No ID given")
     } else {
-      try {
-        val id = requestContent("id").head.toLong
+      val reqOwner = request.session.get("username")
+      var idString = requestContent("id").head
+
+      if (Try(idString.toLong).isSuccess) {
+        val id = idString.toLong
 
         // Make sure note exists
         if (Notes.noteExists(id)) {
@@ -91,37 +86,35 @@ class NoteController @Inject() extends Controller {
         } else {
           BadRequest("Note doesn't exist")
         }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Incorrect ID")
+      } else {
+        BadRequest("Invalid ID")
       }
     }
   }
 
   // Updates a note
-  def updateNote = Action { request => 
-    val requestContent = request.body.asFormUrlEncoded.get
-    val reqUser = request.session.get("username")
+  def updateNote = Action { request =>
+    val missing = requestBodyErrors(request, List("id", "fields"))
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
-    } else if (!requestContent.contains("id")) {
-      BadRequest("No note ID provided")
-    } else if (!requestContent.contains("fields")) {
-      BadRequest("No fields provided")
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
+      val requestContent = request.body.asFormUrlEncoded.get
+      val reqUser = request.session.get("username")
+
       // Get ID from request
       val id = requestContent("id").head.toString
 
-      try {
+      if (Try(id.toLong).isSuccess && Try(Json.parse(requestContent("fields").head).as[Map[String, String]]).isSuccess) {
         // Make sure note actually exists
         if (Notes.noteExists(id.toLong)) {
           val note = Notes.getNote(id.toLong)
-          
+
           // Make sure note actually belongs to the current user.
           // If it doesn't, act as if it doesn't exist.
-          if (note.owners.contains(reqUser.get)) {      
+          if (note.owners.contains(reqUser.get)) {
             // Get fields from request and parse them to a map
             val fields = Json.parse(requestContent("fields").head).as[Map[String, String]]
 
@@ -132,15 +125,13 @@ class NoteController @Inject() extends Controller {
             })
 
             // Get Firebase reference
-            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-            val notesRef = ref.child("notes")
-            val currentNote = notesRef.child(id)
+            val currentNote = Firebase.notesRef.child(id)
 
             // Set all Firebase fields
-            filteredFields.keys.foreach(i => 
+            filteredFields.keys.foreach(i =>
               currentNote.child(i).setValue(filteredFields(i))
-            )
 
+            )
             Ok("success")
           } else {
             BadRequest("Note doesn't exist!")
@@ -148,109 +139,65 @@ class NoteController @Inject() extends Controller {
         } else {
           BadRequest("Note doesn't exist!")
         }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Invalid ID")
-        case jpe: com.fasterxml.jackson.core.JsonParseException => BadRequest("Invalid fields")
-        case e: Exception => BadRequest("Unknown parameter error")
+      } else {
+        BadRequest("Invalid ID or fields")
       }
     }
   }
 
   // Adds owner to note
   def addNoteOwner = Action { request =>
-    val requestContent = request.body.asFormUrlEncoded.get
-    val reqUser = request.session.get("username")
-
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
-    } else if (!requestContent.contains("id")) {
-      BadRequest("No note ID provided")
-    } else if (!requestContent.contains("owner")) {
-      BadRequest("No new owner provided")
-    } else {
-      // Get ID from request 
-      val id = requestContent("id").head.toString
-      // Get owner to add from request
-      val owner = requestContent("owner").head
-
-      try {
-        // Make sure note and owner to add exist
-        if (Notes.noteExists(id.toLong) && Users.userExists(owner)) {
-          val note = Notes.getNote(id.toLong)
-
-          // Make sure note actually belongs to the current user.
-          // If it doesn't, act as if it doesn't exist.
-          if (note.owners.contains(reqUser.get)) {
-            // Get Firebase reference
-            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-            val notesRef = ref.child("notes")
-            val usersRef = ref.child("users")
-            val currentNote = notesRef.child(id)
-            val currentUser = usersRef.child(owner)
-
-            // Add new owner to note
-            currentNote.child("owners").child(owner).setValue(true)
-            
-            // Add note to new owner
-            currentUser.child("notes").child("note-" + id).setValue(true)
-
-            Ok("success")
-          } else {
-            BadRequest("Note doesn't exist")
-          }
-        } else if (!Notes.noteExists(id.toLong)) {
-          BadRequest("Note doesn't exist")
-        } else {
-          BadRequest("User to add doesn't exist")
-        }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Invalid ID")
-        case e: Exception => BadRequest("Unknown parameter error")
-      }
-    }
+    setNoteOwner(request, true)
   }
 
   // Removes owner from note
   def removeNoteOwner = Action { request =>
-    val requestContent = request.body.asFormUrlEncoded.get
-    val reqUser = request.session.get("username")
+    setNoteOwner(request, false)
+  }
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
-    } else if (!requestContent.contains("id")) {
-      BadRequest("No note ID provided")
-    } else if (!requestContent.contains("owner")) {
-      BadRequest("No owner to delete provided")
+  // Sets or removes a note owner, a helper method for addNoteOwner and removeNoteOwner
+  def setNoteOwner(request: Request[AnyContent], add: Boolean): Result = {
+    val missing = requestBodyErrors(request, List("id", "owner"))
+
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
-      // Get ID from request 
+      val requestContent = request.body.asFormUrlEncoded.get
+      val reqUser = request.session("username")
+
+      // Get ID from request
       val id = requestContent("id").head.toString
       // Get owner to add from request
       val owner = requestContent("owner").head
 
-      try {
+      if (Try(id.toLong).isSuccess) {
         // Make sure note and owner to add exist
         if (Notes.noteExists(id.toLong) && Users.userExists(owner)) {
           val note = Notes.getNote(id.toLong)
 
           // Make sure note actually belongs to the current user.
           // If it doesn't, act as if it doesn't exist.
-          if (note.owners.contains(reqUser.get)) {
+          if (note.owners.contains(reqUser)) {
             // Get Firebase reference
-            val ref = FirebaseDatabase.getInstance().getReference("keep-clone")
-            val notesRef = ref.child("notes")
-            val usersRef = ref.child("users")
-            val currentNote = notesRef.child(id)
-            val currentUser = usersRef.child(owner)
+            val currentNote = Firebase.notesRef.child(id)
+            val currentUser = Firebase.usersRef.child(owner)
 
-            // Add new owner to note
-            currentNote.child("owners").child(owner).removeValue()
-            
-            // Add note to new owner
-            currentUser.child("notes").child("note-" + id).removeValue()
+            // Add or remove note based on the add parameter
+            if (add) {
+              // Add new owner to note
+              currentNote.child("owners").child(owner).setValue(true)
+
+              // Add note to new owner
+              currentUser.child("notes").child("note-" + id).setValue(true)
+            } else {
+              // Remove owner from note
+              currentNote.child("owners").child(owner).removeValue()
+
+              // Remove owner from note
+              currentUser.child("notes").child("note-" + id).removeValue()
+            }
 
             Ok("success")
           } else {
@@ -261,33 +208,29 @@ class NoteController @Inject() extends Controller {
         } else {
           BadRequest("Owner to delete doesn't exist")
         }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Invalid ID")
-        case e: Exception => BadRequest("Unknown parameter error")
+      } else {
+        BadRequest("Invalid ID")
       }
     }
   }
 
   // Pins or unpins note
   def setPinned = Action { request =>
-    val requestContent = request.body.asFormUrlEncoded.get
-    val reqUser = request.session.get("username")
+    val missing = requestBodyErrors(request, List("id", "pinned"))
 
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
-    } else if (!requestContent.contains("id")) {
-      BadRequest("No note ID provided")
-    } else if (!requestContent.contains("pinned")) {
-      BadRequest("No pinned state provided")
+    if (!userSessionErrors(request).isEmpty)  {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
+      val requestContent = request.body.asFormUrlEncoded.get
+      val reqUser = request.session.get("username")
       // Get ID from request
       val id = requestContent("id").head.toString
       // Get pinnned state from request
       val pinned = requestContent("pinned").head
 
-      try {
+      if (Try(id.toLong).isSuccess && Try(pinned.toBoolean).isSuccess) {
         // Make sure note exists
         if (Notes.noteExists(id.toLong)) {
           val note = Notes.getNote(id.toLong)
@@ -295,47 +238,37 @@ class NoteController @Inject() extends Controller {
           // Make sure note actually beloongs to the current user.
           // If it doesn't, act as if it doesn't exist.
           if (note.owners.contains(reqUser.get)) {
-            // Convert pinned string to boolean
-            try {
-              Notes.setPinned(id.toLong, pinned.toBoolean)
-              Ok("success")
-            } catch {
-              case iae: IllegalArgumentException => BadRequest("Invalid pinned state")
-              case e: Exception => BadRequest("Unknown parameter error")
-            }
+            Notes.setPinned(id.toLong, pinned.toBoolean)
+            Ok("success")
           } else {
             BadRequest("Note doesn't exist")
           }
         } else {
           BadRequest("Note doesn't exist")
         }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Invalid ID")
-        case e: Exception => BadRequest("Unknown parameter error")
+      } else {
+        BadRequest("Invalid ID or pinned state")
       }
     }
   }
 
   // Archives or unarchieves note
-  def setArchived = Action { request => 
-    val requestContent = request.body.asFormUrlEncoded.get
-    val reqUser = request.session.get("username")
-  
-    if (reqUser.isEmpty) {
-      Unauthorized("Not logged in")
-    } else if (!Users.userExists(reqUser.get)) {
-      Unauthorized("Not logged in as existing user")
-    } else if (!requestContent.contains("id")) {
-      BadRequest("No note ID provided")
-    } else if (!requestContent.contains("archived")) {
-      BadRequest("No archived state provided")
+  def setArchived = Action { request =>
+    val missing = requestBodyErrors(request, List("id", "archived"))
+
+    if (!userSessionErrors(request).isEmpty) {
+      Unauthorized(userSessionErrors(request).get)
+    } else if (!missing.isEmpty) {
+      BadRequest(missing.get)
     } else {
+      val requestContent = request.body.asFormUrlEncoded.get
+      val reqUser = request.session.get("username")
       // Get ID from request
       val id = requestContent("id").head.toString
       // Get pinnned state from request
       val archived = requestContent("archived").head
 
-      try {
+      if (Try(id.toLong).isSuccess && Try(archived.toBoolean).isSuccess) {
         // Make sure note exists
         if (Notes.noteExists(id.toLong)) {
           val note = Notes.getNote(id.toLong)
@@ -344,22 +277,16 @@ class NoteController @Inject() extends Controller {
           // If it doesn't, act as if it doesn't exist.
           if (note.owners.contains(reqUser.get)) {
             // Convert pinned string to boolean
-            try {
-              Notes.setArchived(id.toLong, archived.toBoolean)
-              Ok("success")
-            } catch {
-              case iae: IllegalArgumentException => BadRequest("Invalid archived state")
-              case e: Exception => BadRequest("Unknown parameter error")
-            }
+            Notes.setArchived(id.toLong, archived.toBoolean)
+            Ok("success")
           } else {
             BadRequest("Note doesn't exist")
           }
         } else {
           BadRequest("Note doesn't exist")
         }
-      } catch {
-        case nfe: NumberFormatException => BadRequest("Invalid ID")
-        case e: Exception => BadRequest("Unknown parameter error")
+      } else {
+        BadRequest("Invalid ID or archived state")
       }
     }
   }
