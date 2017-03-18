@@ -1,6 +1,7 @@
 import org.scalatestplus.play._
 import play.api.test._
 import play.api.test.Helpers._
+import play.api.libs.json._
 
 /**
  * Add your spec here.
@@ -50,5 +51,387 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
     }
 
   }
+
+  "NoteController" should {
+    "create a note when there is a user session and the POST parameters are correct" in {
+      val createNote = route(app, FakeRequest(POST, "/notes")
+        .withFormUrlEncodedBody(("title", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(createNote) mustBe OK
+      contentType(createNote) mustBe Some("text/plain")
+    }
+
+    "not create a note when there is a user session but the POST parameters are incorrect" in {
+      val createNote = route(app, FakeRequest(POST, "/notes")
+        .withFormUrlEncodedBody(("notcontent", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(createNote) mustBe BAD_REQUEST
+      contentType(createNote) mustBe Some("text/plain")
+    }
+
+    "not create a note when there is no user session" in {
+      val createNote = route(app, FakeRequest(POST, "/notes").withFormUrlEncodedBody(("title", "test"))).get
+
+      status(createNote) mustBe UNAUTHORIZED
+      contentType(createNote) mustBe Some("text/plain")
+    }
+
+    "delete an existing note when there is a user session that owns the note and a correct ID is given" in {
+      val noteId = contentAsString(route(app, FakeRequest(POST, "/notes")
+        .withFormUrlEncodedBody(("title", "test"))
+        .withSession(("username", "hold_on"))).get)
+
+      val deleteNote = route(app, FakeRequest(POST, "/notes/delete")
+        .withFormUrlEncodedBody(("id", noteId))
+        .withSession(("username", "hold_on"))).get
+
+      status(deleteNote) mustBe OK
+      contentType(deleteNote) mustBe Some("text/plain")
+    }
+
+    "not delete a note when the user session doesn't own the note" in {
+      val noteId = contentAsString(route(app, FakeRequest(POST, "/notes")
+        .withFormUrlEncodedBody(("title", "test"))
+        .withSession(("username", "ABC"))).get)
+
+      val deleteNote = route(app, FakeRequest(POST, "/notes/delete")
+        .withFormUrlEncodedBody(("id", noteId))
+        .withSession(("username", "hold_on"))).get
+
+      status(deleteNote) mustBe BAD_REQUEST
+      contentType(deleteNote) mustBe Some("text/plain")
+    }
+
+    "not delete a note when no ID is given" in {
+      val deleteNote = route(app, FakeRequest(POST, "/notes/delete")
+        .withFormUrlEncodedBody(("notid", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(deleteNote) mustBe BAD_REQUEST
+      contentType(deleteNote) mustBe Some("text/plain")
+    }
+
+    "not delete a note when an incorrect ID is given" in {
+      val deleteNote = route(app, FakeRequest(POST, "/notes/delete")
+        .withFormUrlEncodedBody(("id", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(deleteNote) mustBe BAD_REQUEST
+      contentType(deleteNote) mustBe Some("text/plain")
+    }
+
+    "not delete a nonexisting note" in {
+      val deleteNote = route(app, FakeRequest(POST, "/notes/delete")
+        .withFormUrlEncodedBody(("id", "1"))
+        .withSession(("username", "hold_on"))).get
+
+      status(deleteNote) mustBe BAD_REQUEST
+      contentType(deleteNote) mustBe Some("text/plain")
+    }
+
+    "not delete a note when there is no user session" in {
+      val deleteNote = route(app, FakeRequest(POST, "/notes/delete").withFormUrlEncodedBody(("foo", "bar"))).get
+
+      status(deleteNote) mustBe UNAUTHORIZED
+      contentType(deleteNote) mustBe Some("text/plain")
+    }
+
+    "update an existing note when there's a user session that owns the note and correct POST parameters are given" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("id", "104"), ("fields", "{}"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateNote) mustBe OK
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a note when no ID is given" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("fields", "{}"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateNote) mustBe BAD_REQUEST
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a note when an incorrect ID is given" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("id", "test"), ("fields", "{}"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateNote) mustBe BAD_REQUEST
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a note when no fields are given" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("id", "104"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateNote) mustBe BAD_REQUEST
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a note when the fields parameter is incorrect" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("id", "104"), ("fields", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateNote) mustBe BAD_REQUEST
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a note when the user session doesn't own the note" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("id", "104"), ("fields", "{}"))
+        .withSession(("username", "ABB"))).get
+
+      status(updateNote) mustBe BAD_REQUEST
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a nonexisting note" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update")
+        .withFormUrlEncodedBody(("id", "1"), ("fields", "{}"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateNote) mustBe BAD_REQUEST
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "not update a note when there is no user session" in {
+      val updateNote = route(app, FakeRequest(POST, "/notes/update").withFormUrlEncodedBody(("foo", "bar"))).get
+
+      status(updateNote) mustBe UNAUTHORIZED
+      contentType(updateNote) mustBe Some("text/plain")
+    }
+
+    "add an existing owner to a note when there's a user session that owns the note and correct POST parameters are given" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("id", "104"), ("owner", "ABC"))
+        .withSession(("username", "hold_on"))).get
+
+      status(addOwner) mustBe OK
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add an owner to a note when no note ID is given" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("owner", "ABC"))
+        .withSession(("username", "hold_on"))).get
+
+      status(addOwner) mustBe BAD_REQUEST
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add an owner to a note when an incorrect note ID is given" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("id", "test"), ("owner", "ABC"))
+        .withSession(("username", "hold_on"))).get
+
+      status(addOwner) mustBe BAD_REQUEST
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add an owner to a note when no owner is given" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("id", "104"))
+        .withSession(("username", "hold_on"))).get
+
+      status(addOwner) mustBe BAD_REQUEST
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add a nonexisting owner to a note" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("id", "104"), ("owner", "iwontandshallnotexist"))
+        .withSession(("username", "hold_on"))).get
+
+      status(addOwner) mustBe BAD_REQUEST
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add an owner to a note when the user session doesn't own the note" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("id", "104"), ("owner", "hold_on"))
+        .withSession(("username", "ABB"))).get
+
+      status(addOwner) mustBe BAD_REQUEST
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add an owner to a nonexising note" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner")
+        .withFormUrlEncodedBody(("id", "1"), ("owner", "ABC"))
+        .withSession(("username", "hold_on"))).get
+
+      status(addOwner) mustBe BAD_REQUEST
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "not add an owner to a note when there is no user session" in {
+      val addOwner = route(app, FakeRequest(POST, "/notes/addowner").withFormUrlEncodedBody(("foo", "bar"))).get
+
+      status(addOwner) mustBe UNAUTHORIZED
+      contentType(addOwner) mustBe Some("text/plain")
+    }
+
+    "pin a note when there's a user session that owns the note and correct POST parameters are given" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("id", "104"), ("pinned", "true"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe OK
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a note when no ID is given" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("pinned", "true"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a note when an incorrect note ID is given" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("id", "test"), ("pinned", "true"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a note when no pinned state is given" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("id", "104"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a note when an incorrect pinned state is given" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("id", "104"), ("pinned", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a note when the user session doesn't own the note" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("id", "104"), ("pinned", "true"))
+        .withSession(("username", "ABB"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a nonexisting note" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned")
+        .withFormUrlEncodedBody(("id", "1"), ("pinned", "true"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not pin a note when there is no user session" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setpinned").withFormUrlEncodedBody(("foo", "bar"))).get
+
+      status(pinNote) mustBe UNAUTHORIZED
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "unarchive a note when there's a user session that owns the note and correct POST parameters are given" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("id", "104"), ("archived", "false"))
+        .withSession(("username", "hold_on"))).get
+
+      status(archiveNote) mustBe OK
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a note when no ID is given" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("archived", "false"))
+        .withSession(("username", "hold_on"))).get
+
+      status(archiveNote) mustBe BAD_REQUEST
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a note when an incorrect note ID is given" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("id", "test"), ("pinned", "false"))
+        .withSession(("username", "hold_on"))).get
+
+      status(archiveNote) mustBe BAD_REQUEST
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a note when no archived state is given" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("id", "104"))
+        .withSession(("username", "hold_on"))).get
+
+      status(archiveNote) mustBe BAD_REQUEST
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a note when an incorrect archived state is given" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("id", "104"), ("archived", "test"))
+        .withSession(("username", "hold_on"))).get
+
+      status(archiveNote) mustBe BAD_REQUEST
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a note when the user session doesn't own the note" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("id", "104"), ("archived", "false"))
+        .withSession(("username", "ABB"))).get
+
+      status(archiveNote) mustBe BAD_REQUEST
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a nonexisting note" in {
+      val pinNote = route(app, FakeRequest(POST, "/notes/setarchived")
+        .withFormUrlEncodedBody(("id", "1"), ("archived", "false"))
+        .withSession(("username", "hold_on"))).get
+
+      status(pinNote) mustBe BAD_REQUEST
+      contentType(pinNote) mustBe Some("text/plain")
+    }
+
+    "not unarchive a note when there is no user session" in {
+      val archiveNote = route(app, FakeRequest(POST, "/notes/setarchived").withFormUrlEncodedBody(("foo", "bar"))).get
+
+      status(archiveNote) mustBe UNAUTHORIZED
+      contentType(archiveNote) mustBe Some("text/plain")
+    }
+
+  }
+
+  "ErrorHandler" should {
+
+  }
+
+  "SettingsController" should {
+
+  }
+
+  "UserController" should {
+
+  }
+
+
 
 }

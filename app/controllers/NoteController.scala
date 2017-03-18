@@ -206,7 +206,7 @@ class NoteController @Inject() extends Controller {
         } else if (!Notes.noteExists(id.toLong)) {
           BadRequest("Note doesn't exist")
         } else {
-          BadRequest("Owner to delete doesn't exist")
+          BadRequest("Owner to add/delete doesn't exist")
         }
       } else {
         BadRequest("Invalid ID")
