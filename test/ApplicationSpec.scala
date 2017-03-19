@@ -515,9 +515,110 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
   }
 
   "UserController" should {
+    "render the login page" in {
+      val login = route(app, FakeRequest(GET, "/login")).get
 
+      status(login) mustBe OK
+      contentType(login) mustBe Some("text/html")
+      contentAsString(login) must include ("Login")
+    }
+
+    "redirect from /login to / when there is a user session" in {
+      val login = route(app, FakeRequest(GET, "/login").withSession(("username", "hold_on"))).get
+
+      status(login) mustBe 303
+    }
+
+    "log a user in when a valid username and password are provided and the user exists" in {
+      val login = route(app, FakeRequest(POST, "/login")
+        .withFormUrlEncodedBody(("username", "hold_on"), ("password", "password"))).get
+
+      status(login) mustBe 303
+    }
+
+    "not log a user in when the user doesn't exist" in {
+      val login = route(app, FakeRequest(POST, "/login")
+        .withFormUrlEncodedBody(("username", "nonexistinguserheresowecantloghimin"), ("password", "password"))).get
+
+      status(login) mustBe OK
+      contentType(login) mustBe Some("text/html")
+      contentAsString(login) must include ("A user with that username could not be found")
+    }
+
+    "not log a user in when the password is wrong" in {
+      val login = route(app, FakeRequest(POST, "/login")
+        .withFormUrlEncodedBody(("username", "hold_on"), ("password", "wrongpassword"))).get
+
+      status(login) mustBe OK
+      contentType(login) mustBe Some("text/html")
+      contentAsString(login) must include ("Wrong password!")
+    }
+
+    "not log a user in when not all form fields are given" in {
+      val login = route(app, FakeRequest(POST, "/login")
+        .withFormUrlEncodedBody(("password", "password"))).get
+
+      status(login) mustBe BAD_REQUEST
+      contentType(login) mustBe Some("text/html")
+    }
+
+    "render the register page" in {
+      val register = route(app, FakeRequest(GET, "/register")).get
+
+      status(register) mustBe OK
+      contentType(register) mustBe Some("text/html")
+      contentAsString(register) must include ("Register")
+    }
+
+    "redirect from /register to / when there is a user session" in {
+      val register = route(app, FakeRequest(GET, "/register").withSession(("username", "hold_on"))).get
+
+      status(register) mustBe 303
+    }
+
+    "register a user when all form fields are given and the username isn't taken" in {
+      val uniqueUsername = "test_user" + (System.currentTimeMillis / 1000).toString
+      val register = route(app, FakeRequest(POST, "/register")
+        .withFormUrlEncodedBody(
+          ("username", uniqueUsername),
+          ("email", "foo@bar"),
+          ("firstName", "Foo"),
+          ("lastName", "Bar"),
+          ("password", "password")
+        )).get
+
+      status(register) mustBe 303
+    }
+
+    "not register a user when the username is already taken" in {
+      val register = route(app, FakeRequest(POST, "/register")
+        .withFormUrlEncodedBody(
+          ("username", "hold_on"),
+          ("email", "foo@bar"),
+          ("firstName", "Foo"),
+          ("lastName", "Bar"),
+          ("password", "password")
+        )).get
+
+      status(register) mustBe OK
+      contentType(register) mustBe Some("text/html")
+      contentAsString(register) must include ("A user with that username already exists")
+    }
+
+    "not register a user when not all form fields are given" in {
+      val register = route(app, FakeRequest(POST, "/register")
+        .withFormUrlEncodedBody(("password", "password"))).get
+
+      status(register) mustBe BAD_REQUEST
+      contentType(register) mustBe Some("text/html")
+    }
+
+    "log a user out and render the logout page" in {
+      val logout = route(app, FakeRequest(GET, "/logout")).get
+
+      status(logout) mustBe OK
+      contentType(logout) mustBe Some("text/html")
+      contentAsString(logout) must include ("Successfully logged out")
+    }
   }
-
-
-
 }
