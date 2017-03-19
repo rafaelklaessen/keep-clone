@@ -420,12 +420,98 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
 
   }
 
-  "ErrorHandler" should {
-
-  }
-
   "SettingsController" should {
+    "render a 404 page instead of the setttings page when there is no user session" in {
+      val settings = route(app, FakeRequest(GET, "/settings")).get
 
+      status(settings) mustBe NOT_FOUND
+    }
+
+    "render the settings page when there is a user session" in {
+      val settings = route(app, FakeRequest(GET, "/settings").withSession(("username", "hold_on"))).get
+
+      status(settings) mustBe OK
+      contentType(settings) mustBe Some("text/html")
+      contentAsString(settings) must include ("Settings")
+    }
+
+    "render the OAuth settings page when the user session is provided by OAuth" in {
+      val settings = route(app, FakeRequest(GET, "/settings")
+        .withSession(("oauth", "google"), ("username", "foobar"), ("email", "foo@bar"))).get
+
+      status(settings) mustBe OK
+      contentType(settings) mustBe Some("text/html")
+      contentAsString(settings) must include ("Settings")
+      contentAsString(settings) must include ("OAuth")
+    }
+
+    "update the user settings when there's a user session and valid fields are provided" in {
+      val updateSettings = route(app, FakeRequest(POST, "/settings/update")
+        .withFormUrlEncodedBody(("fields", "{}"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateSettings) mustBe OK
+      contentType(updateSettings) mustBe Some("text/plain")
+    }
+
+    "not update the user settings when there are no fields provided" in {
+      val updateSettings = route(app, FakeRequest(POST, "/settings/update")
+        .withFormUrlEncodedBody(("foo", "bar"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateSettings) mustBe BAD_REQUEST
+      contentType(updateSettings) mustBe Some("text/plain")
+    }
+
+    "not update the user settings when the fields are incorrect" in {
+      val updateSettings = route(app, FakeRequest(POST, "/settings/update")
+        .withFormUrlEncodedBody(("fields", "foobar"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateSettings) mustBe BAD_REQUEST
+      contentType(updateSettings) mustBe Some("text/plain")
+    }
+
+    "not update the user settings when the fields' email is invalid" in {
+      val updateSettings = route(app, FakeRequest(POST, "/settings/update")
+        .withFormUrlEncodedBody(("fields", "{ \"email\": \"foobar\" }"))
+        .withSession(("username", "hold_on"))).get
+
+      status(updateSettings) mustBe BAD_REQUEST
+      contentType(updateSettings) mustBe Some("text/plain")
+    }
+
+    "not update the user settings when the user session is invalid" in {
+      val updateSettings = route(app, FakeRequest(POST, "/settings/update")
+        .withFormUrlEncodedBody(("fields", "{}"))
+        .withSession(("username", "nonexistinguserheresowecantupdatehissettings"))).get
+
+      status(updateSettings) mustBe UNAUTHORIZED
+      contentType(updateSettings) mustBe Some("text/plain")
+    }
+
+    "not update the user settings when there is no user session" in {
+      val updateSettings = route(app, FakeRequest(POST, "/settings/update").withFormUrlEncodedBody(("fields", "{}"))).get
+
+      status(updateSettings) mustBe UNAUTHORIZED
+      contentType(updateSettings) mustBe Some("text/plain")
+    }
+
+    "not delete a user when the user session is invalid" in {
+      val deleteUser = route(app, FakeRequest(POST, "/settings/delete")
+        .withFormUrlEncodedBody(("foo", "bar"))
+        .withSession(("username", "nonexistinguserheresowecantdeletehisaccount"))).get
+
+      status(deleteUser) mustBe UNAUTHORIZED
+      contentType(deleteUser) mustBe Some("text/plain")
+    }
+
+    "not delete a user when there is no user session" in {
+      val deleteUser = route(app, FakeRequest(POST, "/settings/delete").withFormUrlEncodedBody(("foo", "bar"))).get
+
+      status(deleteUser) mustBe UNAUTHORIZED
+      contentType(deleteUser) mustBe Some("text/plain")
+    }
   }
 
   "UserController" should {
