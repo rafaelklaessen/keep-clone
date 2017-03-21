@@ -3,10 +3,13 @@
 ![Notes page screenshot](https://github.com/rafaelklaessen/keep-clone/raw/master/screenshots/notes.jpg "Notes page")
 
 An effort to make a clone of [Google Keep](https://keep.google.com) in play-scala with Firebase.
-Version 1 should have:
+It has:
 
 - A login system that saves user data to Firebase
-- A note system that allows logged-in users to create notes, which are saved to Firebase
+- Log in with Google/GitHub/Facebook
+- Note creating/deleting/updating with Firebase
+- Note sharing; notes can be shared with other users
+- Note pinning and archiving
 - A settings page in which a user can edit his/her settings and delete his/her account
 
 ## About
