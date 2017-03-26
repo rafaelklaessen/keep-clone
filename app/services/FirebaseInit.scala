@@ -1,4 +1,4 @@
-package services 
+package services
 
 import com.google.firebase
 import com.google.firebase._
@@ -10,17 +10,17 @@ import javax.inject._
 import java.io.File
 import java.io.FileInputStream
 
-class FirebaseInit @Inject() () {
+class FirebaseInit @Inject() (configuration: play.api.Configuration) {
   val apps = FirebaseApp.getApps()
 
   if (apps.isEmpty()) {
-    val serviceAccount = new FileInputStream("firebase-auth.json")
+    val serviceAccount = new FileInputStream(configuration.underlying.getString("firebaseAuthPath"))
 
     val options = new FirebaseOptions.Builder()
       .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
       .setDatabaseUrl("https://keep-clone-840b5.firebaseio.com/")
       .build()
-    
+
     FirebaseApp.initializeApp(options)
   }
 }
